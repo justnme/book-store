@@ -1,5 +1,7 @@
 const express = require('express');
 const hbs = require("hbs");
+// for mysql
+const mysql = require('mysql');
 
 const app = express();
 const port = 3000;
