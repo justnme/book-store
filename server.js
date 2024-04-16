@@ -1,7 +1,8 @@
 const express = require('express');
 const hbs = require("hbs");
 // for mysql
-const mysql = require('mysql');
+// const mysql = require('mysql');
+
 
 const app = express();
 const port = 3000;
@@ -34,3 +35,20 @@ app.listen(port, () => {
 	console.log(`Server is listening on localhost:${port}`);
 });
 
+// const connection = mysql.createConnection({
+//     host: 'localhost',
+//     user: 'your_mysql_username',
+//     password: 'your_mysql_password',
+//     database: 'your_database_name'
+//   });
+  
+//   connection.connect((err) => {
+//     if (err) {
+//       console.error('Error connecting to MySQL database: ' + err.stack);
+//       return;
+//     }
+//     console.log('Connected to MySQL database as id ' + connection.threadId);
+//   });
+  
+//   // Close connection
+//   // connection.end();
