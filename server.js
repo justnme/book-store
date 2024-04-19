@@ -9,21 +9,27 @@ const hbs = require("hbs");
 const app = express();
 const port = 3000;
 
-app.set("view engine", "hbs"); // Install hbs
-app.set("views", __dirname + "/views"); // Set views directory
+// #4 hbs conf
+const path = require('path');
 
-app.use(express.static(__dirname)); // Set the default directory path to serve static files
+app.set("view engine", "hbs"); 
+app.set("views", __dirname + "/views"); 
+
+// #4 hbs conf
+hbs.registerPartials(path.join(__dirname, 'views', 'partials'));
+
+app.use(express.static(__dirname)); 
 
 app.get("/", (_, response) => {
-    response.render("index"); // Render views/index.hbs
+    response.render("index"); 
 });
 
 app.get("/home", (_, response) => {
-    response.render("index"); // Render views/index.hbs
+    response.render("index");
 });
 
 app.get("/genres", (_, response) => {
-    response.render("genres"); // Render views/genres.hbs
+    response.render("genres"); 
 });
 
 app.listen(port, () => {

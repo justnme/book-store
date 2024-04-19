@@ -10,6 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.19.2",
+    "express-handlebars": "^7.1.2",
+    "handlebars-layouts": "^3.1.4",
     "hbs": "^4.2.0",
     "mysql": "^2.18.1"
   }
