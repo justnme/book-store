@@ -1,10 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
-
+@import "https://unpkg.com/open-props";
 :root{
-    --orange:rgb(255, 145, 0);
-    --dark-color:rgba(165, 42, 42, 0.61);
-    --black:#444;
-    --light-color:rgba(165, 42, 42, 0.5);
+    --orange:#0000ff;
+    --dark-color:#00008b;
+    --black:#00008b;
+    --white:#ffffff;
+    --light-color:rgba(0, 17, 255, 1.5);
     --border:.1rem solid rgba(0,0,0,.1);
     --border-hover:.1rem solid var(--black);
     --box-shadow:0 .5rem 1rem rgba(0,0,0,.1);
@@ -19,6 +20,7 @@
     text-transform: capitalize;
     transition:all .2s linear;
     transition:width none;
+    box-sizing: border-box;
 }
 
 html{
@@ -73,16 +75,61 @@ section{
     margin-top: 1rem;
     display:inline-block;
     padding:.9rem 3rem;
-    border-radius: .5rem;
-    color:#fff;
+    border-radius: 1.5rem;
+    color:#0000ff;
     background:var(--orange);
     font-size: 1.7rem;
     cursor: pointer;
     font-weight: 500;
+    font-family: var(--font-sans);
+    font-weight: var(--font-weight-6);
+    font-size: var(--font-size-5);
+    color: var(--white);
+    background: var(--orange);
+    border: 0;
+    padding: var(--size-4) var(--size-8);
+    transform: translateY(calc(var(--y, 0) * 1%)) scale(var(--scale));
+    transition: transform 0.1s;
+    position: relative;
 }
 
 .btn:hover{
     background:var(--dark-color);
+    --y: -10;
+    --scale: 0.8;
+    --border-scale: 1;
+}
+.btn:active{
+    --y: 5%;
+  --scale: 0.8;
+  --border-scale: 0.8, 0.8;
+}
+.btn::before{
+    content: "";
+  position: absolute;
+  inset: calc(var(--size-3) * -1);
+  border: var(--size-2) solid var(--black);
+  transform: scale(var(--border-scale, 0));
+  transition: transform 0.125s;
+  
+  --angle-one: 105deg;
+  --angle-two: 290deg;
+  --spread-one: 30deg;
+  --spread-two: 40deg;
+  --start-one: calc(var(--angle-one) - (var(--spread-one) * 0.5));
+  --start-two: calc(var(--angle-two) - (var(--spread-two) * 0.5));
+  --end-one: calc(var(--angle-one) + (var(--spread-one) * 0.5));
+  --end-two: calc(var(--angle-two) + (var(--spread-two) * 0.5));
+  
+  mask: conic-gradient(
+    transparent 0 var(--start-one),
+    #00008b var(--start-one) var(--end-one),
+    transparent var(--end-one) var(--start-two),
+    #00008b var(--start-two) var(--end-two),
+    transparent var(--end-two)
+  );
+  
+  z-index: -1;
 }
 
 .header .header-1{
@@ -91,14 +138,32 @@ section{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    
 }
 
 .header .header-1 .logo{
     font-size: 2.5rem;
     font-weight: bolder;
     color:var(--black);
+    text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 0.15em;
+  display: inline-block;
+  padding: 15px 20px;
+  position: relative;
+  padding: 8px;
+  border-radius: 0 0 0 0;
+  border:3px solid #0000ff;
+  transition: 0.3s,border-color 0.3s 0.3s;
+  clip-path: polygon(4px 4px,calc(100% - 4px) 4px,calc(100% - 4px) calc(100% - 3px),  100% calc(100% - 3px), 100% 100%,0 100%,0 calc(100% - 3px), 4px calc(100% - 3px));
 }
 
+.header .header-1 .logo:hover {
+    border-color:#0000ff;
+  border-radius: 0 0 12px 12px;
+  transition: 0.3s,clip-path 0.3s 0.3s,border-radius 0.3s 0.3s;
+  clip-path: polygon(4px 4px,calc(100% - 4px) 4px,calc(100% - 4px) calc(100% - 14px), 100% calc(100% - 14px),100% 100%,0 100%,0 calc(100% - 14px),4px calc(100% - 14px));
+  }
 .header .header-1 .logo i{
     color:var(--orange);
 }
@@ -285,7 +350,7 @@ section{
 }
 
 .home{
-    background: url(../image/wall.jpeg) no-repeat;
+    background: url(https://kartinki.pics/uploads/posts/2021-04/1617569527_35-p-fon-biblioteka-39.jpg) no-repeat;
     background-size: cover;
     background-position: center;
 }
@@ -309,10 +374,12 @@ section{
 
 .home .row .books-slider a img{
     height: 25rem;
+    filter: brightness(50%);
 }
 
 .home .row .books-slider a:hover img{
     transform: scale(.9);
+    filter: brightness(100%);
 }
 
 .home .row .books-slider .stand{
@@ -323,6 +390,7 @@ section{
 .home .row .content h3{
     color:var(--black);
     font-size: 4.5rem;
+    text-shadow: 1px 1px 2px black, 0 0 25px #0000ff, 0 0 15px #00008b;
 }
 
 .home .row .content p{
@@ -330,6 +398,7 @@ section{
     font-size: 1.4rem;
     line-height: 2;
     padding:1rem 0;
+    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 15px darkblue;
 }
 
 .icons-container{
@@ -437,8 +506,9 @@ section{
     border:var(--border-hover);
     height:4rem;
     width:4rem;
-    color:var(--black);
-    background: #fff;
+    color:var(--white);
+    background: var(--orange);
+    border-radius: 10px;
 }
 
 .swiper-button-next::after,
@@ -449,11 +519,11 @@ section{
 .swiper-button-next:hover,
 .swiper-button-prev:hover{
     background: var(--black);
-    color:#fff;
+    color:var(--white);
 }
 
 .newsletter{
-    background:url(../image/girl.jpeg) no-repeat;
+    background:url(https://wallpapercave.com/wp/wp3903792.jpg) no-repeat;
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -488,12 +558,26 @@ section{
     align-items:center;
     gap:1.5rem;
     padding:2rem 1rem;
-    border:var(--border);
     margin:1rem 0;
+    --c: #0000ff; 
+    --b: 5px;   
+    --g: 5px;    
+    
+    padding: calc(var(--g) + var(--b));
+    --_g: #0000 25%,var(--c) 0;
+    background: 
+      conic-gradient(from 180deg at top    var(--b) right var(--b),var(--_g))
+       var(--_i,200%) 0  /200% var(--_i,var(--b))  no-repeat,
+      conic-gradient(            at bottom var(--b) left  var(--b),var(--_g))
+       0   var(--_i,200%)/var(--_i,var(--b)) 200%  no-repeat;
+    transition: .3s, background-position .3s .3s;
+    cursor: pointer;
 }
 
 .arrivals .arrivals-slider .box:hover{
-    border:var(--border-hover);
+    border:var(--border-hover)transparent;
+    --_i: 100%;
+    transition: .3s, background-size .3s .3s;
 }
 
 .arrivals .arrivals-slider .box .image img{
