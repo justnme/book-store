@@ -109,23 +109,15 @@
                 <a href="#" class="btn">Buy now</a>
                 <p style="color:white; font-size:20px;"> Buy used or new books, online or in store, only at Bookflix and Chill in the beautiful city of Shkodra!</p>
             </div>
-
-            <div class="swiper books-slider">
-                <div class="swiper-wrapper">
-                    <a href="#" class="swiper-slide"><img src="matrix.jpg" alt=""></a>
-                    <a href="#" class="swiper-slide"><img src="the_maid.jpg" alt=""></a>
-                    <a href="#" class="swiper-slide"><img src="shadow_and_bone.jpg" alt=""></a>
-                    <a href="#" class="swiper-slide"><img src="wish_you_were_here.jpg" alt=""></a>
-                    <a href="#" class="swiper-slide"><img src="the_maid.jpg" alt=""></a>
-                    <a href="#" class="swiper-slide"><img src="the_maid.jpg" alt=""></a>
-                    <a href="#" class="swiper-slide"><img src="the_maid.jpg" alt=""></a>
-                    <a href="#" class="swiper-slide"><img src="the_maid.jpg" alt=""></a>
-                    <a href="#" class="swiper-slide"><img src="the_maid.jpg" alt=""></a>
-                    <a href="#" class="swiper-slide"><img src="the_maid.jpg" alt=""></a>
+            
+     <div class="swiper books-slider">
+                <div class="swiper-wrapper" id="bookShelfSwiper">
+                    {{#each books}}
+                    <a href="{{bookLink}}" class="swiper-slide"><img src="image/{{bookCover}}"></a>
+                    {{/each}}
                 </div>
                 <img src="image/stand.png" class="stand" alt="">
             </div>
-
         </div>
 
     </section>

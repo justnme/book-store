@@ -20,16 +20,25 @@ hbs.registerPartials(path.join(__dirname, 'views', 'partials'));
 
 app.use(express.static(__dirname));
 
+
+
+// let it be array for now
+let books = [
+  { bookLink: '', bookCover: 'shadow_and_bone.jpg' },
+  { bookLink: '', bookCover: 'the_maid.jpg' },
+  { bookLink: '', bookCover: 'wish_you_were_here.jpg' },
+];
+
 app.get('/', (_, response) => {
-    response.render('index');
+  response.render('index', { books: books });
 });
 
 app.get('/home', (_, response) => {
-    response.render('index');
+  response.render('index', { books: books });
 });
 
 app.get('/genres', (_, response) => {
-    response.render('genres');
+  response.render('genres', { books: books });
 });
 
 
