@@ -9,7 +9,11 @@ const express = require('express');
 const hbs = require("hbs");
 const app = express();
 const port = 3000;
+// #4 hbs conf
+const path = require('path');
 
+app.set("view engine", "hbs"); 
+app.set("views", __dirname + "/views"); 
 
 // ---------DATABASE------------->>>
 
@@ -221,20 +225,26 @@ sequelize.sync().then(result=>{
 // <<<---------DATABASE-------------
 
 
+// #4 hbs conf
+hbs.registerPartials(path.join(__dirname, 'views', 'partials'));
 app.set("view engine", "hbs"); // Install hbs
 app.set("views", __dirname + "/views"); // Set views directory
 
+app.use(express.static(__dirname)); 
 app.use(express.static(__dirname)); // Set the default directory path to serve static files
 
 app.get("/", (_, response) => {
+    response.render("index"); 
     response.render("index"); // Render views/index.hbs
 });
 
 app.get("/home", (_, response) => {
+    response.render("index");
     response.render("index"); // Render views/index.hbs
 });
 
 app.get("/genres", (_, response) => {
+    response.render("genres"); 
     response.render("genres"); // Render views/genres.hbs
 });
 
