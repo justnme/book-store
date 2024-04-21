@@ -81,12 +81,12 @@
 
         <div id="close-login-btn" class="fas fa-times"></div>
 
-        <form action="">
+        <form method = "POST" action="">
             <h3>sign in</h3>
             <span>username</span>
-            <input type="email" name="" class="box" placeholder="enter your email" id="">
+            <input type="email" name="login_email" class="box" placeholder="enter your email" id="">
             <span>password</span>
-            <input type="password" name="" class="box" placeholder="enter your password" id="">
+            <input type="password" name="login_password" class="box" placeholder="enter your password" id="">
             <div class="checkbox">
                 <input type="checkbox" name="" id="remember-me">
                 <label for="remember-me"> remember me</label>
@@ -94,6 +94,7 @@
             <input type="submit" value="sign in" class="btn">
             <p>forget password ? <a href="#">click here</a></p>
             <p>don't have an account ? <a href="#">create one</a></p>
+			<p style="color: red">{{login_result}}</p>
         </form>
 
     </div>
@@ -113,8 +114,12 @@
      <div class="swiper books-slider">
                 <div class="swiper-wrapper" id="bookShelfSwiper">
                     {{#each books}}
-                    <a href="{{bookLink}}" class="swiper-slide"><img src="image/{{bookCover}}"></a>
+                    <a href="{{bookLink}}" class="swiper-slide"><img src="book_images/{{bookCover}}"></a>
                     {{/each}}
+					
+					<!-- {{book_carousel}} HAS TO BE CHANGED TO THIS-->
+					
+                    <!-- <a href="#" class="swiper-slide"><img src="matrix.jpg" alt=""></a>  Just a sample-->
                 </div>
                 <img src="image/stand.png" class="stand" alt="">
             </div>
