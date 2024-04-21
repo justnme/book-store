@@ -30,8 +30,8 @@ let books = [
 ];
 
 app.get('/', (_, response) => {
-	response.redirect('home');
-    //response.render('index', { books: books }); //I hope this works now
+	// response.redirect('home');
+    response.render('index', { books: books }); //I hope this works now
 });
 
 app.get('/home', (_, response) => {
