@@ -23,6 +23,7 @@ hbs.registerPartials(path.join(__dirname, 'views', 'partials'));
 app.use(express.static(__dirname));
 
 // let it be array for now
+
 let books = [
   { bookLink: 'book_images', bookCover: 'shadow_and_bone.jpg' },
   { bookLink: 'book_images', bookCover: 'the_maid.jpg' },
@@ -83,7 +84,7 @@ const Users = sequelize.define("Users", {
 	},
 });
 
-	const Authors = sequelize.define("Authors", {
+const Authors = sequelize.define("Authors", {
 	author_id: {
 		type: Sequelize.INTEGER,
 		autoIncrement: true,
@@ -180,6 +181,12 @@ const Sales = sequelize.define("Sales", {
 });
 
 const BookTags = sequelize.define("BookTags", {
+	entry_id: {
+		type: Sequelize.INTEGER,
+		autoIncrement: true,
+		primaryKey: true,
+		allowNull: false,
+	},
 	book_id: {
 		type: Sequelize.INTEGER,
 		allowNull: false,
@@ -271,20 +278,63 @@ hbs.registerHelper("book_carousel", function(){
 
 app.post("/addBook", urlencodedParser, function (request, response) { //Adding book to DB
 	if(!request.body) return response.sendStatus(400);
+	
 	const book_title = request.body.bookTitle;
 	const book_genre = request.body.bookGenre;
 	const book_image = request.body.bookImage;
 	const book_author = request.body.bookAuthor;
 	const book_price = request.body.bookPrice;
 	const book_date = request.body.bookDate;
-	const tags = [request.body.tags1, request.body.tags2, request.body.tags3, request.body.tags4, request.body.tags5];
-	console.log(book_title);
-	console.log(book_genre);
-	console.log(book_image);
-	console.log(book_author);
-	console.log(book_price);
-	console.log(book_date);
-	console.log(tags);
+	const tags = [];
+	
+	if(request.body.tags1 != "") tags.push(request.body.tags1);
+	if(request.body.tags2 != "") tags.push(request.body.tags2);
+	if(request.body.tags3 != "") tags.push(request.body.tags3);
+	if(request.body.tags4 != "") tags.push(request.body.tags4);
+	if(request.body.tags5 != "") tags.push(request.body.tags5);
+	
+	Books.findOne({where:{title: book_title}, raw:true})
+	.then(book=>{
+		if (book != null) {
+			//Add something here so that the user knows the book already exists
+		}
+		else {
+			console.log("null");
+			
+			Genres.findOne({where:{genre_name: book_genre}, raw:true})
+			.then(genre=>{
+				
+				Authors.findOne({where:{full_name: book_author}, raw:true})
+				.then(author=>{
+					if (author != null) {
+						Books.create({genre_id: genre.genre_id, image_name: book_image, author_id: author.author_id, title: book_title, price: book_price, date: book_date});
+					}
+					else {
+						Authors.create({full_name: book_author});
+						
+						Authors.max('author_id')
+						.then(authorId=>{
+							Books.create({genre_id: genre.genre_id, image_name: book_image, author_id: authorId, title: book_title, price: book_price, date: book_date});
+						}).catch(err=>console.log(err));
+					}
+					
+					for(let i = 0; i < tags.length; i++) {
+						Tags.findOne({where:{tag_name: tags[i]}, raw:true})
+						.then(tag=>{
+							
+							Books.max('book_id')
+							.then(bookId=>{
+								BookTags.create({book_id: bookId, tag_id: tag.tag_id});
+							}).catch(err=>console.log(err));
+							
+						}).catch(err=>console.log(err));
+					}
+				}).catch(err=>console.log(err));
+				
+			}).catch(err=>console.log(err));
+		}
+	}).catch(err=>console.log(err));
+	
 });
 
 app.post("/home", urlencodedParser, function (request, response) { //login check
