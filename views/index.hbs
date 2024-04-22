@@ -20,8 +20,8 @@
 <body>
 
     <!-- header section starts  -->
- {{> header}}
-   
+    {{> header}}
+
 
     <!-- header section ends -->
 
@@ -41,7 +41,7 @@
 
         <div id="close-login-btn" class="fas fa-times"></div>
 
-        <form method = "POST" action="">
+        <form method="POST" action="">
             <h3>sign in</h3>
             <span>username</span>
             <input type="email" name="login_email" class="box" placeholder="enter your email" id="">
@@ -54,7 +54,7 @@
             <input type="submit" value="sign in" class="btn">
             <p>forget password ? <a href="#">click here</a></p>
             <p>don't have an account ? <a href='registration'>create one</a></p>
-			<p style="color: red">{{login_result}}</p>
+            <p style="color: red">{{login_result}}</p>
         </form>
 
     </div>
@@ -64,25 +64,27 @@
     <section class="home" id="home">
 
         <div class="row">
-
             <div class="content">
                 <h3 style="color:white;">Up to 50% discount</h3>
                 <a href="#" class="btn">Buy now</a>
-                <p style="color:white; font-size:20px;"> Buy used or new books, online or in store, only at Bookflix and Chill in the beautiful city of Shkodra!</p>
+                <p style="color:white; font-size:20px;"> Buy used or new books, online or in store, only at Bookflix and
+                    Chill in the beautiful city of Shkodra!</p>
             </div>
-            
-     <div class="swiper books-slider">
+            <div class="swiper books-slider">
+
                 <div class="swiper-wrapper" id="bookShelfSwiper">
                     {{#each books}}
                     <a href="{{bookLink}}" class="swiper-slide"><img src="book_images/{{bookCover}}"></a>
                     {{/each}}
-					
-					<!-- {{book_carousel}} HAS TO BE CHANGED TO THIS-->
-					
-                    <!-- <a href="#" class="swiper-slide"><img src="matrix.jpg" alt=""></a>  Just a sample-->
+
                 </div>
                 <img src="image/stand.png" class="stand" alt="">
+            
+                 <button id="prevButton" aria-label="Назад">&#60;</button>
+            <button id="nextButton" aria-label="Вперед">&#62;</button>
+           
             </div>
+           
         </div>
 
     </section>
@@ -256,30 +258,30 @@
                 </a>
 
 
-        </div>
+            </div>
 
-        <div class="swiper arrivals-slider">
+            <div class="swiper arrivals-slider">
 
-            <div class="swiper-wrapper">
+                <div class="swiper-wrapper">
 
-                <a href="#" class="swiper-slide box">
-                    <div class="image">
-                        <img src="matrix.jpg" alt="">
-                    </div>
-                    <div class="content">
-                        <h3>new arrivals</h3>
-                        <div class="price">$15.99 <span>$20.99</span></div>
-                        <div class="stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
+                    <a href="#" class="swiper-slide box">
+                        <div class="image">
+                            <img src="matrix.jpg" alt="">
                         </div>
-                    </div>
-                </a>
-                
-        </div>
+                        <div class="content">
+                            <h3>new arrivals</h3>
+                            <div class="price">$15.99 <span>$20.99</span></div>
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                </div>
 
     </section>
 
@@ -306,8 +308,8 @@
     <!-- footer section starts  -->
 
     {{> footer}}
-    
-<!--    Это скам загрузка, просто пять секунд гифка играет поверх 
+
+    <!--    Это скам загрузка, просто пять секунд гифка играет поверх 
     <div class="loader-container">
         <img src="image/loader-img.gif" alt="">
     </div> -->

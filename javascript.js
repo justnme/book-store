@@ -48,25 +48,36 @@ function fadeOut(){
 
 
 
-var swiper = new Swiper(".books-slider", {
-  loop:true,
-  centeredSlides: true,
-  autoplay: {
-    delay: 9500,
-    disableOnInteraction: false,
-  },
-  breakpoints: {
-    0: {
-      slidesPerView: 1,
+document.addEventListener('DOMContentLoaded', function() {
+  var swiper = new Swiper(".books-slider", {
+    loop: true,
+    centeredSlides: true,
+    autoplay: {
+      delay: 9500,
+      disableOnInteraction: false,
     },
-    768: {
-      slidesPerView: 2,
+    breakpoints: {
+      0: { slidesPerView: 1 },
+      768: { slidesPerView: 2 },
+      1024: { slidesPerView: 3 },
     },
-    1024: {
-      slidesPerView: 3,
-    },
-  },
+  });
+
+
+  var prevButton = document.getElementById('prevButton');
+  var nextButton = document.getElementById('nextButton');
+
+  if (prevButton && nextButton) {
+    prevButton.addEventListener('click', function() {
+      swiper.slidePrev(); 
+    });
+
+    nextButton.addEventListener('click', function() {
+      swiper.slideNext(); 
+    });
+  }
 });
+
 
 
 
