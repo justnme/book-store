@@ -2,50 +2,61 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/addBook.css" type="text/css">
-    <title>Add book</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/addBook.css" type="text/css">
+	<title>Add book</title>
 	<link rel="icon" type="image/x-icon" href="/image/favicon.ico">
+	<style>
+	.form-control.user-profile-bio-field {
+    max-width: 80%;
+	min-height: 500px;
+	min-width: 60%;
+    max-height: 1000px; 
+	margin-top: 7px;
+	margin-bottom: 5px;
+	margin-left: 20%;
+}
+</style>
 </head>
 
 <body>
-    <div class="container">
-        <h1 style="border-bottom: 2px solid black; text-align: center;">Add book</h1>
-        <form method = "POST" id="add-book-form">
-            <label for="title">Book title</label>
-            <input name = "bookTitle" type="text" id="title" required>
-			
+	<div class="container">
+		<h1 style="border-bottom: 2px solid black; text-align: center;">Add book</h1>
+		<form method="POST" id="add-book-form">
+			<label for="title">Book title</label>
+			<input name="bookTitle" type="text" id="title" required>
+
 			<label for="image">Book image</label>
-			
+
 			<!-- This parent is important because the function loads the image
 			into the first child, which should be the img element-->
-			<center> 
-				<img id = "image" src = ""/>
+			<center>
+				<img id="image" src="" />
 				<!-- This works fine (the error gets sent to insert file) the
 				first time until you reload the page-->
-				<input name = "bookImage" required type = "file" onchange="Load_Image(this)"/>
+				<input name="bookImage" required type="file" onchange="Load_Image(this)" />
 			</center>
-			
-            <label for="author">Author</label>
-            <input name = "bookAuthor" type="text" id="author" required>
+
+			<label for="author">Author</label>
+			<input name="bookAuthor" type="text" id="author" required>
 
 			<label for="price">Price ($)</label>
-			<input name = "bookPrice" type="number" value = "0.00" min="0.00" step="0.01" id="price" required>
-			
-            <label for="date">Date</label>
-            <input name = "bookDate" type="date" id="date" required>
-			
-            <label for="genre">Genre</label>
-            <select name = "bookGenre" id="genre">
-                <option selected value="Horror">Horror</option>
-                <option value="Adventure">Adventure</option>
-                <option value="Action">Action</option>
-                <option value="Romantic">Romantic</option>
-                <option value="Classic">Classic</option>
+			<input name="bookPrice" type="number" value="0.00" min="0.00" step="0.01" id="price" required>
+
+			<label for="date">Date</label>
+			<input name="bookDate" type="date" id="date" required>
+
+			<label for="genre">Genre</label>
+			<select name="bookGenre" id="genre">
+				<option selected value="Horror">Horror</option>
+				<option value="Adventure">Adventure</option>
+				<option value="Action">Action</option>
+				<option value="Romantic">Romantic</option>
+				<option value="Classic">Classic</option>
 				<option value="Fantasy">Fantasy</option>
-            </select>
-			
+			</select>
+
 			<label for="tags">Tags</label>
 			<div class="flex-container">
 				<select name="tags1">
@@ -149,10 +160,18 @@
 					<option value="supernatural">supernatural</option>
 				</select>
 			</div>
-            <button type="submit">Add book</button>
-        </form>
-    </div>
-        <!--
+		<label>Book description</label>
+			<textarea class="form-control user-profile-bio-field js-length-limited-input"
+				placeholder="Write down the description of the book" data-input-max-length="300"
+			>
+			</textarea>
+
+	
+
+			<button type="submit">Add book</button>
+		</form>
+	</div>
+	<!--
         <form id="edit-book-form" style="display: none;">
             <label for="edit-title">Нова назва книги:</label>
             <input type="text" id="edit-title" required>
@@ -176,8 +195,8 @@
         </form>
 		-->
 
-    <script>
-		function Load_Image(element){ //I couldn't link this to addBook.js file for some reason
+	<script>
+		function Load_Image(element) { //I couldn't link this to addBook.js file for some reason
 			element.parentElement.children[0].src = window.URL.createObjectURL(element.files[0]);
 			element.value = window.URL.createObjectURL(element.files[0]);
 		}
