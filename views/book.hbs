@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book</title>
+    <link rel="icon" type="image/x-icon" href="/image/favicon.ico">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <!-- link for the swiper  -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+</head>
+<style>
+    .font-italic {
+        font-style: italic !important;
+        font-size: 1rem;
+    }
+
+    #bold {
+        font-weight: 600;
+        min-width: 9.375rem;
+    }
+
+    p {
+        font-size: 1.5rem;
+        font-weight: 400;
+    }
+
+    fieldset {
+        font-size: 1.25rem;
+        padding: 1rem;
+    }
+
+    body {
+
+        background: #f3f3f3;
+        font-size: 0.875em;
+        gap: 1.5rem;
+        font-weight: 400;
+        line-height: 1.5;
+    }
+
+    img {
+        width: 7cm;
+        height: 10cm;
+    }
+
+    .book-name {
+        font-size: 2.5rem;
+        color: black;
+    }
+
+    .nje {
+        content: "";
+        display: block;
+        margin: 0 auto;
+        width: 40%;
+        padding-top: 20px;
+        border-bottom: 1px solid black;
+    }
+#button-row{
+    display: flex; display: flex;flex-direction: column;
+}
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+        font-weight: 700;
+    }
+
+    #book-info {
+        display: flex;
+        font-weight: 400;
+        line-height: 1.5;
+    }
+
+    #book-info img {
+        max-width: 75%;
+
+    }
+
+    #padding {
+        padding: 5rem 4rem;
+    }
+
+    #cost {
+        font-size: 2.5rem;
+        font-weight: 700;
+    }
+
+    ul,
+    li {
+        list-style: none;
+        font-size: 1.5rem;
+        font-weight: 400;
+    }
+
+    li {
+        padding: 2px;
+    }
+
+    #block-padding {
+        padding: 1rem 3rem;
+    }
+
+    #block-padding-border {
+        padding:2rem;
+        margin-top: 2rem;
+       margin-bottom: 2rem;
+        border-top: #00aeff solid 2px;
+        border-bottom: #00aeff solid 2px;
+    }
+</style>
+
+<body>
+    {{> header}}
+    <div id="padding">
+        <div>
+            <p>Books / Categories / Young Adult / Young Adult / Fiction / Dystopian</p>
+        </div>
+        <div id="book-info">
+            <div>
+                <img src="https://img-cdn.hpb.com/normal/9781339016573/6/0/300.jpg">
+            </div>
+
+            <div>
+                <div>
+                    <div class="row">
+                        <div id="block-padding">
+                            <h1 class="book-name">The Ballad of Songbirds and Snakes (a Hunger Games Novel)</h1>
+                            <span class="font-italic">by Collins, Suzanne</span>
+                            <p>ISBN: 9781339016573</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="block-padding">
+                    <fieldset>
+                        <legend>Condition</legend>
+
+                        <div>
+                            <input type="radio" id="New" name="Condition" value="New" checked />
+                            <label for="New">New</label>
+                        </div>
+
+                        <div>
+                            <input type="radio" id="Used" name="Condition" value="Used" />
+                            <label for="Used">Used</label>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Format</legend>
+
+                        <div>
+                            <input type="radio" id="Trade Paperback" name="Format" value="Trade Paperback" checked />
+                            <label for="Trade Paperback">Trade Paperback</label>
+                        </div>
+
+                    </fieldset>
+                </div>
+            </div>
+            <div id="block-padding">
+                <p id="cost">$8.49</p>
+                <p>Used - Trade Paperback - 9781339016573</p>
+                <fieldset id="block-padding-border">
+
+
+                    <div>
+                        <input type="radio" id="Pick Up Today" name="Delivery" value="Pick Up Today" checked />
+                        <label for="Pick Up Today">Pick Up Today (Not In Stock at this Location)</label>
+                    </div>
+
+                    <div>
+                        <input type="radio" id="Ship to Address" name="Delivery" value="Ship to Address" checked />
+                        <label for="Ship to Address">Ship to Address</label>
+                    </div>
+                </fieldset>
+                <div id="button-row">
+                <button class="btn">Add to Cart</button>
+                <button class="btn">Add to Wishlist</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="block-padding">
+            <h2 class="heading"> <span>Overview</span> </h2>
+            <p>Ambition will fuel him.<br>
+                Competition will drive him.<br>
+                But power has its price.<br>
+                It is the morning of the reaping that will kick off the tenth annual Hunger Games.
+                In the Capitol, eighteen-year-old Coriolanus Snow is preparing for
+                his one shot at glory as a mentor in the Games.
+                The once-mighty house of Snow has fallen on hard times, its fate hanging
+                on the slender chance that Coriolanus will be
+                able to outcharm, outwit, and outmaneuver his fellow students
+                to mentor the winning tribute.<br>
+                The odds are against him. He's been given the humiliating assignment of mentoring the female tribute
+                from
+                District 12,
+                the lowest of the low. Their fates are now completely intertwined -- every choice
+                Coriolanus makes could lead to favor or failure, triumph or ruin. Inside the arena,
+                it will be a fight to the death. Outside the arena, Coriolanus starts to feel for his doomed
+                tribute... and must weigh his need to follow the rules against his desire to survive
+                no matter what it takes.</p>
+        </div>
+        <div id="block-padding">
+            <h2 class="heading"> <span>Item Information</span> </h2>
+            <ul>
+                <li>
+                    <span id="bold">Format:</span>
+                    <span>Trade Paperback</span>
+                </li>
+                <li>
+                    <span id="bold">Author:</span>
+                    <span>Collins, Suzanne</span>
+                </li>
+                <li>
+                    <span id="bold">ISBN:</span>
+                    <span>9781339016573</span>
+                </li>
+                <li>
+                    <span id="bold">Condition:</span>
+                    <span>Used</span>
+                </li>
+                <li>
+                    <span id="bold">Number Of Pages:</span>
+                    <span>528</span>
+                </li>
+                <li>
+                    <span id="bold">Publication Year:</dt>
+                        <span>2023</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div>
+        <h1 class="heading"> <span>You May Also Like</span> </h1>
+
+        <section class="featured" id="featured">
+            <div class="swiper featured-slider">
+
+                <div class="swiper-wrapper">
+
+                    <div class="swiper-slide box">
+                        <div class="icons">
+                            <a href="#" class="fas fa-search"></a>
+                            <a href="#" class="fas fa-heart"></a>
+                            <a href="#" class="fas fa-eye"></a>
+                        </div>
+                        <div class="image">
+                            <img src="the_hunger_games.jpg">
+                        </div>
+                        <div class="content">
+                            <h3>The hunger games</h3>
+                            <div class="price">$14.99 <span>$18.99</span></div>
+                            <a href="#" class="btn">add to cart</a>
+                        </div>
+                    </div>
+                    <div class="swiper-slide box">
+                        <div class="icons">
+                            <a href="#" class="fas fa-search"></a>
+                            <a href="#" class="fas fa-heart"></a>
+                            <a href="#" class="fas fa-eye"></a>
+                        </div>
+                        <div class="image">
+                            <img src="the_fallen_stars.jpg" alt="">
+                        </div>
+                        <div class="content">
+                            <h3>The fallen stars</h3>
+                            <div class="price">$18.99 <span>$27.99</span></div>
+                            <a href="#" class="btn">add to cart</a>
+                        </div>
+                    </div>
+                    <div class="swiper-slide box">
+                        <div class="icons">
+                            <a href="#" class="fas fa-search"></a>
+                            <a href="#" class="fas fa-heart"></a>
+                            <a href="#" class="fas fa-eye"></a>
+                        </div>
+                        <div class="image">
+                            <img src="into the wild, aventur.jpg" alt="">
+                        </div>
+                        <div class="content">
+                            <h3>Into the wild</h3>
+                            <div class="price">$20.99 <span>$25.99</span></div>
+                            <a href="#" class="btn">add to cart</a>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide box">
+                        <div class="icons">
+                            <a href="#" class="fas fa-search"></a>
+                            <a href="#" class="fas fa-heart"></a>
+                            <a href="#" class="fas fa-eye"></a>
+                        </div>
+                        <div class="image">
+                            <img src="criminal_mischief.jpg" alt="">
+                        </div>
+                        <div class="content">
+                            <h3>Criminal mischief</h3>
+                            <div class="price">$30.00 <span>$33.99</span></div>
+                            <a href="#" class="btn">add to cart</a>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide box">
+                        <div class="icons">
+                            <a href="#" class="fas fa-search"></a>
+                            <a href="#" class="fas fa-heart"></a>
+                            <a href="#" class="fas fa-eye"></a>
+                        </div>
+                        <div class="image">
+                            <img src="catchingfire.jpg" alt="">
+                        </div>
+                        <div class="content">
+                            <h3>Catching Fire</h3>
+                            <div class="price">$12.99 <span>$16.99</span></div>
+                            <a href="#" class="btn">add to cart</a>
+                        </div>
+                    </div>
+
+                </div>
+
+
+        </section>
+    </div>
+    <div>
+        <h1 class="heading"> <span>Customer Reviews</span> </h1>
+    </div>
+    {{> footer}}
+</body>
+
+<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+<script src="javascript.js"></script>
+<script src="js/script.js"></script>
+<script>
+    var swiper = new Swiper(".featured-slider", {
+        spaceBetween: 10,
+        loop: true,
+        centeredSlides: true,
+        autoplay: {
+            delay: 9500,
+            disableOnInteraction: false,
+        },
+
+
+        breakpoints: {
+            0: {
+                slidesPerView: 1,
+            },
+            450: {
+                slidesPerView: 2,
+            },
+            768: {
+                slidesPerView: 3,
+            },
+            1024: {
+                slidesPerView: 4,
+            },
+        },
+    });
+</script>
+
+</html>

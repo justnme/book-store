@@ -45,6 +45,10 @@ app.get('/genres', (_, response) => {
 app.get('/registration', (_, response) => {
 	response.render('registration' );
   });
+  
+  app.get('/book', (_, response) => {
+	response.render('book' );
+  });
 
 // ---------DATABASE------------->>>
 
