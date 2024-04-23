@@ -376,7 +376,6 @@ button#prevButton,
 .home .row .content h3{
     color:var(--black);
     font-size: 4.5rem;
-
     font-weight: bold; 
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
 }
@@ -387,7 +386,6 @@ button#prevButton,
     line-height: 2;
     padding:1rem 0;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
-
 }
 
 .icons-container{

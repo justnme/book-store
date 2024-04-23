@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/addBook.css" type="text/css">
+    <title>Add book</title>
+	<link rel="icon" type="image/x-icon" href="/image/favicon.ico">
+</head>
+
+<body>
+    <div class="container">
+        <h1 style="border-bottom: 2px solid black; text-align: center;">Add book</h1>
+        <form method = "POST" id="add-book-form">
+            <label for="title">Book title</label>
+            <input name = "bookTitle" type="text" id="title" required>
+			
+			<label for="image">Book image</label>
+			
+			<!-- This parent is important because the function loads the image
+			into the first child, which should be the img element-->
+			<center> 
+				<img id = "image" src = ""/>
+				<!-- This works fine (the error gets sent to insert file) the
+				first time until you reload the page-->
+				<input name = "bookImage" required type = "file" onchange="Load_Image(this)"/>
+			</center>
+			
+            <label for="author">Author</label>
+            <input name = "bookAuthor" type="text" id="author" required>
+
+			<label for="price">Price ($)</label>
+			<input name = "bookPrice" type="number" value = "0.00" min="0.00" step="0.01" id="price" required>
+			
+            <label for="date">Date</label>
+            <input name = "bookDate" type="date" id="date" required>
+			
+            <label for="genre">Genre</label>
+            <select name = "bookGenre" id="genre">
+                <option selected value="Horror">Horror</option>
+                <option value="Adventure">Adventure</option>
+                <option value="Action">Action</option>
+                <option value="Romantic">Romantic</option>
+                <option value="Classic">Classic</option>
+				<option value="Fantasy">Fantasy</option>
+            </select>
+			
+			<label for="tags">Tags</label>
+			<div class="flex-container">
+				<select name="tags1">
+					<option selected value=""></option>
+					<option value="long">long</option>
+					<option value="short">short</option>
+					<option value="children">children</option>
+					<option value="teenagers">teenagers</option>
+					<option value="adults">adults</option>
+					<option value="political">political</option>
+					<option value="apocalyptic">apocalyptic</option>
+					<option value="historical">historical</option>
+					<option value="paranormal">paranormal</option>
+					<option value="erotic">erotic</option>
+					<option value="magical">magical</option>
+					<option value="fairyTale">fairy tale</option>
+					<option value="military">military</option>
+					<option value="steampunk">steampunk</option>
+					<option value="religious">religious</option>
+					<option value="conspiracy">conspiracy</option>
+					<option value="supernatural">supernatural</option>
+				</select>
+				<select name="tags2">
+					<option selected value=""></option>
+					<option value="long">long</option>
+					<option value="short">short</option>
+					<option value="children">children</option>
+					<option value="teenagers">teenagers</option>
+					<option value="adults">adults</option>
+					<option value="political">political</option>
+					<option value="apocalyptic">apocalyptic</option>
+					<option value="historical">historical</option>
+					<option value="paranormal">paranormal</option>
+					<option value="erotic">erotic</option>
+					<option value="magical">magical</option>
+					<option value="fairyTale">fairy tale</option>
+					<option value="military">military</option>
+					<option value="steampunk">steampunk</option>
+					<option value="religious">religious</option>
+					<option value="conspiracy">conspiracy</option>
+					<option value="supernatural">supernatural</option>
+				</select>
+				<select name="tags3">
+					<option selected value=""></option>
+					<option value="long">long</option>
+					<option value="short">short</option>
+					<option value="children">children</option>
+					<option value="teenagers">teenagers</option>
+					<option value="adults">adults</option>
+					<option value="political">political</option>
+					<option value="apocalyptic">apocalyptic</option>
+					<option value="historical">historical</option>
+					<option value="paranormal">paranormal</option>
+					<option value="erotic">erotic</option>
+					<option value="magical">magical</option>
+					<option value="fairyTale">fairy tale</option>
+					<option value="military">military</option>
+					<option value="steampunk">steampunk</option>
+					<option value="religious">religious</option>
+					<option value="conspiracy">conspiracy</option>
+					<option value="supernatural">supernatural</option>
+				</select>
+				<select name="tags4">
+					<option selected value=""></option>
+					<option value="long">long</option>
+					<option value="short">short</option>
+					<option value="children">children</option>
+					<option value="teenagers">teenagers</option>
+					<option value="adults">adults</option>
+					<option value="political">political</option>
+					<option value="apocalyptic">apocalyptic</option>
+					<option value="historical">historical</option>
+					<option value="paranormal">paranormal</option>
+					<option value="erotic">erotic</option>
+					<option value="magical">magical</option>
+					<option value="fairyTale">fairy tale</option>
+					<option value="military">military</option>
+					<option value="steampunk">steampunk</option>
+					<option value="religious">religious</option>
+					<option value="conspiracy">conspiracy</option>
+					<option value="supernatural">supernatural</option>
+				</select>
+				<select name="tags5">
+					<option selected value=""></option>
+					<option value="long">long</option>
+					<option value="short">short</option>
+					<option value="children">children</option>
+					<option value="teenagers">teenagers</option>
+					<option value="adults">adults</option>
+					<option value="political">political</option>
+					<option value="apocalyptic">apocalyptic</option>
+					<option value="historical">historical</option>
+					<option value="paranormal">paranormal</option>
+					<option value="erotic">erotic</option>
+					<option value="magical">magical</option>
+					<option value="fairyTale">fairy tale</option>
+					<option value="military">military</option>
+					<option value="steampunk">steampunk</option>
+					<option value="religious">religious</option>
+					<option value="conspiracy">conspiracy</option>
+					<option value="supernatural">supernatural</option>
+				</select>
+			</div>
+            <button type="submit">Add book</button>
+        </form>
+    </div>
+        <!--
+        <form id="edit-book-form" style="display: none;">
+            <label for="edit-title">Нова назва книги:</label>
+            <input type="text" id="edit-title" required>
+        
+            <label for="edit-author">Новий автор:</label>
+            <input type="text" id="edit-author" required>
+        
+            <label for="edit-year">Новий рік видання:</label>
+            <input type="number" id="edit-year" required>
+        
+            <label for="edit-genre">Новий жанр:</label>
+            <select id="edit-genre">
+                <option value="Драма">Драма</option>
+                <option value="Історія">Історія</option>
+                <option value="Фантастика">Фантастика</option>
+                <option value="Пригоди">Пригоди</option>
+                <option value="Роман">Роман</option>
+            </select>
+        
+            <button type="submit">Зберегти зміни</button>
+        </form>
+		-->
+
+    <script>
+		function Load_Image(element){ //I couldn't link this to addBook.js file for some reason
+			element.parentElement.children[0].src = window.URL.createObjectURL(element.files[0]);
+			element.value = window.URL.createObjectURL(element.files[0]);
+		}
+	</script>
+</body>
+
+</html>
