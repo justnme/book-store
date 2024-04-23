@@ -1,5 +1,4 @@
 searchForm = document.querySelector('.search-form');
-//AAAAAA
 document.querySelector('#search-btn').onclick = () =>{
   searchForm.classList.toggle('active');
 }
@@ -77,7 +76,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
-
 
 
 
