@@ -49,6 +49,9 @@ app.get('/registration', (_, response) => {
 	response.render('book');
   });
   
+app.get('/shoppingCart', (_, response) => {
+	response.render('shoppingCart');
+  });
 //   app.get('/book/id', (_, response) => {
 // 	response.render('/book/id');
 //   });
