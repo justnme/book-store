@@ -23,7 +23,6 @@
 <body>
 	<div class="container">
 		<h1 style="border-bottom: 2px solid black; text-align: center;">Add book</h1>
-		<form method="POST" id="add-book-form">
 			<label for="title">Book title</label>
 			<input name="bookTitle" type="text" id="title" required>
 
@@ -31,12 +30,13 @@
 
 			<!-- This parent is important because the function loads the image
 			into the first child, which should be the img element-->
-			<center>
-				<img id="image" src="" />
-				<!-- This works fine (the error gets sent to insert file) the
-				first time until you reload the page-->
-				<input name="bookImage" required type="file" onchange="Load_Image(this)" />
-			</center>
+	<form action="/upload" method="post" enctype="multipart/form-data">
+        <img id="image" src="" />
+        <input name="bookImage" required type="file" onchange="Load_Image(this)" />
+        <button type="submit">Upload Image</button>
+</form>
+
+
 
 			<label for="author">Author</label>
 			<input name="bookAuthor" type="text" id="author" required>
@@ -168,8 +168,7 @@
 
 	
 
-			<button type="submit">Add book</button>
-		</form>
+			{{!-- <button type="submit">Add book</button> --}}
 	</div>
 	<!--
         <form id="edit-book-form" style="display: none;">
@@ -194,12 +193,21 @@
             <button type="submit">Зберегти зміни</button>
         </form>
 		-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 	<script>
-		function Load_Image(element) { //I couldn't link this to addBook.js file for some reason
-			element.parentElement.children[0].src = window.URL.createObjectURL(element.files[0]);
-			element.value = window.URL.createObjectURL(element.files[0]);
-		}
+	function Load_Image(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#image').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
 	</script>
 </body>
 

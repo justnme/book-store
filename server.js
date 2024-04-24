@@ -366,7 +366,32 @@ app.post("/home", urlencodedParser, function (request, response) { //login check
 		response.redirect(request.get('referer')); //reload page
 	}).catch(err=>console.log(err));
 });
+const multer = require('multer');
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'images/') // Destination folder
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname)); // File name
+    }
+});
 
+// Initialize upload
+const upload = multer({
+    storage: storage
+}).single('bookImage');
+
+// Route for file upload
+app.post('/upload', (req, res) => {
+    upload(req, res, (err) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Error uploading file');
+        } else {
+            res.send('File uploaded successfully');
+        }
+    });
+});
 app.listen(port, () => {
     console.log(`Server is listening on localhost:${port}`);
 });
