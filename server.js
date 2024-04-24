@@ -42,6 +42,15 @@ app.get('/genres', (_, response) => {
   response.render('genres', { books: books });
 });
 
+app.get('/registration', (_, response) => {
+	response.render('registration');
+  });
+  
+//   app.get('/book/id', (_, response) => {
+// 	response.render('/book/id');
+//   });
+  
+
 app.get('/addBook', (_, response) => {
   response.render('addBook');
 });
