@@ -7,14 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book</title>
     <link rel="icon" type="image/x-icon" href="/image/favicon.ico">
-    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
-    <!-- link for the swiper  -->
-    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
-    <!-- font awesome cdn link  -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
     <!-- custom css file link  -->
     <link rel="stylesheet" href="css/style.css" type="text/css">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
@@ -217,6 +210,15 @@ box-shadow: 0 0 5px #B0CFE0;
             color: #888; 
             margin-right: 10px;
         }
+        	.textarea-message {
+                width: 60%;
+    max-width: 100%;
+	min-height: 500px;
+	min-width: 60%;
+    max-height: 1000px; 
+	margin-top: 7px;
+	margin-bottom: 5px;
+}
 </style>
 
 <body>
@@ -446,11 +448,13 @@ box-shadow: 0 0 5px #B0CFE0;
                         <span>/5</span>
                     </div>
                     <span>Message</span>
-                    <textarea name="message" rows="5" placeholder="type message"></textarea>
+                    <textarea class="textarea-message" name="message" rows="5" placeholder="type message" autocapitalize="off"></textarea>
                     <input type="submit" value="add review" class="btn">
                 </form>
             </div>
             <div id="block-padding-border">
+
+
                 <h2>Reviews</h2>
                 <div class="review">
                     <div class="review-user"> 
@@ -460,6 +464,27 @@ box-shadow: 0 0 5px #B0CFE0;
                     </div>
                     <p class="message">Govno ebanoe!</p>
                 </div>
+
+                <div class="review">
+                    <div class="review-user"> 
+                    <p class="username">Web Ymer</p>
+                    <p class="date">1888.04.24</p>
+                    <p class="rating">0/5</p>
+                    </div>
+                    <p class="message">Веб умер, на телефон переделывайте свое говно !</p>
+                </div>
+
+
+                <div class="review">
+                    <div class="review-user"> 
+                    <p class="username">Deniska</p>
+                    <p class="date">1984.04.24</p>
+                    <p class="rating">2/5</p>
+                    </div>
+                    <p class="message">огузки ебанные</p>
+                </div>
+
+
             </div>
         </div>
     </div>
