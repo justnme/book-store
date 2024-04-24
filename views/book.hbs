@@ -68,9 +68,13 @@
         padding-top: 20px;
         border-bottom: 1px solid black;
     }
-#button-row{
-    display: flex; display: flex;flex-direction: column;
-}
+
+    #button-row {
+        display: flex;
+        display: flex;
+        flex-direction: column;
+    }
+
     h1 {
         font-size: 2rem;
     }
@@ -87,7 +91,7 @@
     }
 
     #book-info img {
-        max-width: 75%;
+        max-width: 100%;
 
     }
 
@@ -116,12 +120,103 @@
     }
 
     #block-padding-border {
-        padding:2rem;
+        padding: 2rem;
         margin-top: 2rem;
-       margin-bottom: 2rem;
+        margin-bottom: 2rem;
         border-top: #00aeff solid 2px;
         border-bottom: #00aeff solid 2px;
     }
+
+    #add_review {
+        width: 400px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #add_review span {
+        margin-bottom: 8px;
+        font-size: 1.5rem;
+        font-weight: 400;
+    }
+
+    #add_review input[type="text"],
+    #add_review input[type="number"],
+    #add_review input[type="date"],
+    #add_review textarea {
+        padding: 8px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        font-size: 1.5rem;
+        font-weight: 400;
+    }
+    #add_review input[type="text"]:focus,
+    #add_review input[type="number"]:focus,
+    #add_review input[type="date"]:focus,
+    #add_review textarea:focus {
+box-shadow: 0 0 5px #B0CFE0;
+	border:1px solid #B0CFE0;
+    }
+    #add_review input[type="text"],
+    #add_review textarea {
+        width: 100%;
+    }
+
+    #add_review input[type="number"] {
+        width: 50%;
+    }
+      .review {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
+        }
+
+        .review p {
+            margin: 0;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+ 
+
+        .review .message {
+            margin-top: 25px;
+        }
+              .review-user {
+            display: flex;
+            align-items: center;
+        }
+
+        .review-user p {
+            margin: 0;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .review-user .username {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .review-user .rating {
+            font-size: 16px;
+            color: #ffcc00;
+        }
+
+        .review-user .date {
+            font-size: 14px;
+            color: #888; 
+            margin-right: 10px;
+        }
 </style>
 
 <body>
@@ -187,8 +282,8 @@
                     </div>
                 </fieldset>
                 <div id="button-row">
-                <button class="btn">Add to Cart</button>
-                <button class="btn">Add to Wishlist</button>
+                    <button class="btn">Add to Cart</button>
+                    <button class="btn">Add to Wishlist</button>
                 </div>
             </div>
         </div>
@@ -244,7 +339,7 @@
             </ul>
         </div>
     </div>
-    <div>
+    <div id="block-padding">
         <h1 class="heading"> <span>You May Also Like</span> </h1>
 
         <section class="featured" id="featured">
@@ -335,8 +430,38 @@
 
         </section>
     </div>
-    <div>
+    <div id="block-padding">
         <h1 class="heading"> <span>Customer Reviews</span> </h1>
+        <div id="padding">
+            <div id="block-padding-border">
+                <h2>Add Review</h2>
+                <form id="add_review" method="POST" action="">
+                    <span>Username</span>
+                    <input type="text" id="username" name="username" placeholder="enter your name" />
+                    <span>Date</span>
+                    <input type="date" id="current" name="current" value="2024-04-24" />
+                    <span>Rate</span>
+                    <div>
+                        <input type="number" id="rating" name="rating" value="1" min="1" max="5" />
+                        <span>/5</span>
+                    </div>
+                    <span>Message</span>
+                    <textarea name="message" rows="5" placeholder="type message"></textarea>
+                    <input type="submit" value="add review" class="btn">
+                </form>
+            </div>
+            <div id="block-padding-border">
+                <h2>Reviews</h2>
+                <div class="review">
+                    <div class="review-user"> 
+                    <p class="username">Den</p>
+                    <p class="date">2024.04.24</p>
+                    <p class="rating">5/5</p>
+                    </div>
+                    <p class="message">Beautiful book!</p>
+                </div>
+            </div>
+        </div>
     </div>
     {{> footer}}
 </body>
