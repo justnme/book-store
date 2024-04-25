@@ -7,6 +7,7 @@
 
 const express = require('express');
 const urlencodedParser = express.urlencoded({extended: false}); //needed for POST forms
+const { Op } = require("sequelize"); //needed for sequelize operators
 
 const hbs = require("hbs");
 const app = express();
@@ -22,45 +23,12 @@ hbs.registerPartials(path.join(__dirname, 'views', 'partials'));
 
 app.use(express.static(__dirname));
 
-// let it be array for now
-let books = [
-  { bookLink: 'book_images', bookCover: 'shadow_and_bone.jpg' },
-  { bookLink: 'book_images', bookCover: 'the_maid.jpg' },
-  { bookLink: 'book_images', bookCover: 'wish_you_were_here.jpg' },
-];
+//needed for image saving
+const multer = require('multer');
+var bodyParser = require('body-parser');
 
-app.get('/', (_, response) => {
-	// response.redirect('home'); //I hope this works now
-    response.render('index', { books: books });
-});
-
-app.get('/home', (_, response) => {
-  response.render('index', { books: books });
-});
-
-app.get('/genres', (_, response) => {
-  response.render('genres', { books: books });
-});
-
-app.get('/registration', (_, response) => {
-	response.render('registration');
-  });
-  app.get('/book', (_, response) => {
-	response.render('book');
-  });
-  
-app.get('/shoppingCart', (_, response) => {
-	response.render('shoppingCart');
-  });
-//   app.get('/book/id', (_, response) => {
-// 	response.render('/book/id');
-//   });
-  
-
-app.get('/addBook', (_, response) => {
-  response.render('addBook');
-});
-
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 // ---------DATABASE------------->>>
 
@@ -141,6 +109,10 @@ const Books = sequelize.define("Books", {
 	date: {
 		type: Sequelize.STRING,
 		allowNull: false,
+	},
+	description: {
+		type: Sequelize.STRING,
+		allowNull: true,
 	}
 });
 
@@ -273,32 +245,83 @@ sequelize.sync().then(result=>{
 
 // <<<---------DATABASE------------
 
-// DOESN'T WORK (but it's close though)
-/*
-hbs.registerHelper("book_carousel", function(){
-	let result_string ="";
+app.get('/', (_, response) => {
+	response.redirect('home'); //I hope this works now
+    //response.render('index');
+});
+app.get('/registration', (_, response) => {
+	response.render('registration');
+  });
+  app.get('/book', (_, response) => {
+	response.render('book');
+  });
+  
+app.get('/shoppingCart', (_, response) => {
+	response.render('shoppingCart');
+  });
+//   app.get('/book/id', (_, response) => {
+// 	response.render('/book/id');
+//   });
+
+app.get('/genres', (_, response) => {
+  response.render('genres');
+});
+
+app.get('/addBook', (_, response) => {
+  response.render('addBook');
+});
+
+app.get('/home', async (_, response) => {
+	const delay = ms => new Promise(resolve => setTimeout(resolve, ms)); //This is all for book on the home screen
+	let result_string = "";
+	const result = await Books.max("book_id");
 	
-	Books.count()
-	.then(result=>{
-		for (let i = 1; i <= result; i++){
-			const current_book = Books.findByPk(i);
+	(async function loop() {
+		let i = 1;
+		while(i <= result) {
+			await delay(Math.random() * 10);
+			current_book = await Books.findOne({where:{book_id: {[Op.gte]: i}}, raw:true});
 			const current_image_name = current_book.image_name;
 			result_string = result_string + `<a href="#" class="swiper-slide"><img src="book_images/${current_image_name}" alt=""></a>`;
+			i = current_book.book_id + 1;
+			console.log(i);
 		}
-		return `${result_string}`;
-	}).catch(err=>console.log(err));
+		console.log(result_string);
+		await delay(Math.random() * 10);
+		await hbs.registerHelper("book_carousel", function(){
+			return `${result_string}`;
+		});
+		await response.render('index');
+	})();
 });
-*/
 
-app.post("/addBook", urlencodedParser, function (request, response) { //Adding book to DB
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'book_images/') // Destination folder
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname); // File name
+    }
+});
+
+const upload = multer({
+    storage: storage
+}).single('bookImage');
+
+app.post("/upload", upload, (request, response) => {
 	if(!request.body) return response.sendStatus(400);
+
+	console.log(request.body);
+	console.log(request.file);
 	
 	const book_title = request.body.bookTitle;
 	const book_genre = request.body.bookGenre;
-	const book_image = request.body.bookImage;
+	const book_image = request.file.originalname;
 	const book_author = request.body.bookAuthor;
 	const book_price = request.body.bookPrice;
 	const book_date = request.body.bookDate;
+	const book_description = request.body.bookDescription;
 	const tags = [];
 	
 	if(request.body.tags1 != "") tags.push(request.body.tags1);
@@ -307,14 +330,19 @@ app.post("/addBook", urlencodedParser, function (request, response) { //Adding b
 	if(request.body.tags4 != "") tags.push(request.body.tags4);
 	if(request.body.tags5 != "") tags.push(request.body.tags5);
 	
+	upload(request, response, (err) => {
+        if (err) {
+            console.error(err);
+            response.status(500).send('Error uploading file');
+        }
+    });
+
 	Books.findOne({where:{title: book_title}, raw:true})
 	.then(book=>{
 		if (book != null) {
 			//Add something here so that the user knows the book already exists
 		}
 		else {
-			console.log("null");
-			
 			Genres.findOne({where:{genre_name: book_genre}, raw:true})
 			.then(genre=>{
 				
@@ -328,7 +356,7 @@ app.post("/addBook", urlencodedParser, function (request, response) { //Adding b
 						
 						Authors.max('author_id')
 						.then(authorId=>{
-							Books.create({genre_id: genre.genre_id, image_name: book_image, author_id: authorId, title: book_title, price: book_price, date: book_date});
+							Books.create({genre_id: genre.genre_id, image_name: book_image, author_id: authorId, title: book_title, price: book_price, date: book_date, description: book_description});
 						}).catch(err=>console.log(err));
 					}
 					
@@ -347,8 +375,7 @@ app.post("/addBook", urlencodedParser, function (request, response) { //Adding b
 				
 			}).catch(err=>console.log(err));
 		}
-	}).catch(err=>console.log(err));
-	
+	}).catch(err=>console.log(err)); 
 });
 
 app.post("/home", urlencodedParser, function (request, response) { //login check
@@ -372,51 +399,7 @@ app.post("/home", urlencodedParser, function (request, response) { //login check
 		response.redirect(request.get('referer')); //reload page
 	}).catch(err=>console.log(err));
 });
-const multer = require('multer');
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'images/') // Destination folder
-    },
-    filename: function (req, file, cb) {
-        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname)); // File name
-    }
+
+app.listen(3000, () => {
+    console.log(`Server is listening on localhost:3000`);
 });
-
-// Initialize upload
-const upload = multer({
-    storage: storage
-}).single('bookImage');
-
-// Route for file upload
-app.post('/upload', (req, res) => {
-    upload(req, res, (err) => {
-        if (err) {
-            console.error(err);
-            res.status(500).send('Error uploading file');
-        } else {
-            res.send('File uploaded successfully');
-        }
-    });
-});
-app.listen(port, () => {
-    console.log(`Server is listening on localhost:${port}`);
-});
-
-
-// const connection = mysql.createConnection({
-//     host: 'localhost',
-//     user: 'your_mysql_username',
-//     password: 'your_mysql_password',
-//     database: 'your_database_name'
-//   });
-  
-//   connection.connect((err) => {
-//     if (err) {
-//       console.error('Error connecting to MySQL database: ' + err.stack);
-//       return;
-//     }
-//     console.log('Connected to MySQL database as id ' + connection.threadId);
-//   });
-  
-//   // Close connection
-//   // connection.end();
