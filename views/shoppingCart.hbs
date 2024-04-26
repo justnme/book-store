@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookflix and Chill</title>
+    <link rel="icon" type="image/x-icon" href="/image/favicon.ico">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+
+<style>
+
+h1 {
+    color: #333;
+}
+
+h5 {
+    color: #666;
+}
+
+/* Стили для корзины покупок */
+#cart-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+#cart-container h3 {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+#cart-container h3:last-child {
+    margin-right: 0;
+    margin-left: 25px;
+}
+
+/* Стили для "Saved for later" */
+#saved-for-later {
+    margin-top: 20px;
+}
+
+#saved-for-later p {
+    font-style: italic;
+}
+
+/* Стили для кнопки Apply */
+#apply-button {
+    margin-top: 20px;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#apply-button:hover {
+    background-color: #0056b3;
+}
+
+/* Стили для Order Summary */
+#order-summary {
+    margin-top: 20px;
+}
+
+/* Стили для Proceed To Checkout */
+#checkout-button {
+    display: block;
+    margin-top: 20px;
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+}
+
+#checkout-button:hover {
+    background-color: #218838;
+}
+
+</style>
+
+</head>
+
+<body>
+{{>header}}
+<div id="cart-container">
+    <h1>Your Shopping Cart</h1>
+    <h5>You're $29.91 away from free shipping!</h5>
+    <div class="cart-table" tabindex="0" aria-label="Cart items table">
+        <h3 class="cart-table__header">Items</h3>
+        <h3 class="cart-table__header">Price</h3>
+        <h3 class="cart-table__header">Quantity</h3>
+        <h3 class="cart-table__header cart-table__total">Total</h3>
+    </div>
+    <div id="saved-for-later">
+        <div>Saved for later</div>
+        <div class="saved-items">
+            <p class="saved-items__message">You currently have no saved items</p>
+        </div>
+    </div>
+    <button id="apply-button" tabindex="0" type="submit" form="desktop-apply-coupon-form" aria-label="Apply coupon code">Apply</button>
+    <div id="order-summary">
+        <div>Order Summary</div>
+        <div class="order-summary-details">
+        </div>
+    </div>
+</div>
+
+
+
+
+{{>footer}}
+</body>
+
+</html>
