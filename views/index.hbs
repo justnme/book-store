@@ -15,6 +15,10 @@
     <!-- custom css file link  -->
     <link rel="stylesheet" href="css/style.css" type="text/css">
 
+    {{!-- shoppping cart css --}}
+    <link rel="stylesheet" href="css/shoppingCart.css" type="text/css">
+
+
 </head>
 
 <body>
@@ -304,20 +308,18 @@
 
     <!-- deal section ends -->
     <!-- footer section starts  -->
-
+    {{> shoppingmenu}}
     {{> footer}}
 
-    <!--    Это скам загрузка, просто пять секунд гифка играет поверх 
-    <div class="loader-container">
-        <img src="image/loader-img.gif" alt="">
-    </div> -->
-
+  
 
 
 
     <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
     <!-- custom js file link  -->
     <script src="javascript.js"></script>
+    {{!-- shopping cart logic --}}
+    <script src="scripts/shopping-cart.js"></script>
 
 </body>
 
