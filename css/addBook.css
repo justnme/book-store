@@ -14,6 +14,14 @@ width: fit-content;
 
 }
 
+.form-control.user-profile-bio-field {
+    min-height: 300px;
+    min-width: 60%;
+    max-height: 1000px;
+    margin-top: 7px;
+    margin-bottom: 5px;
+}
+
 #padding {
     padding: 5rem 4rem;
 }
