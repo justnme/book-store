@@ -1,85 +1,103 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
 }
 /* стилизация контейнера главной формы */
 .container {
-    background-color: #f1eeee;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
+width: fit-content;
     padding: 20px;
-    width: 100%;
-    max-width: 800px;
-    box-sizing: border-box;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    max-height: 900px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+
+
 }
 
+#padding {
+    padding: 5rem 4rem;
+}
 h1 {
-    text-align: center;
-    margin-bottom: 20px;
+    font-size: 2rem;
 }
-
-form > label {
+#block-padding {
+    padding: 1rem 3rem;
+}
+#add-padding{
+    padding: 1rem;
+}
+#saveForm > label {
     text-align: center;
 	margin-top: 25px;
 	margin-bottom: 5px;
     display: block;
     font-weight: bold;
+    font-size: 1.75rem;
+}
+.book-picture label {
+    text-align: center;
+    display: block;
+    font-weight: bold;
+    font-size: 1.75rem;
+}
+#centre{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+#stretch{
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
 }
 
-form > input {
-    width: 100%;
-    padding: 10px 0 10px 0;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
+.book-fields  label{
+    text-align: center;
+    display: block;
+    font-weight: bold;
+    font-size:  1.75rem;
 }
-
-form > select {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-}
-
-div > select {
-    width: 130px;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-}
-
-form > button {
-    background-color: #0b1cb8;
-    color: #fff;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    margin-top: 10px;
-    width: 100%;
-}
+.book-flex{
+    display: flex;
+    justify-content: center;
+    }
+    
 
 .flex-container {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-evenly;
 }
-
-form button:hover {
-    background-color: #0075f2;
+.book-fields input[type="text"],
+.book-fields input[type="number"],
+.book-fields input[type="date"],
+ .book-fields select {
+width: 300px;
+}
+input[type="text"],
+input[type="number"],
+input[type="date"],
+textarea, select {
+    padding-right: 8px;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+textarea:focus , select:focus {
+box-shadow: 0 0 5px #B0CFE0;
+border:1px solid #B0CFE0;
 }
 
+#tags1,#tags2,#tags3,#tags4,#tags5{
+    margin: 2px;
+}
 /* Стили для кнопок сортировок */
 #sort-title,
 #sort-author,
@@ -149,6 +167,7 @@ form button:hover {
 }
 
 /* Стили для кнопок редагировки и удаления */
+/*Снести нахуй и использовать из оновного css btn*/
 .book .edit,
 .book .delete {
     background-color: #007bff;
