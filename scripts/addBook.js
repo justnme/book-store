@@ -1,5 +1,5 @@
 function load_Image(element){ //Load image to hbs
-    element.parentElement.children[0].src = window.URL.createObjectURL(element.files[0]);
+    document.getElementById("image").src = window.URL.createObjectURL(element.files[0]);
 }
 
 const saveForm =  document.getElementById("saveForm")

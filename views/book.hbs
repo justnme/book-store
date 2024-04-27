@@ -9,8 +9,8 @@
     <link rel="icon" type="image/x-icon" href="/image/favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <!-- custom css file link  -->
-    <link rel="stylesheet" href="css/style.css" type="text/css">
-      <link rel="stylesheet" href="css/book.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+      <link rel="stylesheet" href="/css/book.css" type="text/css">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 
 </head>
@@ -19,24 +19,29 @@
 <body>
     {{> header}}
     <div id="padding">
+        <!--
         <div>
             <p>Books / Categories / Young Adult / Young Adult / Fiction / Dystopian</p>
         </div>
+		-->
         <div id="book-info">
             <div>
-                <img src="https://img-cdn.hpb.com/normal/9781339016573/6/0/300.jpg">
+				{{{bookImage}}}
             </div>
 
             <div>
                 <div>
                     <div class="row">
                         <div id="block-padding">
-                            <h1 class="book-name">The Ballad of Songbirds and Snakes (a Hunger Games Novel)</h1>
-                            <span class="font-italic">by Collins, Suzanne</span>
-                            <p>ISBN: 9781339016573</p>
+                            {{{bookTitle}}}
+							{{{bookAuthor}}}
+                            <!--
+							<p>ISBN: 9781339016573</p>
+							-->
                         </div>
                     </div>
                 </div>
+                <!--
                 <div id="block-padding">
                     <fieldset>
                         <legend>Condition</legend>
@@ -61,9 +66,11 @@
 
                     </fieldset>
                 </div>
+				-->
             </div>
             <div id="block-padding">
-                <p id="cost">$8.49</p>
+                {{{bookPrice}}}
+				<!--
                 <p>Used - Trade Paperback - 9781339016573</p>
                 <fieldset id="block-padding-border">
 
@@ -78,6 +85,7 @@
                         <label for="Ship to Address">Ship to Address</label>
                     </div>
                 </fieldset>
+				-->
                 <div id="button-row">
                     <button class="btn">Add to Cart</button>
                     <button class="btn">Add to Wishlist</button>
@@ -86,37 +94,27 @@
         </div>
 
         <div id="block-padding">
-            <h2 class="heading"> <span>Overview</span> </h2>
-            <p>Ambition will fuel him.<br>
-                Competition will drive him.<br>
-                But power has its price.<br>
-                It is the morning of the reaping that will kick off the tenth annual Hunger Games.
-                In the Capitol, eighteen-year-old Coriolanus Snow is preparing for
-                his one shot at glory as a mentor in the Games.
-                The once-mighty house of Snow has fallen on hard times, its fate hanging
-                on the slender chance that Coriolanus will be
-                able to outcharm, outwit, and outmaneuver his fellow students
-                to mentor the winning tribute.<br>
-                The odds are against him. He's been given the humiliating assignment of mentoring the female tribute
-                from
-                District 12,
-                the lowest of the low. Their fates are now completely intertwined -- every choice
-                Coriolanus makes could lead to favor or failure, triumph or ruin. Inside the arena,
-                it will be a fight to the death. Outside the arena, Coriolanus starts to feel for his doomed
-                tribute... and must weigh his need to follow the rules against his desire to survive
-                no matter what it takes.</p>
+            <h2 class="heading"> <span>Description</span> </h2>
+            {{{bookDescription}}}
         </div>
         <div id="block-padding">
-            <h2 class="heading"> <span>Item Information</span> </h2>
+            <h2 class="heading"> <span>Information</span> </h2>
             <ul>
+				<!--
                 <li>
                     <span id="bold">Format:</span>
                     <span>Trade Paperback</span>
                 </li>
+				-->
                 <li>
                     <span id="bold">Author:</span>
-                    <span>Collins, Suzanne</span>
+					{{{bookAuthor2}}}
                 </li>
+				<li>
+                    <span id="bold">Genre:</span>
+					{{{bookGenre}}}
+                </li>
+				<!--
                 <li>
                     <span id="bold">ISBN:</span>
                     <span>9781339016573</span>
@@ -129,9 +127,10 @@
                     <span id="bold">Number Of Pages:</span>
                     <span>528</span>
                 </li>
+				-->
                 <li>
-                    <span id="bold">Publication Year:</dt>
-                        <span>2023</span>
+                    <span id="bold">Publication Date:</dt>
+					{{{bookDate}}}
                 </li>
             </ul>
         </div>
@@ -144,83 +143,7 @@
 
                 <div class="swiper-wrapper">
 
-                    <div class="swiper-slide box">
-                        <div class="icons">
-                            <a href="#" class="fas fa-search"></a>
-                            <a href="#" class="fas fa-heart"></a>
-                            <a href="#" class="fas fa-eye"></a>
-                        </div>
-                        <div class="image">
-                            <img src="the_hunger_games.jpg">
-                        </div>
-                        <div class="content">
-                            <h3>The hunger games</h3>
-                            <div class="price">$14.99 <span>$18.99</span></div>
-                            <a href="#" class="btn">add to cart</a>
-                        </div>
-                    </div>
-                    <div class="swiper-slide box">
-                        <div class="icons">
-                            <a href="#" class="fas fa-search"></a>
-                            <a href="#" class="fas fa-heart"></a>
-                            <a href="#" class="fas fa-eye"></a>
-                        </div>
-                        <div class="image">
-                            <img src="the_fallen_stars.jpg" alt="">
-                        </div>
-                        <div class="content">
-                            <h3>The fallen stars</h3>
-                            <div class="price">$18.99 <span>$27.99</span></div>
-                            <a href="#" class="btn">add to cart</a>
-                        </div>
-                    </div>
-                    <div class="swiper-slide box">
-                        <div class="icons">
-                            <a href="#" class="fas fa-search"></a>
-                            <a href="#" class="fas fa-heart"></a>
-                            <a href="#" class="fas fa-eye"></a>
-                        </div>
-                        <div class="image">
-                            <img src="into the wild, aventur.jpg" alt="">
-                        </div>
-                        <div class="content">
-                            <h3>Into the wild</h3>
-                            <div class="price">$20.99 <span>$25.99</span></div>
-                            <a href="#" class="btn">add to cart</a>
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide box">
-                        <div class="icons">
-                            <a href="#" class="fas fa-search"></a>
-                            <a href="#" class="fas fa-heart"></a>
-                            <a href="#" class="fas fa-eye"></a>
-                        </div>
-                        <div class="image">
-                            <img src="criminal_mischief.jpg" alt="">
-                        </div>
-                        <div class="content">
-                            <h3>Criminal mischief</h3>
-                            <div class="price">$30.00 <span>$33.99</span></div>
-                            <a href="#" class="btn">add to cart</a>
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide box">
-                        <div class="icons">
-                            <a href="#" class="fas fa-search"></a>
-                            <a href="#" class="fas fa-heart"></a>
-                            <a href="#" class="fas fa-eye"></a>
-                        </div>
-                        <div class="image">
-                            <img src="catchingfire.jpg" alt="">
-                        </div>
-                        <div class="content">
-                            <h3>Catching Fire</h3>
-                            <div class="price">$12.99 <span>$16.99</span></div>
-                            <a href="#" class="btn">add to cart</a>
-                        </div>
-                    </div>
+                    {{> featured}}
 
                 </div>
 
@@ -233,24 +156,18 @@
             <div id="block-padding-border">
                 <h2>Add Review</h2>
                 <form id="add_review" method="POST" action="">
-                    <span>Username</span>
-                    <input type="text" id="username" name="username" placeholder="enter your name" />
-                    <span>Date</span>
-                    <input type="date" id="current" name="current" value="2024-04-24" />
                     <span>Rate</span>
                     <div>
-                        <input type="number" id="rating" name="rating" value="1" min="1" max="5" />
-                        <span>/5</span>
+                        <input type="number" id="rating" name="review_rating" value="1" min="1" max="5" />
+                        <span> / 5</span>
                     </div>
                     <span>Message</span>
-                    <textarea class="textarea-message" name="message" rows="5" placeholder="type message" autocapitalize="off"></textarea>
+                    <textarea class="textarea-message" name="review_message" rows="5" placeholder="type message" autocapitalize="off"></textarea>
                     <input type="submit" value="add review" class="btn">
                 </form>
             </div>
             <div id="block-padding-border">
-
-
-                <h2>Reviews</h2>
+				<h2>Reviews</h2>
                 <div class="review">
                     <div class="review-user"> 
                     <p class="username">Den</p>
@@ -278,7 +195,6 @@
                     </div>
                     <p class="message">огузки ебанные</p>
                 </div>
-
 
             </div>
         </div>

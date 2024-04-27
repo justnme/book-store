@@ -92,18 +92,19 @@
 
     <div id="close-registration-btn" class="fas fa-times"></div>
 
-    <form action="">
+    <form method="POST">
         <h3>sign up</h3>
         <span>username</span>
-        <input type="text" name="" class="box" placeholder="enter your username" id="">
+        <input required type="text" name="reg_login" class="box" placeholder="enter your username" id="">
         <span>email</span>
-        <input type="email" name="" class="box" placeholder="enter your email" id="">
+        <input required type="email" name="reg_email" class="box" placeholder="enter your email" id="">
         <span>password</span>
-        <input type="password" name="" class="box" placeholder="enter your password" id="">
+        <input required type="password" name="reg_password" class="box" placeholder="enter your password" id="">
         <span>confirm password</span>
-        <input type="password" name="" class="box" placeholder="confirm your password" id="">
+        <input required type="password" name="confirm_reg_password" class="box" placeholder="confirm your password" id="">
         <input type="submit" value="sign up" class="btn">
         <p>already have an account? <a href="#">sign in</a></p>
+		<p style="color: red">{{reg_result}}</p>
     </form>
 
 </div>
@@ -112,7 +113,7 @@
     {{> footer}}
 </body>
     <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
-    <script src="javascript.js"></script>
+    <script src="scripts/javascript.js"></script>
 
 </html>
  

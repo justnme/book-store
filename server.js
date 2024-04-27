@@ -251,20 +251,185 @@ app.get('/', (_, response) => {
 });
 app.get('/registration', (_, response) => {
 	response.render('registration');
-  });
-  app.get('/book', (_, response) => {
-	response.render('book');
-  });
+});
+
+app.post("/registration", urlencodedParser, function (request, response) { //login check
+    if(!request.body) return response.sendStatus(400);
+	
+	const delay = ms => new Promise(resolve => setTimeout(resolve, ms)); //This is all for book on the home screen
+	
+	const reg_login = request.body.reg_login;
+    const reg_email = request.body.reg_email;
+    const reg_password = request.body.reg_password;
+	const confirm_reg_password = request.body.confirm_reg_password;
+	const reg_status = "user";
+	
+	(async function reg_Checks() {
+		if(reg_password != confirm_reg_password) {
+			await delay(Math.random() * 10);
+			await hbs.registerHelper("reg_result", function(){
+				return `The second password is not indentical`;
+			});
+		}
+		else {
+			await delay(Math.random() * 10);
+			let user = await Users.findOne({where: {[Op.or]: [{email: reg_email}, {login: reg_login}]}, raw:true});
+			await delay(Math.random() * 10);
+			if (user != null && user.email == reg_email) {
+				if (user.email == reg_email) {
+					await hbs.registerHelper("reg_result", function(){
+						return `This email has already been registered`;
+					});
+				}
+				if (user.login == reg_login) {
+					await hbs.registerHelper("reg_result", function(){
+						return `This login has already been registered`;
+					});
+				}
+			}
+			else await Users.create({password_text: reg_password, email: reg_email, login: reg_login, status_text: "user"});
+		}
+		await response.redirect(request.get('referer')); //reload page
+	})();
+});
+
+app.get('/book/:linkTitle', async (request, response) => {
+	const delay = ms => new Promise(resolve => setTimeout(resolve, ms)); //This is all for book on the home screen
+	
+	const current_title = request.params.linkTitle;
+	
+	await delay(Math.random() * 10);
+	const current_book = await Books.findOne({where:{title: current_title}, raw:true});
+	if(current_book == null) {
+		return response.status(400).send(`A book with title "${current_title}" does not exist`);
+	}
+	
+	await delay(Math.random() * 10);
+	const current_book_author = await Authors.findOne({where:{author_id: current_book.author_id}, raw:true});
+	
+	await delay(Math.random() * 10);
+	const current_book_genre = await Genres.findOne({where:{genre_id: current_book.genre_id}, raw:true});
+	
+	await delay(Math.random() * 10);
+	const current_image = current_book.image_name;
+	const current_author = current_book_author.full_name;
+	const current_genre = current_book_genre.genre_name;
+	const current_price = current_book.price;
+	const current_date = current_book.date;
+	const current_description = current_book.description;
+	
+	await delay(Math.random() * 10);
+	await hbs.registerHelper("bookTitle", function(){
+		return `<h1 class="book-name">${current_title}</h1>`;
+	});
+	
+	await delay(Math.random() * 10);
+	await hbs.registerHelper("bookAuthor", function(){
+		return `<span class="font-italic">by ${current_author}</span>`;
+	});
+	
+	await delay(Math.random() * 10);
+	await hbs.registerHelper("bookImage", function(){
+		return `<img src="/book_images/${current_image}">`;
+	});
+	
+	await delay(Math.random() * 10);
+	await hbs.registerHelper("bookPrice", function(){
+		return `<p id="cost">$${current_price}</p>`;
+	});
+	
+	await delay(Math.random() * 10);
+	await hbs.registerHelper("bookDescription", function(){
+		return `<p>${current_description}</p>`;
+	});
+	
+	await delay(Math.random() * 10);
+	await hbs.registerHelper("bookAuthor2", function(){
+		return `<span>${current_author}</span>`;
+	});
+	
+	await delay(Math.random() * 10);
+	await hbs.registerHelper("bookGenre", function(){
+		return `<span>${current_genre}</span>`;
+	});
+	
+	await delay(Math.random() * 10);
+	await hbs.registerHelper("bookDate", function(){
+		return `<span>${current_date}</span>`;
+	});
+	
+	
+	//Featured list
+	await delay(Math.random() * 10);
+	const featured_tag = await Tags.findOne({where:{tag_name: "featured"}, raw:true});
+	const max_result = await BookTags.max("book_id", {where:{tag_id: featured_tag.tag_id, [Op.not]: {book_id: current_book.book_id}}});
+	
+	let result_string = "";
+	let i = 1;
+	
+	while(i <= max_result) {
+		await delay(Math.random() * 10);
+		const featured_book_tag = await BookTags.findOne({where:{book_id: {[Op.gte]: i}, [Op.not]: {book_id: current_book.book_id}, tag_id: featured_tag.tag_id}, raw:true});
+		const featured_book = await Books.findByPk(featured_book_tag.book_id);
+		const featured_image = featured_book.image_name;
+		const featured_title = featured_book.title;
+		const featured_price = featured_book.price;
+		
+		result_string = result_string + `
+		<div class="swiper-slide box">
+			<div class="icons">
+				<a href="#" class="fas fa-search"></a>
+				<a href="#" class="fas fa-heart"></a>
+				<a href="#" class="fas fa-eye"></a>
+			</div>
+			<div class="image">
+				<img style="max-width: 165.5px" src="/book_images/${featured_image}" alt="">
+			</div>
+			<div class="content">
+				<h3>${featured_title}</h3>
+				<div class="price">$${featured_price}</div>
+				<a href="#" class="btn">add to cart</a>
+			</div>
+		</div>	
+		`;
+		i = featured_book.book_id + 1;
+		console.log(i);
+	}
+	console.log(result_string);
+	await delay(Math.random() * 10);
+	await hbs.registerHelper("featuredBooks", function(){
+		return `${result_string}`;
+	});
+	
+	await response.render('book');
+});
   
 app.get('/shoppingCart', (_, response) => {
 	response.render('shoppingCart');
-  });
-//   app.get('/book/id', (_, response) => {
-// 	response.render('/book/id');
-//   });
+});
 
-app.get('/genres', (_, response) => {
-  response.render('genres');
+app.get('/addBook', async (_, response) => {
+	const delay = ms => new Promise(resolve => setTimeout(resolve, ms)); //This is all for book on the home screen
+	let result_string = "";
+	const max_result = await Tags.max("tag_id");
+	
+	(async function loop() {
+		let i = 1;
+		while(i <= max_result) {
+			await delay(Math.random() * 10);
+			const current_tag = await Tags.findOne({where:{tag_id: {[Op.gte]: i}}, raw:true});
+			const current_tag_name = current_tag.tag_name;
+			result_string = result_string + `<option value="${current_tag_name}">${current_tag_name}</option>`;
+			i = current_tag.tag_id + 1;
+			console.log(i);
+		}
+		console.log(result_string);
+		await delay(Math.random() * 10);
+		await hbs.registerHelper("tagsListContent", function(){
+			return `${result_string}`;
+		});
+		await response.render('addBook');
+	})();
 });
 
 app.get('/addBook', (_, response) => {
@@ -274,15 +439,18 @@ app.get('/addBook', (_, response) => {
 app.get('/home', async (_, response) => {
 	const delay = ms => new Promise(resolve => setTimeout(resolve, ms)); //This is all for book on the home screen
 	let result_string = "";
-	const result = await Books.max("book_id");
+	let max_result = await Books.max("book_id");
 	
 	(async function loop() {
+		
+		//Top book list
 		let i = 1;
-		while(i <= result) {
+		while(i <= max_result) {
 			await delay(Math.random() * 10);
-			current_book = await Books.findOne({where:{book_id: {[Op.gte]: i}}, raw:true});
-			const current_image_name = current_book.image_name;
-			result_string = result_string + `<a href="#" class="swiper-slide"><img src="book_images/${current_image_name}" alt=""></a>`;
+			const current_book = await Books.findOne({where:{book_id: {[Op.gte]: i}}, raw:true});
+			const current_image = current_book.image_name;
+			const current_title = current_book.title;
+			result_string = result_string + `<a href="/book/${current_title}" class="swiper-slide"><img style="max-width: 165.5px" src="book_images/${current_image}" alt=""></a>`;
 			i = current_book.book_id + 1;
 			console.log(i);
 		}
@@ -291,6 +459,49 @@ app.get('/home', async (_, response) => {
 		await hbs.registerHelper("book_carousel", function(){
 			return `${result_string}`;
 		});
+		
+		//Featured list
+		await delay(Math.random() * 10);
+		const featured_tag = await Tags.findOne({where:{tag_name: "featured"}, raw:true});
+		max_result = await BookTags.max("book_id", {where:{tag_id: featured_tag.tag_id}});
+		
+		let result_string2 = "";
+		i = 1;
+		
+		while(i <= max_result) {
+			await delay(Math.random() * 10);
+			const current_book_tag = await BookTags.findOne({where:{book_id: {[Op.gte]: i}, tag_id: featured_tag.tag_id}, raw:true});
+			const current_book = await Books.findByPk(current_book_tag.book_id);
+			const current_image = current_book.image_name;
+			const current_title = current_book.title;
+			const current_price = current_book.price;
+			
+			result_string2 = result_string2 + `
+			<div class="swiper-slide box">
+				<div class="icons">
+					<a href="#" class="fas fa-search"></a>
+					<a href="#" class="fas fa-heart"></a>
+					<a href="#" class="fas fa-eye"></a>
+				</div>
+				<div class="image">
+					<img src="/book_images/${current_image}" alt="">
+				</div>
+				<div class="content">
+					<h3>${current_title}</h3>
+					<div class="price">$${current_price}</div>
+					<a href="#" class="btn">add to cart</a>
+				</div>
+			</div>	
+			`;
+			i = current_book.book_id + 1;
+			console.log(i);
+		}
+		console.log(result_string2);
+		await delay(Math.random() * 10);
+		await hbs.registerHelper("featuredBooks", function(){
+			return `${result_string2}`;
+		});
+		
 		await response.render('index');
 	})();
 });
