@@ -416,7 +416,10 @@ app.get('/book/:linkTitle', async (request, response) => {
 app.get('/shoppingCart', (_, response) => {
 	response.render('shoppingCart');
 });
- 
+   
+app.get('/orders', (_, response) => {
+	response.render('orders');
+});
 app.get('/addBook', async (_, response) => {
 	const delay = ms => new Promise(resolve => setTimeout(resolve, ms)); //This is all for book on the home screen
 	let result_string = "";
