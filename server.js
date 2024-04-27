@@ -11,6 +11,10 @@ const { Op } = require("sequelize"); //needed for sequelize operators
 
 const hbs = require("hbs");
 const app = express();
+
+// o((>ω< ))o
+app.use(express.static('public'));
+
 const port = 3000;
 // #4 hbs conf
 const path = require('path');
@@ -317,7 +321,12 @@ app.get('/book/:linkTitle', async (request, response) => {
 	const current_price = current_book.price;
 	const current_date = current_book.date;
 	const current_description = current_book.description;
-	
+	// just ll do the same
+	await delay(Math.random() * 10);
+	await hbs.registerHelper("bookContainer", function(){
+		return `<div id = "${current_title}">`;
+	});
+
 	await delay(Math.random() * 10);
 	await hbs.registerHelper("bookTitle", function(){
 		return `<h1 class="book-name">${current_title}</h1>`;
@@ -407,7 +416,7 @@ app.get('/book/:linkTitle', async (request, response) => {
 app.get('/shoppingCart', (_, response) => {
 	response.render('shoppingCart');
 });
-
+ 
 app.get('/addBook', async (_, response) => {
 	const delay = ms => new Promise(resolve => setTimeout(resolve, ms)); //This is all for book on the home screen
 	let result_string = "";
@@ -450,7 +459,12 @@ app.get('/home', async (_, response) => {
 			const current_book = await Books.findOne({where:{book_id: {[Op.gte]: i}}, raw:true});
 			const current_image = current_book.image_name;
 			const current_title = current_book.title;
-			result_string = result_string + `<a href="/book/${current_title}" class="swiper-slide"><img style="max-width: 165.5px" src="book_images/${current_image}" alt=""></a>`;
+			result_string = result_string +
+			 `<a href="/book/${current_title}"
+			 class="swiper-slide">
+			 <img style="max-width: 165.5px" 
+			 src="book_images/${current_image}" alt="">
+			 </a>`;
 			i = current_book.book_id + 1;
 			console.log(i);
 		}
@@ -611,6 +625,7 @@ app.post("/home", urlencodedParser, function (request, response) { //login check
 	}).catch(err=>console.log(err));
 });
 
-app.listen(3000, () => {
-    console.log(`Server is listening on localhost:3000`);
+
+app.listen(port, () => {
+    console.log(`Server is listening on localhost:${port}`);
 });

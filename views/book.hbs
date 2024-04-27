@@ -24,7 +24,9 @@
             <p>Books / Categories / Young Adult / Young Adult / Fiction / Dystopian</p>
         </div>
 		-->
-        <div id="book-info">
+        {{!-- <div id="book-info"> --}}
+            {{!-- unmaintainable snippet of code --}}
+             {{{bookContainer}}}
             <div>
 				{{{bookImage}}}
             </div>
@@ -87,7 +89,7 @@
                 </fieldset>
 				-->
                 <div id="button-row">
-                    <button class="btn">Add to Cart</button>
+                    <button class="btn" id="buyButton">Add to Cart</button>
                     <button class="btn">Add to Wishlist</button>
                 </div>
             </div>
@@ -203,8 +205,7 @@
 </body>
 
 <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
-<script src="javascript.js"></script>
-<script src="js/script.js"></script>
+<script src="/javascript.js"></script>
 <script>
     var swiper = new Swiper(".featured-slider", {
         spaceBetween: 10,
@@ -232,5 +233,7 @@
         },
     });
 </script>
+{{!-- shopping cart --}}
+<script src="/scripts/shopping-cart.js"></script>
 
 </html>

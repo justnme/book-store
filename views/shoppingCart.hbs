@@ -96,12 +96,11 @@ h5 {
 {{>header}}
 <div id="cart-container">
     <h1>Your Shopping Cart</h1>
-    <h5>You're $29.91 away from free shipping!</h5>
     <div class="cart-table" tabindex="0" aria-label="Cart items table">
-        <h3 class="cart-table__header">Items</h3>
-        <h3 class="cart-table__header">Price</h3>
-        <h3 class="cart-table__header">Quantity</h3>
-        <h3 class="cart-table__header cart-table__total">Total</h3>
+        <h3 class="cart-table__header" id="items">Items</h3>
+        <h3 class="cart-table__header" id="price">Price</h3>
+        <h3 class="cart-table__header" id="quanity">Quantity</h3>
+        <h3 class="cart-table__header cart-table__total" id="total">Total</h3>
     </div>
     <div id="saved-for-later">
         <div>Saved for later</div>
@@ -122,5 +121,6 @@ h5 {
 
 {{>footer}}
 </body>
+    <script src="scripts/shopping-cart.js"></script>
 
 </html>
