@@ -14,7 +14,6 @@ document.querySelector('#close-login-btn').onclick = () =>{
 }
 
 window.onscroll = () =>{
-  
   searchForm.classList.remove('active');
 
   if(window.scrollY > 80){

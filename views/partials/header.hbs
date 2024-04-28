@@ -1,24 +1,25 @@
 
-    <header class="header">
+<header class="header">
 
-        <div class="header-1">
+	<div class="header-1">
 
-            <a href="#" class="logo"> <i class="fas fa-book"></i> Holy Book </a>
+		<a href="#" class="logo"> <i class="fas fa-book"></i> Holy Book </a>
 
-            <form action="" class="search-form">
-                <input type="search" name="" placeholder="Search here..." id="search-box">
-                <label for="search-box" class="fas fa-search"></label>
-            </form>
+		<form action="" class="search-form">
+			<input type="search" name="" placeholder="Search here..." id="search-box">
+			<label for="search-box" class="fas fa-search"></label>
+		</form>
 
-            <div class="icons">
-                <div id="search-btn" class="fas fa-search"></div>
-                <a href="#" class="fas fa-heart"></a>
-                <div id="login-btn" class="fas fa-user"></div>
-                <a 
-                href='shoppingCart'
-                 class="fas fa-shopping-cart icon-cart"><span id="shoppingId">0</span></a>
-            </div>
+		<div class="icons">
+			<div>{{{userName}}}</div>
+			<div id="search-btn" class="fas fa-search"></div>
+			<a href="#" class="fas fa-heart"></a>
+			<div id="login-btn" class="fas fa-user"></div>
+			<a href='http://localhost:3000/shoppingCart' class="fas fa-shopping-cart icon-cart">
+				<span id="shoppingId">0</span>
+			</a>
+		</div>
 
-        </div>
-        {{> navbarindex}}
-       </header>
+	</div>
+	{{> navbarindex}}
+</header>

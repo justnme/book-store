@@ -73,8 +73,17 @@ body.showCart .cartTab{
 
 
 
+input[type = "submit"] {
+	font-size: 48px;
+}
 
+input[type = "submit"]:active{
+	background-color: rgba(0,0,0,0);
+}
 
+input[type = "submit"]:hover{
+	background-color: rgba(0,0,0,0);
+}
 
 .icon-cart{
     position: relative;

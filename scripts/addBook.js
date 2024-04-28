@@ -34,7 +34,7 @@ function submitForm(e){
 	formData.append("bookDescription", bookDescription.value);
     formData.append("bookImage", bookImage.files[0]);
 	
-	fetch('http://localhost:3000/upload', {
+	fetch('http://localhost:3000/addBook', {
 		method: 'POST',
         body: formData
 	})
