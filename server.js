@@ -527,7 +527,9 @@ app.post("/book/:linkTitle", urlencodedParser, async function (request, response
 
   
 app.get('/shoppingCart', (_, response) => {
-	
+	hbs.registerHelper("userName", function(){
+		return `${logged_user}`;
+	});
 	response.render('shoppingCart');
 });
    
