@@ -14,7 +14,7 @@ document.querySelector('#close-login-btn').onclick = () =>{
 }
 
 window.onscroll = () =>{
-
+  
   searchForm.classList.remove('active');
 
   if(window.scrollY > 80){
@@ -33,17 +33,9 @@ window.onload = () =>{
     document.querySelector('.header .header-2').classList.remove('active');
   }
 
-  fadeOut();
 
 }
 
-function loader(){
-  document.querySelector('.loader-container').classList.add('active');
-}
-
-function fadeOut(){
-  setTimeout(loader, 4000);
-}
 
 
 

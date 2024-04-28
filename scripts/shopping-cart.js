@@ -4,15 +4,17 @@ let iconCart = document.querySelector('.icon-cart');
 let iconCartSpan = document.getElementById('shoppingId');
 let body = document.querySelector('body');
 
-function setCookie(name, value, days) {
+function setCookie(name, value, days, sameSite) {
     var expires = "";
     if (days) {
         var date = new Date();
         date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
         expires = "; expires=" + date.toUTCString();
     }
-    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    var cookieString = name + "=" + (value || "") + expires + "; path=/; SameSite=" + sameSite;
+    document.cookie = cookieString;
 }
+
 
 function checkCookieExists(cookieName) {
     var cookies = document.cookie.split(';');
@@ -36,71 +38,8 @@ function getCookie(name) {
     return null;
 }
 
-    let addToCartBtn = document.getElementById("buyButton");
-    addToCartBtn.addEventListener("click", function() {
-        console.log("button pressed buy");
-    
-        var bookName = document.getElementById("BookName").innerText;
-        var author = document.getElementById("bookAuthor").innerText;
-        var imageUrl = document.getElementById("bookImage").src;
-        var imageSrc = imageUrl.substring(imageUrl.lastIndexOf('/') + 1);
-        var price = document.getElementById("cost").innerText;
-    
-        var bookData = {
-            name: bookName,
-            author: author,
-            imageSrc: imageSrc,
-            price: price
-        };
-    
-        var bookDataString = JSON.stringify(bookData);
-        var cookieName = 'cart_' + bookName;
-    
-        if (getCookie(cookieName)) {
-            alert(`${bookName} is already in your shopping cart!`);
-        } else {
-            setCookie(cookieName, bookDataString, 30);
-            alert(`${bookName} was added to your shopping cart!`);
-            changeQuantityCart();
-        }
-    });
     
 
-// const addToCart = (book_id) => {
-//     let positionThisbookInCart = cart.findIndex((value) => value.book_id == book_id);
-//     if(cart.length <= 0){
-//         cart = [{
-//             book_id: book_id,
-//             quantity: 1
-//         }];
-//     }else if(positionThisbookInCart < 0){
-//         cart.push({
-//             book_id: book_id,
-//             quantity: 1
-//         });
-//     }else{
-//         cart[positionThisbookInCart].quantity = cart[positionThisbookInCart].quantity + 1;
-//     }
-
-//     addCartToHTML();
-//     addCartToMemory();
-// }
-
-
-
-
-
-// listCartHTML.addEventListener('click', (event) => {
-//     let positionClick = event.target;
-//     if(positionClick.classList.contains('minus') || positionClick.classList.contains('plus')){
-//         let book_id = positionClick.parentElement.parentElement.dataset.id;
-//         let type = 'minus';
-//         if(positionClick.classList.contains('plus')){
-//             type = 'plus';
-//         }
-//         changeQuantityCart(book_id, type);
-//     }
-// })
 
 function changeQuantityCart() {
     let cookies = document.cookie.split(';');
@@ -130,6 +69,11 @@ function cookiesBooksToJs() {
         }
     }
 
+    console.log(cartItems)
+
     return cartItems;
 }
 
+
+function deleteCookie(name) {
+    document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;SameSite=Strict;';}

@@ -124,7 +124,6 @@ h5 {
     color: #333;
 }
 
-/* Other styles remain unchanged */
 
 </style>
 
@@ -137,11 +136,14 @@ h5 {
  <h1>Your Shopping Cart</h1>
 <div id="bookListContainer"></div>
 
-
+    <h2>Total price is:<span id="totalPrice">0$</span></h2>
+<button class="btn" id="clearAllButton" onclick="clearShoppingCart()">Clear all cart</button>
+<button class="btn" id="buyAllButton" onclick="buyShoppingCart()">Buy</button>
 
 {{>footer}}
 </body>
-    {{!-- <script src="scripts/shopping-cart.js"></script> --}}
 
     <script src="scripts/shopping-cart-content.js"></script>
+    <script src="scripts/shopping-cart.js"></script>
+
 </html>
