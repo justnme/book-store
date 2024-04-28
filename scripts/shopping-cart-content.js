@@ -27,7 +27,6 @@ function load() {
 
         bookList.innerHTML += `
                 <div class="book-container">
-                <div class="flexCart">
                 <div>
                     <h2 class="book-title">${bookInfo.name}</h2>
                     <p class="book-author">${bookInfo.author}</p>
@@ -37,7 +36,6 @@ function load() {
                     </div>
                     <div>
                     <button class="btn" id="book-button-${bookInfo.name}"  onclick="removeBook('${bookInfo.name}')">X</button>
-                    </div>
                     </div>
                 </div>
             `;

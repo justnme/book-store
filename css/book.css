@@ -1,6 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Hahmlet:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
+.font-roboto{
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.eb-garamond {
+    font-family: "EB Garamond", serif;
+    font-style: normal;
+  }
+.font-hahmlet{
+    font-family: "Hahmlet", serif;
+    font-style: normal;
+    font-size: 1.5rem;
+}
 .font-italic {
     font-style: italic !important;
-    font-size: 1rem;
+    font-size: 1.5rem;
 }
 
 #bold {
@@ -9,8 +27,11 @@
 }
 
 p {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
     font-size: 1.5rem;
-    font-weight: 400;
+
 }
 
 fieldset {

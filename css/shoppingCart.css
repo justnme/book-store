@@ -86,7 +86,7 @@ body.showCart .cartTab{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 5rem 4rem;
+    padding: 3rem 5rem;
 }
 
 #Cart input[type = "submit"] {
@@ -189,19 +189,36 @@ h5 {
 }
 
 .book-image {
-    width: 50px; /* Adjust size as needed */
+    width: 120px; /* Adjust size as needed */
     height: auto;
     margin-right: 10px;
 }
+.book-container{
+    padding: 2rem;
+    margin-top: 2rem;
 
+    border-top: #00aeff solid 2px;
+    border-bottom: #00aeff solid 2px;
+}
+
+.book-container ~ * {
+    padding: 2rem;
+
+    margin-bottom: 2rem;
+    border-top: none; 
+    border-bottom: #00aeff solid 2px;
+}
 .book-info {
     flex: 1;
 }
-
+h2 {
+    font-size: 2rem;
+    font-weight: 700;
+}
 .book-title {
     margin: 0;
     color: #333;
-    font-size: 1.75rem;
+    font-size: 2rem;
 }
 .flexCart{
     display: flex;
@@ -210,11 +227,11 @@ h5 {
 .book-author {
     margin: 0;
     color: #666;
-    font-size: 1.5rem;
+    font-size: 1.75rem;
 }
 
 .book-price {
-    margin-left: auto;
+
     color: #0cbe0f;
-    font-size: 1.5rem;
+    font-size: 1.75rem;
 }
