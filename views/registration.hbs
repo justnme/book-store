@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link rel="icon" type="image/x-icon" href="/image/favicon.ico">
+<style>
+    /* Styles for the registration form container */
+.registration-form-container {
+    width: 300px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+     margin-left: auto;
+    margin-right: auto;
+        margin-top: 10%;
+    margin-bottom: 10%;
+}
+
+/* Styles for the close button */
+#close-registration-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    color: #888;
+}
+
+/* Styles for the form */
+.registration-form-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Styles for the headings */
+.registration-form-container h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.2em;
+}
+
+/* Styles for the input fields */
+.registration-form-container input[type="text"],
+.registration-form-container input[type="email"],
+.registration-form-container input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Styles for the submit button */
+.registration-form-container input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Styles for the paragraph links */
+.registration-form-container p {
+    margin-top: 10px;
+}
+
+/* Styles for the paragraph links */
+.registration-form-container p a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+/* Styles for the paragraph links on hover */
+.registration-form-container p a:hover {
+    text-decoration: underline;
+}
+
+</style>
+
+</head>
+<body>
+    {{> header}}
+
+<div class="registration-form-container">
+
+    <div id="close-registration-btn" class="fas fa-times"></div>
+
+    <form method="POST">
+        <h3>Register</h3>
+        <span>username</span>
+        <input required type="text" name="reg_login" class="box" placeholder="enter your username" id="">
+        <span>email</span>
+        <input required type="email" name="reg_email" class="box" placeholder="enter your email" id="">
+        <span>password</span>
+        <input required type="password" name="reg_password" class="box" placeholder="enter your password" id="">
+        <span>confirm password</span>
+        <input required type="password" name="confirm_reg_password" class="box" placeholder="confirm your password" id="">
+        <input type="submit" value="register" class="btn">
+        <p>already have an account? <a href="#">sign in</a></p>
+		<p style="color: red">{{reg_result}}</p>
+    </form>
+
+</div>
+
+
+    {{> footer}}
+</body>
+    <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+    <script src="scripts/javascript.js"></script>
+
+</html>
+ 
