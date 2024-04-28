@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
 @import "https://unpkg.com/open-props";
 :root{
-    --orange:#00aeff;
+    --orange:rgb(0, 174, 255);
     --dark-color:#00008b9d;
     --black:#00008bb4;
     --white:#ffffff;
@@ -17,7 +17,6 @@
     box-sizing: border-box;
     outline: none; border:none;
     text-decoration: none;
-    /* text-transform: capitalize; */
     transition:all .2s linear;
     transition:width none;
     box-sizing: border-box;
@@ -341,10 +340,12 @@ button#prevButton,
     align-items: center;
     flex-wrap: wrap;
     gap:1.5rem;
+    
 }
 
 .home .row .content{
-    background-color: #00aeff;
+    padding: 2rem;
+    background-color: rgba(0, 174, 255, 0.3);
     border-radius: 7%;
     flex:1 1 42rem;
 }
@@ -533,33 +534,22 @@ button#prevButton,
     border-radius: .5rem;
     text-transform: none;
 }
-
-.arrivals .arrivals-slider .box{
+.arrivals .arrivals-slider .box {
     display: flex;
-    align-items:center;
-    gap:1.5rem;
-    padding:2rem 1rem;
-    margin:1rem 0;
-    --c: #0000ff; 
-    --b: 5px;   
-    --g: 5px;    
-    
-    padding: calc(var(--g) + var(--b));
-    --_g: #0000 25%,var(--c) 0;
-    background: 
-      conic-gradient(from 180deg at top    var(--b) right var(--b),var(--_g))
-       var(--_i,200%) 0  /200% var(--_i,var(--b))  no-repeat,
-      conic-gradient(            at bottom var(--b) left  var(--b),var(--_g))
-       0   var(--_i,200%)/var(--_i,var(--b)) 200%  no-repeat;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 2rem 1rem;
+    margin: 1rem 0;
     transition: .3s, background-position .3s .3s;
     cursor: pointer;
+    border: 2px solid transparent; 
 }
 
-.arrivals .arrivals-slider .box:hover{
-    border:var(--border-hover)transparent;
-    --_i: 100%;
-    transition: .3s, background-size .3s .3s;
+.arrivals .arrivals-slider .box:hover {
+    border-color: blue; 
+    background-clip: padding-box; 
 }
+
 
 .arrivals .arrivals-slider .box .image img{
     height:15rem;
