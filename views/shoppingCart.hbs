@@ -87,40 +87,61 @@ h5 {
 #checkout-button:hover {
     background-color: #218838;
 }
+/* Styles for cart book items */
+.cart-book {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.book-details {
+    display: flex;
+    align-items: center;
+}
+
+.book-image {
+    width: 50px; /* Adjust size as needed */
+    height: auto;
+    margin-right: 10px;
+}
+
+.book-info {
+    flex: 1;
+}
+
+.book-title {
+    margin: 0;
+    color: #333;
+}
+
+.book-author {
+    margin: 0;
+    color: #666;
+}
+
+.book-price {
+    margin-left: auto;
+    color: #333;
+}
+
+/* Other styles remain unchanged */
 
 </style>
 
 </head>
 
 <body>
-{{>header}}
-<div id="cart-container">
-    <h1>Your Shopping Cart</h1>
-    <div class="cart-table" tabindex="0" aria-label="Cart items table">
-        <h3 class="cart-table__header" id="items">Items</h3>
-        <h3 class="cart-table__header" id="price">Price</h3>
-        <h3 class="cart-table__header" id="quanity">Quantity</h3>
-        <h3 class="cart-table__header cart-table__total" id="total">Total</h3>
-    </div>
-    <div id="saved-for-later">
-        <div>Saved for later</div>
-        <div class="saved-items">
-            <p class="saved-items__message">You currently have no saved items</p>
-        </div>
-    </div>
-    <button id="apply-button" tabindex="0" type="submit" form="desktop-apply-coupon-form" aria-label="Apply coupon code">Apply</button>
-    <div id="order-summary">
-        <div>Order Summary</div>
-        <div class="order-summary-details">
-        </div>
-    </div>
-</div>
 
+{{>header}}
+
+ <h1>Your Shopping Cart</h1>
+<div id="bookListContainer"></div>
 
 
 
 {{>footer}}
 </body>
-    <script src="scripts/shopping-cart.js"></script>
+    {{!-- <script src="scripts/shopping-cart.js"></script> --}}
 
+    <script src="scripts/shopping-cart-content.js"></script>
 </html>

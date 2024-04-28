@@ -4,10 +4,6 @@ let iconCart = document.querySelector('.icon-cart');
 let iconCartSpan = document.getElementById('shoppingId');
 let body = document.querySelector('body');
 
-function checkCookie(name) {
-    var cookieValue = getCookie(name);
-    return cookieValue !== null;
-}
 function setCookie(name, value, days) {
     var expires = "";
     if (days) {
@@ -15,43 +11,60 @@ function setCookie(name, value, days) {
         date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
         expires = "; expires=" + date.toUTCString();
     }
-    document.cookie = "cart_" + name + "=" + (value || "") + expires + "; path=/";
-    console.log(`Cookie cart_${name} set with value ${value}`);
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
 }
 
-
-function getCookie(name) {
-    var nameEQ = name + "=";
+function checkCookieExists(cookieName) {
     var cookies = document.cookie.split(';');
     for (var i = 0; i < cookies.length; i++) {
-        var cookie = cookies[i];
-        while (cookie.charAt(0) == ' ') {
-            cookie = cookie.substring(1, cookie.length);
+        var cookie = cookies[i].trim();
+        if (cookie.indexOf(cookieName + '=') === 0) {
+            return true;
         }
-        if (cookie.indexOf(nameEQ) == 0) {
-            return cookie.substring(nameEQ.length, cookie.length);
+    }
+    return false;
+}
+
+function getCookie(name) {
+    var cookies = document.cookie.split(';');
+    for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i].trim();
+        if (cookie.indexOf(name + '=') === 0) {
+            return cookie.substring(name.length + 1);
         }
     }
     return null;
 }
 
-let addToCartBtn = document.getElementById("buyButton");
-addToCartBtn.addEventListener("click", function() {
-    console.log("button pressed buy")
-    var containerId = this.parentElement.parentElement.parentElement.id;
-
-    if (checkCookie(containerId)) {
-        alert(`${containerId} is already in your shopping cart!`);
-    } else {
-        setCookie(containerId, true, 30); 
-        alert(`${containerId} was added to your shopping cart!`);
-        changeQuantityCart();
-
-    }
-});
-
-
-
+    let addToCartBtn = document.getElementById("buyButton");
+    addToCartBtn.addEventListener("click", function() {
+        console.log("button pressed buy");
+    
+        var bookName = document.getElementById("BookName").innerText;
+        var author = document.getElementById("bookAuthor").innerText;
+        var imageUrl = document.getElementById("bookImage").src;
+        var imageSrc = imageUrl.substring(imageUrl.lastIndexOf('/') + 1);
+        var price = document.getElementById("cost").innerText;
+    
+        var bookData = {
+            name: bookName,
+            author: author,
+            imageSrc: imageSrc,
+            price: price
+        };
+    
+        var bookDataString = JSON.stringify(bookData);
+        var cookieName = 'cart_' + bookName;
+    
+        if (getCookie(cookieName)) {
+            alert(`${bookName} is already in your shopping cart!`);
+        } else {
+            setCookie(cookieName, bookDataString, 30);
+            alert(`${bookName} was added to your shopping cart!`);
+            changeQuantityCart();
+        }
+    });
+    
 
 // const addToCart = (book_id) => {
 //     let positionThisbookInCart = cart.findIndex((value) => value.book_id == book_id);
@@ -119,3 +132,4 @@ function cookiesBooksToJs() {
 
     return cartItems;
 }
+

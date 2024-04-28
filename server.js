@@ -11,12 +11,13 @@ const { Op } = require("sequelize"); //needed for sequelize operators
 
 const hbs = require("hbs");
 const app = express();
+// const routes = require('./routes/routes');
 
 // o((>ω< ))o
 app.use(express.static('public'));
+// app.use('/', routes);
 
 const port = 3000;
-// #4 hbs conf
 const path = require('path');
 
 app.set('view engine', 'hbs');
@@ -253,6 +254,22 @@ app.get('/', (_, response) => {
 	response.redirect('home'); //I hope this works now
     //response.render('index');
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 app.get('/registration', (_, response) => {
 	response.render('registration');
 });
@@ -297,6 +314,7 @@ app.post("/registration", urlencodedParser, function (request, response) { //log
 	})();
 });
 
+	// Отбайрактарен
 app.get('/book/:linkTitle', async (request, response) => {
 	const delay = ms => new Promise(resolve => setTimeout(resolve, ms)); //This is all for book on the home screen
 	
@@ -329,17 +347,17 @@ app.get('/book/:linkTitle', async (request, response) => {
 
 	await delay(Math.random() * 10);
 	await hbs.registerHelper("bookTitle", function(){
-		return `<h1 class="book-name">${current_title}</h1>`;
+		return `<h1 class="book-name" id="BookName">${current_title}</h1>`;
 	});
 	
 	await delay(Math.random() * 10);
 	await hbs.registerHelper("bookAuthor", function(){
-		return `<span class="font-italic">by ${current_author}</span>`;
+		return `<span class="font-italic" id="bookAuthor">by ${current_author}</span>`;
 	});
 	
 	await delay(Math.random() * 10);
 	await hbs.registerHelper("bookImage", function(){
-		return `<img src="/book_images/${current_image}">`;
+		return `<img src="/book_images/${current_image}" 	id="bookImage"> `;
 	});
 	
 	await delay(Math.random() * 10);
@@ -354,7 +372,7 @@ app.get('/book/:linkTitle', async (request, response) => {
 	
 	await delay(Math.random() * 10);
 	await hbs.registerHelper("bookAuthor2", function(){
-		return `<span>${current_author}</span>`;
+		return `<span id="bookAuthor2">${current_author}</span>`;
 	});
 	
 	await delay(Math.random() * 10);
@@ -412,7 +430,7 @@ app.get('/book/:linkTitle', async (request, response) => {
 	
 	await response.render('book');
 });
-  
+
 app.get('/shoppingCart', (_, response) => {
 	response.render('shoppingCart');
 });
@@ -627,6 +645,11 @@ app.post("/home", urlencodedParser, function (request, response) { //login check
 		response.redirect(request.get('referer')); //reload page
 	}).catch(err=>console.log(err));
 });
+
+app.get('/shoppingCart', async (request, response) => {
+    response.render('shoppingCart', { bookHTMLArray });
+});
+
 
 
 app.listen(port, () => {

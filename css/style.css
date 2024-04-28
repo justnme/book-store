@@ -352,9 +352,11 @@ button#prevButton,
     text-align: center;
     margin-top: 2rem;
 }
+/* 
 .swiper-slide-active {
     filter: brightness(150%) 
-  }
+  } */
+
 .home .row .books-slider a img{
     height: 25rem;
     filter: brightness(50%);
