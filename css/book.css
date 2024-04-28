@@ -48,8 +48,8 @@ img {
 
 #button-row {
     display: flex;
-    display: flex;
     flex-direction: column;
+    align-items:start ;
 }
 
 h1 {

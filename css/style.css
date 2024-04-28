@@ -383,7 +383,13 @@ button#prevButton,
     padding:1rem 0;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
 }
-
+.User{
+   padding: 0rem 3rem;
+}
+.icons{
+    display: flex;
+    align-items: center;
+}
 .icons-container{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
@@ -506,7 +512,7 @@ button#prevButton,
 }
 
 .newsletter{
-    background:url(wall.jpeg) no-repeat;
+    background:url(nicebook.jpg) no-repeat;
     background-size: cover;
     background-position: center;
 }
@@ -609,7 +615,7 @@ button#prevButton,
 }
 
 .deal .content p{
-    padding:1rem 0;
+    padding:1.5rem 0;
     color:var(--light-color);
     font-size: 1.4rem;
     line-height: 2;
@@ -862,6 +868,16 @@ button#prevButton,
     .newsletter form{
         margin-left:0;
         max-width: 100%;
+    }
+
+}
+@media (max-width:550px){
+    .header .header-1 .logo{
+        font-size: 2rem;
+    }
+    .header .header-1 .icons div,
+    .header .header-1 .icons a{
+        font-size: 1.75rem;
     }
 
 }
