@@ -1,24 +1,9 @@
 function buyShoppingCart(){
+// 🐓🐓🐓🐓🐓🐓🐓🐓🐓🐓🐓🐓🐓🐓🐓🐓🐓🐓🐓🐓🐓🐓🐓🐓
     cookiesBooksToJs();
 }
 
-function cookiesBooksToJs() {
-    
-    console.log( "тут ыф")
-    let cookies = document.cookie.split(';');
-    let cartItems = [];
 
-    for (let i = 0; i < cookies.length; i++) {
-        let cookie = cookies[i].trim();
-        if (cookie.startsWith('cart_')) {
-            let bookName = cookie.substring(5, cookie.indexOf('='));
-            cartItems.push(bookName);
-        }
-    }
-    console.log( "тут" + cartItems)
-    return cartItems;
-
-}
 
 function load() {
     let bookInfoArray = document.cookie.split(';'); 
@@ -43,7 +28,7 @@ let imageName = imagePath.substring(imagePath.lastIndexOf('/') + 1);
         bookList.innerHTML += `
             <div class="book-container">
                 <h2 class="book-title">${bookInfo.name}</h2>
-                <p class="book-author">by ${bookInfo.author}</p>
+                <p class="book-author">${bookInfo.author}</p>
                 <img class="book-image" src="book_images/${imageName}" alt="${bookInfo.name}">
                 <p class="book-price">${bookInfo.price}</p>
                 <button class="btn" id="book-button-${bookInfo.name}"  onclick="removeBook('${bookInfo.name}')">Remove book</button>
@@ -99,3 +84,4 @@ function removeBook(bookName) {
 
 
 load();
+changeQuantityCart();

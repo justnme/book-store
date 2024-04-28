@@ -344,6 +344,8 @@ button#prevButton,
 }
 
 .home .row .content{
+    background-color: #00aeff;
+    border-radius: 7%;
     flex:1 1 42rem;
 }
 
