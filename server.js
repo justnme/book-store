@@ -586,7 +586,6 @@ app.post("/upload", upload, (request, response) => {
 	Books.findOne({where:{title: book_title}, raw:true})
 	.then(book=>{
 		if (book != null) {
-			//Add something here so that the user knows the book already exists
 		}
 		else {
 			Genres.findOne({where:{genre_name: book_genre}, raw:true})
