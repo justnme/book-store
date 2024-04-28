@@ -15,17 +15,101 @@
     <!-- custom css file link  -->
     <link rel="stylesheet" href="css/style.css" type="text/css">
     <link rel="stylesheet" href="css/shoppingCart.css" type="text/css">
+    <style>
+     .modal {
+    display: none;
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.4); 
+}
 
+.modal-content {
+    background-color: #fefefe;
+    position: absolute;
+    left: 50%; 
+    top: 50%; 
+    transform: translate(-50%, -50%); 
+    padding: 30px;
+    border: 1px solid #888;
+    width: 60%;
+    max-width: 600px; 
+    font-size: 1.6rem;
+    text-align: center; 
+}
+
+.close {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 20px; 
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .confirmButton,
+        .cancelButton {
+            border: none;
+            color: white;
+            padding: 7px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1.6rem;
+            margin-top: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .confirmButton {
+            background-color: #4CAF50;
+        }
+
+        .cancelButton {
+            background-color: #cc4545;
+        }
+
+        .confirmButton:hover {
+            background-color: #45a049;
+        }
+
+        .cancelButton:hover {
+            background-color: #a14545;
+        }
+    </style>
 </head>
 
 <body>
     {{>header}}
+    <div id="myModal" class="modal">
+
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Вы уверены, что хотите совершить покупку на сумму <span id="totalPriceConfirmation"
+                    class="book-price">0$</span>?</p>
+            <button id="confirmButton" class="confirmButton">Подтвердить</button>
+            <button id="cancelButton" class="cancelButton">Отмена</button>
+        </div>
+
+    </div>
+
     <div id="Centre">
         <div id="Cart">
             <h1>Your Shopping Cart</h1>
             <div id="bookListContainer"></div>
 
-            <h2>Total price is:<span id="totalPrice" class="book-price">0$</span></h2>
+            <h2>Total price is: <span id="totalPrice" class="book-price">0$</span></h2>
             <button class="btn" id="clearAllButton" onclick="clearShoppingCart()">Clear all cart</button>
             <button class="btn" id="buyAllButton" onclick="buyShoppingCart()">Buy</button>
         </div>
@@ -33,8 +117,64 @@
     {{>footer}}
 </body>
 
-    <script src="/scripts/change-shopping-cart.js"></script>
-    <script src="scripts/shopping-cart-content.js"></script>
-    <script src="scripts/shopping-cart.js"></script>
+<script src="/scripts/change-shopping-cart.js"></script>
+<script src="scripts/shopping-cart-content.js"></script>
+<script src="scripts/shopping-cart.js"></script>
+<script>
+
+
+    var modal = document.getElementById("myModal");
+    var span = document.getElementsByClassName("close")[0];
+    var totalPriceElement = document.getElementById("totalPrice");
+    var totalPriceConfirmationElement = document.getElementById("totalPriceConfirmation");
+    var confirmButton = document.getElementById("confirmButton");
+
+
+    function showModal() {
+        modal.style.display = "block";
+        totalPriceConfirmationElement.textContent = totalPriceElement.textContent;
+    }
+
+
+    function closeModal() {
+        modal.style.display = "none";
+    }
+
+
+    span.onclick = function () {
+        closeModal();
+    }
+
+
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            closeModal();
+        }
+    }
+
+
+    function confirmPurchase() {
+
+        console.log("Покупка подтверждена");
+        closeModal();
+    }
+
+
+    function buyShoppingCart() {
+      
+        showModal();
+
+        confirmButton.onclick = function () {
+            createOrder();
+        }
+
+        cancelButton.onclick = function () {
+            closeModal();
+        }  
+        
+       /*место под вызов создания заявки*/
+        cookiesBooksToJs(); 
+    }
+</script>
 
 </html>

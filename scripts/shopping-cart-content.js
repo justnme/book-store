@@ -1,5 +1,4 @@
 function buyShoppingCart() {
-    // 🐓🐓🐓🐓🐓🐓🐓🐓🐓🐓🐓🐓🐓🐓🐓🐓🐓🐓🐓🐓🐓🐓🐓🐓
     cookiesBooksToJs();
 }
 
@@ -34,9 +33,8 @@ function load() {
                     <img class="book-image" src="book_images/${imageName}" alt="${bookInfo.name}">
                     <p class="book-price">${bookInfo.price}</p>
                     </div>
-                    <div>
-                    <button class="btn" id="book-button-${bookInfo.name}"  onclick="removeBook('${bookInfo.name}')">X</button>
-                    </div>
+                    <button class="btn" id="book-button-${bookInfo.name}"  onclick="removeBook('${bookInfo.name}')">✕</button>
+
                 </div>
             `;
     }
@@ -85,6 +83,7 @@ function removeBook(bookName) {
     let cookieName = 'cart_' + bookName;
     deleteCookie(cookieName);
     updateTotalPrice();
+    changeQuantityCart();
 }
 
 

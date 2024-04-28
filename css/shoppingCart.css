@@ -235,3 +235,8 @@ h2 {
     color: #0cbe0f;
     font-size: 1.75rem;
 }
+@media (max-width:991px){
+    #Cart{
+        width: 100%;
+    }
+}
