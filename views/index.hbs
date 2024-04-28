@@ -68,7 +68,7 @@
     <section class="home" id="home">
 
         <div class="row">
-            <div class="content" >
+            <div class="content">
                 <h3 style="color:white;">Up to 50% discount</h3>
                 <a href="#" class="btn">Buy now</a>
                 <p style="color:white; font-size:20px;"> Buy used or new books, online or in store, only at Bookflix and
@@ -77,15 +77,15 @@
             <div class="swiper books-slider">
 
                 <div class="swiper-wrapper" id="bookShelfSwiper">
-                     {{{book_carousel}}}
+                    {{{book_carousel}}}
                 </div>
                 <img src="image/stand.png" class="stand" alt="">
-            
-				<button id="prevButton" aria-label="Назад">&#60;</button>
-				<button id="nextButton" aria-label="Вперед">&#62;</button>
-           
+
+                <button id="prevButton" aria-label="Назад">&#60;</button>
+                <button id="nextButton" aria-label="Вперед">&#62;</button>
+
             </div>
-           
+
         </div>
 
     </section>
@@ -147,8 +147,8 @@
         <div class="swiper featured-slider">
 
             <div class="swiper-wrapper">
-				
-				{{> featured}}
+
+                {{> featured}}
 
             </div>
 
@@ -164,10 +164,12 @@
     <!-- newsletter section starts -->
 
 
-    <!-- нахуй он это сделал? я бы убрал -->
+    <!-- All be ukraine -->
     <section class="newsletter">
 
-        <form action="">
+        <form action="" style="padding: 2rem;
+    background-color: rgba(0, 174, 255, 0.3);
+    border-radius: 7%">
             <h3>subscribe for latest updates</h3>
             <input type="email" name="" placeholder="enter your email" id="" class="box">
             <input type="submit" value="subscribe" class="btn">
@@ -388,23 +390,23 @@
         </div>
 
         <div class="image">
-            <img src="image/deal-img.jpeg" alt="">
+            <img src="image\sale.png" alt="">
         </div>
 
     </section>
 
     <!-- deal section ends -->
     <!-- footer section starts  -->
-	{{> shoppingmenu}}
+    {{> shoppingmenu}}
     {{> footer}}
-	
+
 
 
 
     <script src="/scripts/change-shopping-cart.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>   
- <!-- custom js file link  -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- custom js file link  -->
     <script src="javascript.js"></script>
     {{!-- shopping cart logic --}}
     <script src="scripts/coockies-to-js.js"></script>
