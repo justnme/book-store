@@ -598,7 +598,7 @@ app.get('/orders', async (_, response) => {
 		result_string = result_string + `
 		<div class="rq-card">
 			<div class="rq-left">
-				<p style="margin-bottom: 30px">User: ${current_name}</p>
+				<p style="margin-bottom: 30px ; ">User: <span style="color:rgb(0, 174, 255);">${current_name}</span></p>
 		`
 		
 		let j = 1;
@@ -613,8 +613,8 @@ app.get('/orders', async (_, response) => {
 			const current_price = current_book.price;
 			
 			result_string = result_string + `
-				<p>Book: ${current_title}</p>
-				<p style="margin-bottom: 30px">Price: $${current_price}</p>
+				<p>Book:<span style="font-weight: 900;"> ${current_title}</span></p>
+				<p style="margin-bottom: 30px ;  ">Price:<span style="color: #0cbe0f;">$${current_price}</span></p>
 			`
 			
 			j = current_collection.entry_id + 1;
@@ -622,18 +622,20 @@ app.get('/orders', async (_, response) => {
 		
 		result_string = result_string + `
 			</div>
+			<div>
 			<div class="rq-right">
 				<p>${current_date}</p>
 			</div>
 			<div class="rq-bottom-right">
-				<form action="/orders/decline" method="POST">
+				<form  id="btn_id" action="/orders/decline" method="POST">
 					<input type="text" name="cartCollectionId" style="display: none" value = "${current_application.cartCollection_id}"/>
-					<input type="submit" value="✕" class="fas fa-times"/>
+					<input  style="background-color: transparent;  font-size:4rem;" type="submit" value="✕" class="fas fa-times"/>
 				</form>
-				<form action="/orders/accept" method="POST">
+				<form  id="btn_id" action="/orders/accept" method="POST">
 					<input type="text" name="cartCollectionId" style="display: none" value = "${current_application.cartCollection_id}"/>
-					<input type="submit" value="✓" class="fas fa-check"/>
+					<input style="background-color: transparent;  font-size:4rem;" type="submit" value="✓" class="fas fa-check"/>
 				</form>
+			</div>
 			</div>
 		</div>
 		`

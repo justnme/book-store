@@ -9,6 +9,7 @@
     --border:.1rem solid rgba(0,0,0,.1);
     --border-hover:.1rem solid var(--black);
     --box-shadow:0 .5rem 1rem rgba(0,0,0,.1);
+
 }
 
 *{
@@ -108,8 +109,34 @@ button#prevButton,
 }
 
 .btn:hover{
- filter: opacity(75%);
+    filter: opacity(75%);
+   }
+
+#btn_id{
+    margin: 0.5rem;
+    display:inline-block;
+    padding:.5rem 1rem;
+    border-radius: 1.5rem;
+    color:#0000ff;
+    background:var(--orange);
+    font-size: 1.7rem;
+    cursor: pointer;
+    font-weight: 500;
+    font-family: var(--font-sans);
+    font-weight: var(--font-weight-6);
+    font-size: var(--font-size-5);
+    color: var(--white);
+    background: var(--orange);
+    border: 0;
+    position: relative;
+    transition: all 0.35s;
 }
+
+#btn_id:hover{
+    filter: opacity(75%);
+   }
+
+
 
 
 .header .header-1{
