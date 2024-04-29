@@ -117,7 +117,7 @@ const Books = sequelize.define("Books", {
 		allowNull: false,
 	},
 	description: {
-		type: Sequelize.STRING,
+		type: Sequelize.TEXT,
 		allowNull: true,
 	}
 });
