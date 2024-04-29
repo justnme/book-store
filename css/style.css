@@ -389,6 +389,7 @@ button#prevButton,
 .icons{
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 .icons-container{
     display: grid;
@@ -878,11 +879,11 @@ button#prevButton,
 }
 @media (max-width:550px){
     .header .header-1 .logo{
-        font-size: 2rem;
+        font-size: 1.75rem;
     }
     .header .header-1 .icons div,
     .header .header-1 .icons a{
-        font-size: 1.75rem;
+        font-size: 1.5rem;
     }
 
 }

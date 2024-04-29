@@ -105,6 +105,17 @@ body.showCart .cartTab{
     position: relative;
 }
 
+#Cart input[type = "submit"] {
+	font-size: 48px;
+}
+
+#Cart input[type = "submit"]:active{
+	background-color: rgba(0,0,0,0);
+}
+
+ #Cart input[type = "submit"]:hover{
+	background-color: rgba(0,0,0,0);
+}
 
 h1 {
     color: #333;
@@ -229,7 +240,9 @@ h2 {
     color: #666;
     font-size: 1.75rem;
 }
-
+#yml section{
+    padding: 0rem 0rem;
+}
 .book-price {
 
     color: #0cbe0f;

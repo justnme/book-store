@@ -532,6 +532,45 @@ app.get('/shoppingCart', (_, response) => {
 	});
 	response.render('shoppingCart');
 });
+
+  
+app.get('/searchPage', (_, response) => {
+	hbs.registerHelper("userName", function(){
+		return `${logged_user}`;
+	});
+	response.render('searchPage');
+});
+
+app.post('/shoppingCart', urlencodedParser, async (request, response) => {
+	if(!request.body) return response.sendStatus(400);
+	
+	const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+	
+	const application_titles = request.body.applicationTitles;
+	const application_date = request.body.applicationDate;
+	
+	console.log(application_titles);
+	console.log(application_date);
+	
+	const new_cartCollection_id = await CartCollections.max("cartCollection_id") + 1;
+	
+	for(let i = 0; i < application_titles.length; i++){
+		await delay(Math.random() * 10);
+		const current_book = await Books.findOne({where: {title: application_titles[i]}});
+		const current_book_id = current_book.book_id;
+		
+		await CartCollections.create({cartCollection_id: new_cartCollection_id, book_id: current_book_id});
+	}
+	
+	const current_user = await Users.findOne({where:{login: logged_user}, raw:true});
+	
+	await Applications.create({cartCollection_id: new_cartCollection_id, user_id: current_user.user_id, status_text: "pending", date: application_date});
+	
+	hbs.registerHelper("userName", function(){
+		return `${logged_user}`;
+	});
+	await response.render('shoppingCart');
+});
    
 app.get('/orders', async (_, response) => {
 	const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -886,6 +925,114 @@ app.get('/home', async (_, response) => {
 		await delay(Math.random() * 10);
 		await hbs.registerHelper("featuredBooks", function(){
 			return `${result_string2}`;
+		});
+		
+		//new arrivals
+		result_string3 = `
+		<div class="swiper arrivals-slider">
+            <div class="swiper-wrapper">
+		`;
+		i = 0;
+		const limit = 12;
+		while(i < limit / 2) {
+			await delay(Math.random() * 10);
+			const current_book = await Books.findAll({order: [["date", "DESC"]], raw:true});
+			
+			console.log(current_book[i]);
+			
+			const current_image = current_book[i].image_name;
+			const current_title = current_book[i].title;
+			const current_price = current_book[i].price;
+			const current_ratings = await Reviews.findAll({where: {book_id: current_book[i].book_id}, raw: true});
+			
+			let average_rating = 0.0;
+			let j = 0;
+			const rating_count = await Reviews.count({where: {book_id: current_book[i].book_id}, raw: true});
+			if(rating_count != 0){
+				while(j < rating_count){
+					average_rating += parseFloat(current_ratings[j].rating);
+					j++;
+				}
+				average_rating /= rating_count;
+				average_rating = average_rating + " / 5"
+			}
+			else average_rating = "No reviews yet";
+			
+			result_string3 = result_string3 + `
+				<a href="/book/${current_title}" class="swiper-slide box">
+                    <div class="image">
+                        <img style="max-width: 100px" src="book_images/${current_image}">
+                    </div>
+                    <div class="content">
+                        <h3>${current_title}</h3>
+                        <div class="price">$${current_price}</div>
+                        <div style="font-size: 20px">
+							${average_rating}
+                        </div>
+                    </div>
+                </a>
+			`;
+			i++;
+			console.log(i);
+		}
+		
+		result_string3 = result_string3 + `
+            </div>
+        </div>
+        <div class="swiper arrivals-slider">
+            <div class="swiper-wrapper">
+		`;
+		
+		while(i < limit) {
+			await delay(Math.random() * 10);
+			const current_book = await Books.findAll({order: [["date", "DESC"]], raw:true});
+			
+			const current_image = current_book[i].image_name;
+			const current_title = current_book[i].title;
+			const current_price = current_book[i].price;
+			const current_ratings = await Reviews.findAll({where: {book_id: current_book[i].book_id}, raw: true});
+			
+			let average_rating = 0.0;
+			let j = 0;
+			const rating_count = await Reviews.count({where: {book_id: current_book[i].book_id}, raw: true});
+			if(rating_count != 0){
+				while(j < rating_count){
+					average_rating += parseFloat(current_ratings[j].rating);
+					j++;
+				}
+				average_rating /= rating_count;
+				average_rating = average_rating + " / 5"
+			}
+			else average_rating = "No reviews yet";
+			
+			console.log(average_rating);
+			
+			result_string3 = result_string3 + `
+				<a href="/book/${current_title}" class="swiper-slide box">
+                    <div class="image">
+                        <img style="max-width: 100px" src="book_images/${current_image}">
+                    </div>
+                    <div class="content">
+                        <h3>${current_title}</h3>
+                        <div class="price">$${current_price}</div>
+                        <div style="font-size: 20px">
+							${average_rating}
+                        </div>
+                    </div>
+                </a>
+			 `;
+			i++;
+			console.log(i);
+		}
+		
+		result_string3 = result_string3 + `
+            </div>
+        </div>
+		`;
+		
+		await delay(Math.random() * 10);
+		await hbs.registerHelper("new_arrivalsList", function(){
+			return `${result_string3}`;
 		});
 		
 		await response.render('index');

@@ -12,7 +12,7 @@
        <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
 
 
-
+ <link rel="stylesheet" href="css/searchPage.css" type="text/css">
     <!-- custom css file link  -->
     <link rel="stylesheet" href="css/style.css" type="text/css">
     <link rel="stylesheet" href="css/shoppingCart.css" type="text/css">
@@ -20,11 +20,90 @@
 
 <body>
     {{>header}}
+ <h1>Search result "Wish"</h1>
+
+<div id="Centre_search">
+        <div id="Search">
+            <div id="bookListContainer"></div>
+        <div class="search-container">
+                <div>
+                    <h2 class="book-title">Wish you were here</h2>
+                    <p class="book-author">by Lana Doyle</p>
+                    <div>
+                    <img class="book-image" src="book_images/wish_you_were_here.jpg" alt="Wish you were here">
+                    <p class="book-price">$24.99</p>
+                    </div>
+                </div>
+        </div>
+    </div>
+ <div id="block-padding">
+        <h1 class="heading"> <span>You May Also Like</span> </h1>
+
+<div id="yml">
+    <section class="featured" id="featured">
 
 
+
+        <div class="swiper featured-slider">
+
+            <div class="swiper-wrapper">
+
+                {{> featured}}
+
+            </div>
+
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+
+        </div>
+</div>
     {{>footer}}
 </body>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="/javascript.js"></script>
+<script>
+var swiper = new Swiper(".featured-slider", {
+  spaceBetween: 10,
+  loop:true,
+  centeredSlides: true,
+  autoplay: {
+    delay: 9500,
+    disableOnInteraction: false,
+  },
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
+  breakpoints: {
+    0: {
+        slidesPerView: 1,
+    },
+    450: {
+        slidesPerView: 2,
+    },
+    768: {
+        slidesPerView: 3,
+    },
+    1024: {
+        slidesPerView: 4,
+    },
+},
+});
+</script>
+   <script src="/scripts/change-shopping-cart.js"></script>
 
+   <script>changeQuantityCart();</script>
+    {{!-- <script>changeQuantityCart();</script> --}}
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>   
+ <!-- custom js file link  -->
+
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- custom js file link  -->
+
+    <script src="javascript.js"></script>
+    {{!-- shopping cart logic --}}
+    <script src="scripts/coockies-to-js.js"></script>
     <script src="/scripts/change-shopping-cart.js"></script>
     <script src="scripts/shopping-cart-content.js"></script>
     <script src="scripts/shopping-cart.js"></script>
