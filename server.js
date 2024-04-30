@@ -358,6 +358,7 @@ app.get('/book/:linkTitle', async (request, response) => {
 	const current_title = request.params.linkTitle;
 	
 	const current_book = await Books.findOne({where:{title: current_title}, raw:true});
+	
 	if(current_book == null) {
 		return response.status(400).send(`A book with title "${current_title}" does not exist`);
 	}
@@ -711,7 +712,9 @@ app.post("/book/:linkTitle/deleteReview", urlencodedParser, async function (requ
 app.post("/book/:linkTitle", urlencodedParser, async function (request, response) { //comment leaving
     
     if(!request.body) return response.sendStatus(400);
-	
+	if(logged_user == "Not logged in"){
+		return response.status(400).send(`You must be logged in to leave a review`);
+	  }
 	const current_title = request.params.linkTitle;
 	
 	const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -1062,11 +1065,12 @@ app.get('/genres', async (_, response) => {
 		`
 		
             </div>
-			<div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
+		
 		</section>
 		`;
-		
+		// removed due quick bugs
+		// <div class="swiper-button-next"></div>
+		// <div class="swiper-button-prev"></div>
 		i = current_genre.genre_id + 1;
 	}
 	

@@ -88,6 +88,8 @@ h2 {
 
 #padding {
     padding: 5rem 4rem;
+    border-bottom: 2px solid black;
+margin-bottom: 25px;
 }
 
 #cost {
@@ -109,6 +111,26 @@ li {
 #block-padding {
     padding: 1rem 3rem;
 }
+.block-description{
+    width: 50%;
+    margin: 0 auto;
+    text-align: left;}
+
+@media (max-width:1600px){
+    .block-description{
+        width: 80%;
+        margin: 0 auto;
+        text-align: left;
+    }
+}
+
+.block-description p {
+    font-size: 2rem;
+    text-indent: 2em; 
+    letter-spacing: 1px;    margin-bottom: 20px; 
+    font-family: Roboto, sans-serif;
+}
+
 
 #block-padding-border {
     padding: 2rem;
@@ -213,7 +235,7 @@ border:1px solid #B0CFE0;
     display: flex;
     justify-content: center;
     align-items: center; 
-    flex-direction: column; 
+    flex-direction: row; 
 }
 
 .center-content > div {
@@ -233,7 +255,9 @@ border:1px solid #B0CFE0;
     margin-bottom: 10px; 
 }
 
-
+.side-bar{
+    display: block;
+}
 
         .textarea-message {
             width: 60%;

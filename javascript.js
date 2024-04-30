@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
 var swiper = new Swiper(".featured-slider", {
   spaceBetween: 10,
   loop:true,
-  loopAdditionalSlides: 3,
+  loopAdditionalSlides: 1,
   centeredSlides: true,
   autoplay: {
     delay: 9500,
@@ -94,7 +94,7 @@ var swiper = new Swiper(".featured-slider", {
         slidesPerView: 3,
     },
     1024: {
-        slidesPerView: 4  ,
+        slidesPerView: 3  ,
     },
 },
 });
