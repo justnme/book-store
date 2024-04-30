@@ -29,13 +29,16 @@ function load() {
                     <div>
                     <img class="book-image" src="book_images/${imageName}" alt="${bookInfo.name}">           
                     </div>
-                    <div>
+                    <div style="width:100%;">
                     <h2 class="book-title">${bookInfo.name}</h2>
                     <p class="book-author">${bookInfo.author}</p>
                     </div>
-                    <div style="margin-left: 50px;">
-                    <p style="margin-left: 38px;" class="book-price">${bookInfo.price}</p>
-                    <button style="margin-top: 120px;" class="btn" id="book-button-${bookInfo.name}"  onclick="removeBook('${bookInfo.name}')">Delete</button>
+                    <div style="display: flex;
+                    flex-direction: column;
+                    align-items: flex-end;
+                    justify-content: flex-end;">
+                    <p   class="book-price">${bookInfo.price}</p>
+                    <button style="margin-top:120px;"  class="btn" id="book-button-${bookInfo.name}"  onclick="removeBook('${bookInfo.name}')">Delete</button>
                     </div>
 
                 </div>
