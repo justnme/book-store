@@ -52,7 +52,7 @@ function cookiesBooksToJs() {
     }
 
     console.log(cartItems)
-
+    
     return cartItems;
 }
 
