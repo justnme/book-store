@@ -80,7 +80,7 @@ function updateTotalPrice() {
 
 
 function removeBook(bookName) {
-    let bookElement = document.getElementById(`book-button-${bookName}`).parentNode;
+    let bookElement = document.getElementById(`book-button-${bookName}`).parentNode.parentNode;
 
     bookElement.remove();
     let cookieName = 'cart_' + bookName;
