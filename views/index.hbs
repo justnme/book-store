@@ -13,10 +13,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <!-- custom css file link  -->
-    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
 
     {{!-- shoppping cart css --}}
-    <link rel="stylesheet" href="css/shoppingCart.css" type="text/css">
+    <link rel="stylesheet" href="/css/shoppingCart.css" type="text/css">
 
 
 </head>
@@ -79,7 +79,7 @@
                 <div class="swiper-wrapper" id="bookShelfSwiper">
                     {{{book_carousel}}}
                 </div>
-                <img src="image/stand.png" class="stand" alt="">
+                <img src="/image/stand.png" class="stand" alt="">
 
                 <button id="prevButton" aria-label="Назад">&#60;</button>
                 <button id="nextButton" aria-label="Вперед">&#62;</button>
@@ -202,28 +202,25 @@
         </div>
 
         <div class="image">
-            <img src="image/sale.png" alt="">
+            <img src="/image/sale.png" alt="">
         </div>
 
     </section>
 
     <!-- deal section ends -->
     <!-- footer section starts  -->
-    {{> shoppingmenu}}  
+    {{> shoppingmenu}}
     {{> footer}}
 
 
 
 
     <script src="/scripts/change-shopping-cart.js"></script>
-
    <script>changeQuantityCart();</script>
     {{!-- <script>changeQuantityCart();</script> --}}
-
-
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <!-- custom js file link  -->
-    <script src="javascript.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>   
+ <!-- custom js file link  -->
+    <script src="/javascript.js"></script>
 </body>
 
 </html>

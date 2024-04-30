@@ -118,7 +118,7 @@ const Books = sequelize.define("Books", {
 		allowNull: false,
 	},
 	description: {
-		type: Sequelize.TEXT,
+		type: Sequelize.STRING,
 		allowNull: true,
 	}
 });
@@ -180,7 +180,7 @@ const Sales = sequelize.define("Sales", {
 		type: Sequelize.INTEGER,
 		allowNull: false,
 	},
-	book_id: {
+	cartCollection_id: {
 		type: Sequelize.INTEGER,
 		allowNull: false,
 	},
@@ -280,6 +280,7 @@ async function fillHeader(){
 			return `
 			<a href='http://localhost:3000/addBook'>Add book</a>
 			<a href='http://localhost:3000/orders'>Orders</a>
+			<a href='http://localhost:3000/accepted_orders'>Accepted Orders</a>
 			`;
 		});
 	}
@@ -467,7 +468,7 @@ app.get('/book/:linkTitle', async (request, response) => {
 				<a href="#" class="fas fa-eye"></a>
 			</div>
 			<div class="image">
-				<a href="/book/${featured_title}/deleteBook"><img style="max-width: 165.5px" src="/book_images/${featured_image}"></a>
+				<a href="/book/${featured_title}"><img style="max-width: 165.5px" src="/book_images/${featured_image}"></a>
 			</div>
 			<div class="content">
 				<h3>${featured_title}</h3>
@@ -772,6 +773,22 @@ app.post('/shoppingCart', urlencodedParser, async (request, response) => {
 	
 	await Applications.create({cartCollection_id: new_cartCollection_id, user_id: current_user.user_id, status_text: "pending", date: application_date});
 	
+	const max_application_id = await Applications.max("application_id");
+	
+	const date = new Date();
+	
+	let day = date.getDate();
+	if (day < 10) day = '0' + day;
+	
+	let month = date.getMonth() + 1;
+	if (month < 10) month = '0' + month;
+	
+	let year = date.getFullYear();
+
+	const sale_date = `${year}-${month}-${day}`;
+	
+	await Sales.create({user_id: current_user.user_id, application_id: max_application_id, cartCollection_id: new_cartCollection_id, date: sale_date });
+	
 	await response.render('shoppingCart');
 });
    
@@ -942,7 +959,7 @@ app.post('/orders/decline', urlencodedParser, async (request, response) => {
 	
 	const current_cartCollection_id = request.body.cartCollectionId;
 	await CartCollections.destroy({where: {cartCollection_id: current_cartCollection_id}});
-	await Applications.destroy({where: {cartCollection_id: current_cartCollection_id}});
+	await Applications.update({status_text: "rejected"}, {where: {cartCollection_id: current_cartCollection_id}});
 	
 	await response.redirect('back');
 });

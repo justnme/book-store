@@ -15,7 +15,6 @@
     <!-- custom css file link  -->
     <link rel="stylesheet" href="css/style.css" type="text/css">
     <link rel="stylesheet" href="css/shoppingCart.css" type="text/css">
-
 </head>
 
 <body>
@@ -26,12 +25,10 @@
             <span class="close">&times;</span>
             <p>Are you sure that you want to confirm the purchase worth <span id="totalPriceConfirmation"
                     class="book-price">0$</span>?</p>
-            <div style="display: flex;">
-                <form id="confirmForm" method="POST" onsubmit="clearShoppingCart();closeModal()">
-                    <button type="submit" id="confirmButton" class="confirmButton">Confirm</button>
-                </form>
-                <button style="margin-left: 5px;" id="cancelButton" class="cancelButton">Cancel</button>
-            </div>
+            <form id="confirmForm" method="POST" onsubmit="clearShoppingCart();closeModal()">
+				<button type = "submit" id="confirmButton" class="confirmButton">Confirm</button>
+			</form>
+			<button id="cancelButton" class="cancelButton">Cancel</button>
         </div>
 
     </div>
@@ -39,81 +36,15 @@
     <div id="Centre">
         <div id="Cart">
             <h1>Your Shopping Cart</h1>
-            <button class="btn" id="clearAllButton" onclick="clearShoppingCart()">Clear all cart</button>
             <div id="bookListContainer"></div>
 
             <h2>Total price is: <span id="totalPrice" class="book-price">0$</span></h2>
-            <div>
-                <button class="btn" id="buyAllButton" onclick="buyShoppingCart()">Buy</button>
-            </div>
+            <button class="btn" id="clearAllButton" onclick="clearShoppingCart()">Clear all cart</button>
+            <button class="btn" id="buyAllButton" onclick="buyShoppingCart()">Buy</button>
         </div>
     </div>
-    <div id="block-padding">
-        <h1 class="heading"> <span>You May Also Like</span> </h1>
-        <div id="yml">
-            <section class="featured" id="featured">
-
-
-
-                <div class="swiper featured-slider">
-
-                    <div class="swiper-wrapper">
-
-                        {{> featured}}
-
-                    </div>
-
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
-
-                </div>
-        </div>
-        {{>footer}}
+    {{>footer}}
 </body>
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script src="/javascript.js"></script>
-<script>
-    var swiper = new Swiper(".featured-slider", {
-        spaceBetween: 10,
-        loop: true,
-        centeredSlides: true,
-        autoplay: {
-            delay: 9500,
-            disableOnInteraction: false,
-        },
-        navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-        },
-        breakpoints: {
-            0: {
-                slidesPerView: 1,
-            },
-            450: {
-                slidesPerView: 2,
-            },
-            768: {
-                slidesPerView: 3,
-            },
-            1024: {
-                slidesPerView: 4,
-            },
-        },
-    });
-</script>
-<script src="/scripts/change-shopping-cart.js"></script>
-
-<script>changeQuantityCart();</script>
-{{!--
-<script>changeQuantityCart();</script> --}}
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<!-- custom js file link  -->
-
-
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<!-- custom js file link  -->
-
-<script src="javascript.js"></script>
 
 <script src="/scripts/change-shopping-cart.js"></script>
 <script src="scripts/shopping-cart-content.js"></script>
@@ -127,38 +58,38 @@
     var totalPriceElement = document.getElementById("totalPrice");
     var totalPriceConfirmationElement = document.getElementById("totalPriceConfirmation");
     var confirmButton = document.getElementById("confirmButton");
+	
+	
+	
+	const date = new Date();
 
+	let day = date.getDate();
+	if (day < 10) day = '0' + day;
+	
+	let month = date.getMonth() + 1;
+	if (month < 10) month = '0' + month;
+	
+	let year = date.getFullYear();
 
-
-    const date = new Date();
-
-    let day = date.getDate();
-    if (day < 10) day = '0' + day;
-
-    let month = date.getMonth() + 1;
-    if (month < 10) month = '0' + month;
-
-    let year = date.getFullYear();
-
-    const application_date = `${year}-${month}-${day}`;
-
-    const applicationDate = document.createElement("input");
-    applicationDate.name = "applicationDate";
-    applicationDate.type = "text";
-    applicationDate.setAttribute('value', application_date);
-    applicationDate.style.display = "none";
-    confirmForm.append(applicationDate);
-
-    const applicationBookTitles = cookiesBooksToJs();
-    for (let i = 0; i < applicationBookTitles.length; i++) {
-        const applicationTitle = document.createElement("input");
-        applicationTitle.name = "applicationTitles[]";
-        applicationTitle.type = "text";
-        applicationTitle.setAttribute('value', applicationBookTitles[i]);
-        applicationTitle.style.display = "none";
-        confirmForm.append(applicationTitle);
-    }
-
+	const application_date = `${year}-${month}-${day}`;
+	
+	const applicationDate = document.createElement("input");
+	applicationDate.name = "applicationDate";
+	applicationDate.type = "text";
+	applicationDate.setAttribute('value', application_date);
+	applicationDate.style.display = "none";
+	confirmForm.append(applicationDate);
+	
+	const applicationBookTitles = cookiesBooksToJs();
+	for(let i = 0; i < applicationBookTitles.length; i++){
+		const applicationTitle = document.createElement("input");
+		applicationTitle.name = "applicationTitles[]";
+		applicationTitle.type = "text";
+		applicationTitle.setAttribute('value', applicationBookTitles[i]);
+		applicationTitle.style.display = "none";
+		confirmForm.append(applicationTitle);
+	}
+	
 
 
     function showModal() {
@@ -190,19 +121,18 @@
     }
 
     function buyShoppingCart() {
-
+      
+		const book_array = cookiesBooksToJs();
+		if(book_array.length == 0){
+			alert("You must fill your cart first!");
+			return;
+		}
+	  
         showModal();
-
-        confirmButton.onclick = function () {
-            createOrder();
-        }
 
         cancelButton.onclick = function () {
             closeModal();
         }
-
-        /*место под вызов создания заявки*/
-        cookiesBooksToJs();
     }
 </script>
 
