@@ -36,16 +36,60 @@
     <div id="Centre">
         <div id="Cart">
             <h1>Your Shopping Cart</h1>
+             <button class="btn" id="clearAllButton" onclick="clearShoppingCart()">Clear all cart</button>
             <div id="bookListContainer"></div>
 
             <h2>Total price is: <span id="totalPrice" class="book-price">0$</span></h2>
-            <button class="btn" id="clearAllButton" onclick="clearShoppingCart()">Clear all cart</button>
             <button class="btn" id="buyAllButton" onclick="buyShoppingCart()">Buy</button>
         </div>
     </div>
+     <div id="block-padding">
+        <h1 class="heading"> <span>You May Also Like</span> </h1>
+
+        <section class="featured" id="featured">
+            <div class="swiper featured-slider">
+
+                <div class="swiper-wrapper">
+
+                    {{> featured}}
+
+                </div>
+                
+            </div>
+
+        </section>
+    </div>
     {{>footer}}
 </body>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="/javascript.js"></script>
+<script>
+    var swiper = new Swiper(".featured-slider", {
+        spaceBetween: 10,
+        loop: true,
+        centeredSlides: true,
+        autoplay: {
+            delay: 9500,
+            disableOnInteraction: false,
+        },
 
+
+        breakpoints: {
+            0: {
+                slidesPerView: 1,
+            },
+            450: {
+                slidesPerView: 2,
+            },
+            768: {
+                slidesPerView: 3,
+            },
+            1024: {
+                slidesPerView: 4,
+            },
+        },
+    });
+</script>
 <script src="/scripts/change-shopping-cart.js"></script>
 <script src="scripts/shopping-cart-content.js"></script>
 <script src="scripts/shopping-cart.js"></script>

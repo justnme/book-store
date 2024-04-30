@@ -1050,7 +1050,9 @@ app.get('/genres', async (_, response) => {
                         <div class="price">$${current_price}</div>
                         <a href="#" class="btn">add to cart</a>
                     </div>
+					
                 </div>
+				
 			`
 			
 			j = current_book.book_id + 1;
@@ -1058,7 +1060,10 @@ app.get('/genres', async (_, response) => {
 		
 		result_string = result_string +
 		`
+		
             </div>
+			<div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
 		</section>
 		`;
 		
