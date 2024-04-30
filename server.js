@@ -1041,7 +1041,7 @@ app.get('/genres', async (_, response) => {
                         <a href="#" class="fas fa-eye"></a>
                     </div>
                     <div class="image">
-                        <a href="/book/${current_title}"><img style="max-width: 165.5px" src="book_images/${current_image}"></a>
+                        <a href="/book/${current_title}"><img style="max-width: 165.5px" src="/book_images/${current_image}"></a>
                     </div>
                     <div class="content">
                         <h3>${current_title}</h3>
@@ -1091,7 +1091,7 @@ app.get('/home', async (_, response) => {
 			 `<a href="/book/${current_title}"
 			 class="swiper-slide">
 			 <img style="max-width: 165.5px" 
-			 src="book_images/${current_image}" alt="">
+			 src="/book_images/${current_image}" alt="">
 			 </a>`;
 			i = current_book.book_id + 1;
 			limit++;
@@ -1128,7 +1128,7 @@ app.get('/home', async (_, response) => {
 					<a href="#" class="fas fa-eye"></a>
 				</div>
 				<div class="image">
-					<a href="/book/${current_title}"><img style="max-width: 165.5px" src="book_images/${current_image}"></a>
+					<a href="/book/${current_title}"><img style="max-width: 165.5px" src="/book_images/${current_image}"></a>
 				</div>
 				<div class="content">
 					<h3>${current_title}</h3>
@@ -1181,7 +1181,7 @@ app.get('/home', async (_, response) => {
 			result_string3 = result_string3 + `
 				<a href="/book/${current_title}" class="swiper-slide box">
                     <div class="image">
-                        <img style="max-width: 100px" src="book_images/${current_image}">
+                        <img style="max-width: 100px" src="/book_images/${current_image}">
                     </div>
                     <div class="content">
                         <h3>${current_title}</h3>
@@ -1230,7 +1230,7 @@ app.get('/home', async (_, response) => {
 			result_string3 = result_string3 + `
 				<a href="/book/${current_title}" class="swiper-slide box">
                     <div class="image">
-                        <img style="max-width: 100px" src="book_images/${current_image}">
+                        <img style="max-width: 100px" src="/book_images/${current_image}">
                     </div>
                     <div class="content">
                         <h3>${current_title}</h3>
