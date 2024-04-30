@@ -207,14 +207,14 @@ h5 {
 .book-container{
     padding: 2rem;
     margin-top: 2rem;
-
+    display: flex;
     border-top: #00aeff solid 2px;
     border-bottom: #00aeff solid 2px;
 }
 
 .book-container ~ * {
     padding: 2rem;
-
+display: flex;
     margin-bottom: 2rem;
     border-top: none; 
     border-bottom: #00aeff solid 2px;

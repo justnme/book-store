@@ -26,14 +26,17 @@ function load() {
 
         bookList.innerHTML += `
                 <div class="book-container">
-                <div>
+                    <div>
+                    <img class="book-image" src="book_images/${imageName}" alt="${bookInfo.name}">           
+                    </div>
+                    <div>
                     <h2 class="book-title">${bookInfo.name}</h2>
                     <p class="book-author">${bookInfo.author}</p>
-                    <div>
-                    <img class="book-image" src="book_images/${imageName}" alt="${bookInfo.name}">
-                    <p class="book-price">${bookInfo.price}</p>
                     </div>
-                    <button class="btn" id="book-button-${bookInfo.name}"  onclick="removeBook('${bookInfo.name}')">✕</button>
+                    <div style="margin-left: 50px;">
+                    <p style="margin-left: 38px;" class="book-price">${bookInfo.price}</p>
+                    <button style="margin-top: 120px;" class="btn" id="book-button-${bookInfo.name}"  onclick="removeBook('${bookInfo.name}')">Delete</button>
+                    </div>
 
                 </div>
             `;
