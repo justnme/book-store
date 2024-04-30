@@ -39,13 +39,7 @@ fieldset {
     padding: 1rem;
 }
 
-body {
 
-    font-size: 0.875em;
-    gap: 1.5rem;
-    font-weight: 400;
-    line-height: 1.5;
-}
 
 img {
     width: 7cm;
@@ -214,6 +208,33 @@ border:1px solid #B0CFE0;
         color: #888; 
         margin-right: 10px;
     }
+
+.center-content {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    flex-direction: column; 
+}
+
+.center-content > div {
+    margin: 10px;
+}
+
+
+#buyButton{
+    text-align: center;
+}
+.content-center .book-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.content-center .book-details > div {
+    margin-bottom: 10px; 
+}
+
+
+
         .textarea-message {
             width: 60%;
 max-width: 100%;

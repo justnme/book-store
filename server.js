@@ -19,8 +19,8 @@ const port = 3000;
 // #4 hbs conf
 const path = require('path');
 
-//let logged_user = "Not logged in";
-let logged_user = "AdminGuy";
+let logged_user = "Not logged in";
+// let logged_user = "AdminGuy";
 
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
@@ -299,7 +299,10 @@ app.get('/registration', (_, response) => {
 	fillHeader();
 	response.render('registration');
 });
-
+app.get('/searchPage', (_, response) => {
+	fillHeader();
+	response.render('searchPage');
+});
 app.post("/registration", urlencodedParser, function (request, response) { //login check
     if(!request.body) return response.sendStatus(400);
 	
@@ -394,9 +397,8 @@ app.get('/book/:linkTitle', async (request, response) => {
 		return `${result_string0}`;
 	});
 	
-	// just ll do the same
 	await hbs.registerHelper("bookContainer", function(){
-		return `<div id = "${current_title}">`;
+		return `<div id = "${current_title}" class="center-content">`;
 	});
 
 	await hbs.registerHelper("bookTitle", function(){

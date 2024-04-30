@@ -8,9 +8,8 @@
     <title>Book</title>
     <link rel="icon" type="image/x-icon" href="/image/favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <!-- custom css file link  -->
     <link rel="stylesheet" href="/css/style.css" type="text/css">
-      <link rel="stylesheet" href="/css/book.css" type="text/css">
+    <link rel="stylesheet" href="/css/book.css" type="text/css">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 
 </head>
@@ -19,13 +18,13 @@
 <body>
     {{> header}}
     <div id="padding">
-        {{!-- <div id="book-info"> --}}
-            {{!-- unmaintainable snippet of code --}}
-			<div>
-				<!-- <p>Books - Categories - Young Adult - Young Adult - Fiction - Dystopian</p> -->
+
+			
+        
+             {{{bookContainer}}}
+             <div>
 				{{{bookTagList}}}
 			</div>
-             {{{bookContainer}}}
             <div>
 				{{{bookImage}}}
             </div>
@@ -36,38 +35,11 @@
                         <div id="block-padding">
                             {{{bookTitle}}}
 							{{{bookAuthor}}}
-                            <!--
-							<p>ISBN: 9781339016573</p>
-							-->
+
                         </div>
                     </div>
                 </div>
-                <!--
-                <div id="block-padding">
-                    <fieldset>
-                        <legend>Condition</legend>
-
-                        <div>
-                            <input type="radio" id="New" name="Condition" value="New" checked />
-                            <label for="New">New</label>
-                        </div>
-
-                        <div>
-                            <input type="radio" id="Used" name="Condition" value="Used" />
-                            <label for="Used">Used</label>
-                        </div>
-                    </fieldset>
-                    <fieldset>
-                        <legend>Format</legend>
-
-                        <div>
-                            <input type="radio" id="Trade Paperback" name="Format" value="Trade Paperback" checked />
-                            <label for="Trade Paperback">Trade Paperback</label>
-                        </div>
-
-                    </fieldset>
-                </div>
-				-->
+              
             </div>
             <div id="block-padding">
                 {{{bookPrice}}}

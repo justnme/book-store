@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var swiper = new Swiper(".books-slider", {
     loop: true,
     centeredSlides: true,
+    
     autoplay: {
       delay: 9500,
       disableOnInteraction: false,
@@ -72,6 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
 var swiper = new Swiper(".featured-slider", {
   spaceBetween: 10,
   loop:true,
+  loopAdditionalSlides: 3,
   centeredSlides: true,
   autoplay: {
     delay: 9500,

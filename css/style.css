@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
 @import "https://unpkg.com/open-props";
 :root{
-    --orange:rgb(0, 174, 255);
+    --cyan:rgb(0, 174, 255);
     --dark-color:#00008b9d;
     --black:#00008bb4;
     --white:#ffffff;
@@ -76,7 +76,7 @@ button#prevButton,
     height:4rem;
     width:4rem;
     color:var(--white);
-    background: var(--orange);
+    background: var(--cyan);
     border-radius: 10px;
     font-size: 2.5rem;
     margin: 5px;
@@ -93,7 +93,7 @@ button#prevButton,
     padding:.9rem 3rem;
     border-radius: 1.5rem;
     color:#0000ff;
-    background:var(--orange);
+    background:var(--cyan);
     font-size: 1.7rem;
     cursor: pointer;
     font-weight: 500;
@@ -101,7 +101,7 @@ button#prevButton,
     font-weight: var(--font-weight-6);
     font-size: var(--font-size-5);
     color: var(--white);
-    background: var(--orange);
+    background: var(--cyan);
     border: 0;
     position: relative;
     transition: all 0.35s;
@@ -117,7 +117,7 @@ button#prevButton,
     padding:.5rem 1rem;
     border-radius: 1.5rem;
     color:#0000ff;
-    background:var(--orange);
+    background:var(--cyan);
     font-size: 1.7rem;
     cursor: pointer;
     font-weight: 500;
@@ -125,7 +125,7 @@ button#prevButton,
     font-weight: var(--font-weight-6);
     font-size: var(--font-size-5);
     color: var(--white);
-    background: var(--orange);
+    background: var(--cyan);
     border: 0;
     position: relative;
     transition: all 0.35s;
@@ -171,7 +171,7 @@ button#prevButton,
   clip-path: polygon(4px 4px,calc(100% - 4px) 4px,calc(100% - 4px) calc(100% - 14px), 100% calc(100% - 14px),100% 100%,0 100%,0 calc(100% - 14px),4px calc(100% - 14px));
   }
 .header .header-1 .logo i{
-    color:var(--orange);
+    color:var(--cyan);
 }
 
 .header .header-1 .search-form{
@@ -202,7 +202,7 @@ button#prevButton,
 }
 
 .header .header-1 .search-form label:hover{
-    color:var(--orange);
+    color:var(--cyan);
 }
 
 .header .header-1 .icons div,
@@ -215,7 +215,7 @@ button#prevButton,
 
 .header .header-1 .icons div:hover,
 .header .header-1 .icons a:hover{
-    color:var(--orange);
+    color:var(--cyan);
 }
 
 #search-btn{
@@ -223,7 +223,7 @@ button#prevButton,
 }
 
 .header .header-2{
-    background:var(--orange);
+    background:var(--cyan);
 }
 
 .header .header-2 .navbar{
@@ -250,7 +250,7 @@ button#prevButton,
 
 .bottom-navbar{
     text-align: center;
-    background:var(--orange);
+    background:var(--cyan);
     position: fixed;
     bottom:0; left:0; right:0;
     z-index: 1000;
@@ -343,7 +343,7 @@ button#prevButton,
 }
 
 .login-form-container form p a{
-    color:var(--orange);
+    color:var(--cyan);
     text-decoration: underline;
 }
 
@@ -372,7 +372,7 @@ button#prevButton,
 .home .row .content{
     padding: 2rem;
     background-color: rgba(0, 174, 255, 0.3);
-    border-radius: 7%;
+    border-radius: 2%;
     flex:1 1 42rem;
 }
 
@@ -432,7 +432,7 @@ button#prevButton,
 
 .icons-container .icons i{
     font-size: 3.5rem;
-    color:var(--orange);
+    color:var(--cyan);
 }
 
 .icons-container .icons h3{
@@ -491,7 +491,7 @@ button#prevButton,
 }
 
 .featured .featured-slider .box .icons a:hover{
-    background:var(--orange);
+    background:var(--cyan);
     color:#fff;
 }
 
@@ -523,7 +523,7 @@ button#prevButton,
     height:4rem;
     width:4rem;
     color:var(--white);
-    background: var(--orange);
+    background: var(--cyan);
     border-radius: 10px;
 }
 
@@ -609,7 +609,7 @@ button#prevButton,
 
 .arrivals .arrivals-slider .box .content .stars i{
     font-size: 1.5rem;
-    color:var(--orange);
+    color:var(--cyan);
 }
 
 .deal{
@@ -636,7 +636,7 @@ button#prevButton,
 }
 
 .deal .content h3{
-    color:var(--orange);
+    color:var(--cyan);
     font-size: 2.5rem;
     padding-bottom: .5rem;
 }
@@ -690,7 +690,7 @@ button#prevButton,
 
 .reviews .reviews-slider .box .stars i{
     font-size: 1.7rem;
-    color:var(--orange);
+    color:var(--cyan);
 }
 
 .blogs .blogs-slider .box{
@@ -754,7 +754,7 @@ button#prevButton,
 }
 
 .footer .box-container .box a i{
-    color:var(--orange);
+    color:var(--cyan);
     padding-right: .5rem;
 }
 
@@ -777,7 +777,7 @@ button#prevButton,
     line-height: 5rem;
     font-size: 2rem;
     color:#fff;
-    background:var(--orange);
+    background:var(--cyan);
     margin:0 .3rem;
     border-radius: 50%; 
 }
@@ -797,7 +797,7 @@ button#prevButton,
 }
 
 .footer .credit span{
-    color:var(--orange);
+    color:var(--cyan);
 }
 
 .loader-container{
