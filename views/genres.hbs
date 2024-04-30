@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genres</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+     <link rel="icon" type="image/x-icon" href="/image/favicon.ico">
+    <style>
+        img {
+            width: 7cm;
+            height: 10cm;
+        }
+        
+        h1 {
+            text-align: center;
+            color: black;
+        }
+        
+        .nje {
+            content: "";
+            display: block;
+            margin: 0 auto;
+            width: 40%;
+            padding-top: 20px;
+            border-bottom: 1px solid black;
+        }
+    </style>
+    <!-- link for the swiper  -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+
+</head>
+
+<body>
+    {{> header}}
+	
+    <!-- login form  -->
+
+    <div class="login-form-container">
+
+        <div id="close-login-btn" class="fas fa-times"></div>
+
+        <form method="POST" action="">
+            <h3>sign in</h3>
+            <span>username</span>
+            <input type="text" name="login_name" class="box" placeholder="enter your login" id="">
+            <span>password</span>
+            <input type="password" name="login_password" class="box" placeholder="enter your password" id="">
+            <div class="checkbox">
+                <input type="checkbox" name="" id="remember-me">
+                <label for="remember-me"> remember me</label>
+            </div>
+            <input type="submit" value="sign in" class="btn">
+            <p>forget password ? <a href="#">click here</a></p>
+            <p>don't have an account ? <a href='registration'>create one</a></p>
+            <p style="color: red">{{login_result}}</p>
+        </form>
+
+    </div>
+
+
+    <div class="nje">
+        <h1>Types of Books</h1>
+    </div>
+
+
+
+    {{{genreList}}}
+    <script src="/scripts/change-shopping-cart.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!-- custom js file link  -->
+    <script src="javascript.js"></script>
+
+
+</body>
+
+</html>

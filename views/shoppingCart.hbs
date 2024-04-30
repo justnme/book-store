@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookflix and Chill</title>
+    <link rel="icon" type="image/x-icon" href="/image/favicon.ico">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/shoppingCart.css" type="text/css">
+    <style>
+     .modal {
+    display: none;
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.4); 
+}
+
+.modal-content {
+    background-color: #fefefe;
+    position: absolute;
+    left: 50%; 
+    top: 50%; 
+    transform: translate(-50%, -50%); 
+    padding: 30px;
+    border: 1px solid #888;
+    width: 60%;
+    max-width: 600px; 
+    font-size: 1.6rem;
+    text-align: center; 
+}
+
+.close {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 20px; 
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .confirmButton,
+        .cancelButton {
+            border: none;
+            color: white;
+            padding: 7px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1.6rem;
+            margin-top: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .confirmButton {
+            background-color: #4CAF50;
+        }
+
+        .cancelButton {
+            background-color: #cc4545;
+        }
+
+        .confirmButton:hover {
+            background-color: #45a049;
+        }
+
+        .cancelButton:hover {
+            background-color: #a14545;
+        }
+    </style>
+</head>
+
+<body>
+    {{>header}}
+    <div id="myModal" class="modal">
+
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Are you sure that you want to confirm the purchase worth <span id="totalPriceConfirmation"
+                    class="book-price">0$</span>?</p>
+            <form id="confirmForm" method="POST" onsubmit="clearShoppingCart();closeModal()">
+				<button type = "submit" id="confirmButton" class="confirmButton">Confirm</button>
+			</form>
+			<button id="cancelButton" class="cancelButton">Cancel</button>
+        </div>
+
+    </div>
+
+    <div id="Centre">
+        <div id="Cart">
+            <h1>Your Shopping Cart</h1>
+            <div id="bookListContainer"></div>
+
+            <h2>Total price is: <span id="totalPrice" class="book-price">0$</span></h2>
+            <button class="btn" id="clearAllButton" onclick="clearShoppingCart()">Clear all cart</button>
+            <button class="btn" id="buyAllButton" onclick="buyShoppingCart()">Buy</button>
+        </div>
+    </div>
+    {{>footer}}
+</body>
+
+<script src="/scripts/change-shopping-cart.js"></script>
+<script src="scripts/shopping-cart-content.js"></script>
+<script src="scripts/shopping-cart.js"></script>
+<script src="scripts/cookies-to-js.js"></script>
+<script>
+
+
+    var modal = document.getElementById("myModal");
+    var span = document.getElementsByClassName("close")[0];
+    var totalPriceElement = document.getElementById("totalPrice");
+    var totalPriceConfirmationElement = document.getElementById("totalPriceConfirmation");
+    var confirmButton = document.getElementById("confirmButton");
+	
+	
+	
+	const date = new Date();
+
+	let day = date.getDate();
+	if (day < 10) day = '0' + day;
+	
+	let month = date.getMonth() + 1;
+	if (month < 10) month = '0' + month;
+	
+	let year = date.getFullYear();
+
+	const application_date = `${year}-${month}-${day}`;
+	
+	const applicationDate = document.createElement("input");
+	applicationDate.name = "applicationDate";
+	applicationDate.type = "text";
+	applicationDate.setAttribute('value', application_date);
+	applicationDate.style.display = "none";
+	confirmForm.append(applicationDate);
+	
+	const applicationBookTitles = cookiesBooksToJs();
+	for(let i = 0; i < applicationBookTitles.length; i++){
+		const applicationTitle = document.createElement("input");
+		applicationTitle.name = "applicationTitles[]";
+		applicationTitle.type = "text";
+		applicationTitle.setAttribute('value', applicationBookTitles[i]);
+		applicationTitle.style.display = "none";
+		confirmForm.append(applicationTitle);
+	}
+	
+
+
+    function showModal() {
+        modal.style.display = "block";
+        totalPriceConfirmationElement.textContent = totalPriceElement.textContent;
+    }
+
+    function closeModal() {
+        modal.style.display = "none";
+    }
+
+
+    span.onclick = function () {
+        closeModal();
+    }
+
+
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            closeModal();
+        }
+    }
+
+
+    function confirmPurchase() {
+
+        console.log("Покупка подтверждена");
+        closeModal();
+    }
+
+    function buyShoppingCart() {
+      
+		const book_array = cookiesBooksToJs();
+		if(book_array.length == 0){
+			alert("You must fill your cart first!");
+			return;
+		}
+	  
+        showModal();
+
+        cancelButton.onclick = function () {
+            closeModal();
+        }
+    }
+</script>
+
+</html>

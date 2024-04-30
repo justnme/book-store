@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/addBook.css" type="text/css">
+	<title>Add book</title>
+	<link rel="icon" type="image/x-icon" href="/image/favicon.ico">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+	<!-- custom css file link  -->
+	<link rel="stylesheet" href="css/style.css" type="text/css">
+	<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+
+</head>
+
+<body>
+	{{> header}}
+	<div id="padding">
+		<h1 class="heading"> <span>Add book</span> </h1>
+		<div id="centre">
+			<div class="container" id="padding">
+
+				<form id="saveForm">
+					<div class="book-flex">
+						<div class="book-picture" id="add-padding">
+							<label for="image">Book image</label>
+							<img id="image" src="" />
+							<input id="bookImage" name="fieldname" required type="file" onchange="load_Image(this)" />
+						</div>
+						<div class="book-fields" id="add-padding">
+							<div id="stretch">
+								<label for="title">Book title</label>
+								<input id="bookTitle" type="text" required>
+							</div>
+							<div id="stretch">
+								<label for="author">Author</label>
+								<input id="bookAuthor" type="text" required>
+							</div>
+							<div id="stretch">
+								<label for="price">Price ($)</label>
+								<input id="bookPrice" type="number" value="0.00" min="0.00" step="0.01" required>
+							</div>
+							<div id="stretch">
+								<label for="date">Date</label>
+								<input id="bookDate" type="date" required>
+							</div>
+							<div id="stretch">
+								<label for="genre">Genre</label>
+								<select id="bookGenre">
+									<option selected value="Horror">Horror</option>
+									<option value="Adventure">Adventure</option>
+									<option value="Action">Action</option>
+									<option value="Romantic">Romantic</option>
+									<option value="Classic">Classic</option>
+									<option value="Fantasy">Fantasy</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<label for="tags">Tags</label>
+					<div class="flex-container">
+						<select id="tags1">
+							{{> tagList}}
+						</select>
+						<select id="tags2">
+							{{> tagList}}
+						</select>
+						<select id="tags3">
+							{{> tagList}}
+						</select>
+						<select id="tags4">
+							{{> tagList}}
+						</select>
+						<select id="tags5">
+							{{> tagList}}
+						</select>
+					</div>
+					<label>Book description</label>
+					<div id="stretch">
+						<textarea required id="bookDescription"
+							class="form-control user-profile-bio-field js-length-limited-input"
+							placeholder="Write down the description of the book" data-input-max-length="300"></textarea>
+						<button type="submit" class="btn">Add book</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!--
+        <form id="edit-book-form" style="display: none;">
+            <label for="edit-title">Нова назва книги:</label>
+            <input type="text" id="edit-title" required>
+        
+            <label for="edit-author">Новий автор:</label>
+            <input type="text" id="edit-author" required>
+        
+            <label for="edit-year">Новий рік видання:</label>
+            <input type="number" id="edit-year" required>
+        
+            <label for="edit-genre">Новий жанр:</label>
+            <select id="edit-genre">
+                <option value="Драма">Драма</option>
+                <option value="Історія">Історія</option>
+                <option value="Фантастика">Фантастика</option>
+                <option value="Пригоди">Пригоди</option>
+                <option value="Роман">Роман</option>
+            </select>
+        
+            <button type="submit">Зберегти зміни</button>
+        </form>
+		-->
+	{{> footer}}
+
+</body>
+    <script src="/scripts/change-shopping-cart.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="../scripts/addBook.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>   
+<script src="javascript.js"></script>
+<script src="js/script.js"></script>
+
+</html>
