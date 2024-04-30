@@ -6,7 +6,7 @@ const saveForm =  document.getElementById("saveForm")
 saveForm.addEventListener("submit", submitForm);
 
 function submitForm(e){
-	e.preventDefault();
+	e.preventDefault(); //This blocks redirects
 	const bookTitle = document.getElementById("bookTitle");
 	const bookImage = document.getElementById("bookImage");
 	const bookAuthor = document.getElementById("bookAuthor");

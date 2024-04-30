@@ -19,7 +19,8 @@ const port = 3000;
 // #4 hbs conf
 const path = require('path');
 
-let logged_user = "Not logged in";
+//let logged_user = "Not logged in";
+let logged_user = "AdminGuy";
 
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
@@ -268,14 +269,33 @@ sequelize.sync().then(result=>{
 
 // <<<---------DATABASE------------
 
+async function fillHeader(){
+	await hbs.registerHelper("userName", function(){
+		return `${logged_user}`;
+	});
+	
+	const current_user = await Users.findOne({where:{login: logged_user}, raw:true});
+	if(current_user != null && current_user.status_text == "admin") {
+		await hbs.registerHelper("adminButtons", function(){
+			return `
+			<a href='http://localhost:3000/addBook'>Add book</a>
+			<a href='http://localhost:3000/orders'>Orders</a>
+			`;
+		});
+	}
+	else {
+		await hbs.registerHelper("adminButtons", function(){
+			return ``;
+		});
+	}
+}
+
 app.get('/', (_, response) => {
 	response.redirect('home'); //I hope this works now
     //response.render('index');
 });
 app.get('/registration', (_, response) => {
-	hbs.registerHelper("userName", function(){
-		return `${logged_user}`;
-	});
+	fillHeader();
 	response.render('registration');
 });
 
@@ -333,81 +353,105 @@ app.get('/book/:linkTitle', async (request, response) => {
 	
 	const current_title = request.params.linkTitle;
 	
-	await delay(Math.random() * 10);
 	const current_book = await Books.findOne({where:{title: current_title}, raw:true});
 	if(current_book == null) {
 		return response.status(400).send(`A book with title "${current_title}" does not exist`);
 	}
 	
-	await delay(Math.random() * 10);
+	const current_logged_user = await Users.findOne({where: {login: logged_user}});
+	
 	const current_book_author = await Authors.findOne({where:{author_id: current_book.author_id}, raw:true});
 	
-	await delay(Math.random() * 10);
 	const current_book_genre = await Genres.findOne({where:{genre_id: current_book.genre_id}, raw:true});
 	
-	await delay(Math.random() * 10);
 	const current_image = current_book.image_name;
 	const current_author = current_book_author.full_name;
 	const current_genre = current_book_genre.genre_name;
 	const current_price = current_book.price;
 	const current_date = current_book.date;
 	const current_description = current_book.description;
+	
+	//Book Tags
+	
+	const max_bookTag_id = await BookTags.max("entry_id", {where:{book_id: current_book.book_id}});
+	
+	let result_string0 = `<p>`;
+	let i = 1;
+	
+	while(i <= max_bookTag_id) {
+		await delay(Math.random() * 10);
+		const current_tag = await BookTags.findOne({where:{book_id: current_book.book_id, entry_id: {[Op.gte]: i}}, raw:true});
+		const current_tag_name = await Tags.findOne({where: {tag_id: current_tag.tag_id}});
+		
+		result_string0 = result_string0 + `${current_tag_name.tag_name}  -  `;
+		i = current_tag.entry_id + 1;
+		console.log(i);
+	}
+	result_string0 = result_string0.substring(0, result_string0.length - 3);
+	
+	await hbs.registerHelper("bookTagList", function(){
+		return `${result_string0}`;
+	});
+	
 	// just ll do the same
-	await delay(Math.random() * 10);
 	await hbs.registerHelper("bookContainer", function(){
 		return `<div id = "${current_title}">`;
 	});
 
-	await delay(Math.random() * 10);
 	await hbs.registerHelper("bookTitle", function(){
 		return `<h1 class="book-name" id="BookName">${current_title}</h1>`;
 	});
 	
-	await delay(Math.random() * 10);
 	await hbs.registerHelper("bookAuthor", function(){
 		return `<span class="font-italic" id="bookAuthor">by ${current_author}</span>`;
 	});
 	
-	await delay(Math.random() * 10);
 	await hbs.registerHelper("bookImage", function(){
 		return `<img src="/book_images/${current_image}" 	id="bookImage"> `;
 	});
 	
-	await delay(Math.random() * 10);
 	await hbs.registerHelper("bookPrice", function(){
 		return `<p id="cost">$${current_price}</p>`;
 	});
 	
-	await delay(Math.random() * 10);
 	await hbs.registerHelper("bookDescription", function(){
 		return `<p>${current_description}</p>`;
 	});
 	
-	await delay(Math.random() * 10);
 	await hbs.registerHelper("bookAuthor2", function(){
 		return `<span id="bookAuthor2">${current_author}</span>`;
 	});
 	
-	await delay(Math.random() * 10);
 	await hbs.registerHelper("bookGenre", function(){
 		return `<span>${current_genre}</span>`;
 	});
 	
-	await delay(Math.random() * 10);
 	await hbs.registerHelper("bookDate", function(){
 		return `<span>${current_date}</span>`;
 	});
 	
+	if(logged_user != "Not logged in" && current_logged_user.status_text == "admin"){
+		await hbs.registerHelper("adminBookButtons", function(){
+			return `
+			<a href="http://localhost:3000/editBook/${current_title}" class="btn">Edit</a>
+			<form action = "http://localhost:3000/book/${current_title}/deleteBook" method = "POST">
+				<button type = "submit" class="btn">Delete</button>
+			</form>
+			`;
+		});
+	}
+	
 	
 	//Featured list
 	await delay(Math.random() * 10);
+	
 	const featured_tag = await Tags.findOne({where:{tag_name: "featured"}, raw:true});
-	const max_result = await BookTags.max("book_id", {where:{tag_id: featured_tag.tag_id, [Op.not]: {book_id: current_book.book_id}}});
+	const max_featured_id = await BookTags.max("book_id", {where:{tag_id: featured_tag.tag_id, [Op.not]: {book_id: current_book.book_id}}});
 	
 	let result_string = "";
-	let i = 1;
+	i = 1;
 	
-	while(i <= max_result) {
+	while(i <= max_featured_id) {
 		await delay(Math.random() * 10);
 		const featured_book_tag = await BookTags.findOne({where:{book_id: {[Op.gte]: i}, [Op.not]: {book_id: current_book.book_id}, tag_id: featured_tag.tag_id}, raw:true});
 		const featured_book = await Books.findByPk(featured_book_tag.book_id);
@@ -423,7 +467,7 @@ app.get('/book/:linkTitle', async (request, response) => {
 				<a href="#" class="fas fa-eye"></a>
 			</div>
 			<div class="image">
-				<a href="/book/${featured_title}"><img style="max-width: 165.5px" src="/book_images/${featured_image}"></a>
+				<a href="/book/${featured_title}/deleteBook"><img style="max-width: 165.5px" src="/book_images/${featured_image}"></a>
 			</div>
 			<div class="content">
 				<h3>${featured_title}</h3>
@@ -446,7 +490,7 @@ app.get('/book/:linkTitle', async (request, response) => {
 	
 	while(i <= max_review_id) {
 		await delay(Math.random() * 10);
-		const comment = await Reviews.findOne({where:{review_id: {[Op.gte]: i}}, raw:true});
+		const comment = await Reviews.findOne({where:{book_id: current_book.book_id, review_id: {[Op.gte]: i}}, raw:true});
 		const comment_user = await Users.findOne({where: {user_id: comment.user_id}});
 		
 		const comment_user_name = comment_user.login;
@@ -462,6 +506,18 @@ app.get('/book/:linkTitle', async (request, response) => {
 				<p class="rating">${comment_rating} / 5</p>
 			</div>
 			<p class="message">${comment_message}</p>
+		`;
+		
+		if(logged_user != "Not logged in" && (comment_user_name == logged_user || current_logged_user.status_text == "admin")){
+			result_string2 = result_string2 + `
+				<form action="http://localhost:3000/book/${current_title}/deleteReview" method="POST">
+					<input type="text" style="display:none" name="reviewId" value="${comment.review_id}">
+					<input type="submit" name="formButton" value="Delete" class="btn">
+				</form>
+			`;
+		}
+		
+		result_string2 = result_string2 + `
 		</div>
 		`;
 		i = comment.review_id + 1;
@@ -473,30 +529,189 @@ app.get('/book/:linkTitle', async (request, response) => {
 		return `${result_string2}`;
 	});
 	
-	await hbs.registerHelper("userName", function(){
-		return `${logged_user}`;
-	});
-	
-	await delay(Math.random() * 10);
 	await hbs.registerHelper("featuredBooks", function(){
 		return `${result_string}`;
 	});
 	
+	fillHeader();
+	
 	await response.render('book');
 });
 
+app.get("/editBook/:linkTitle", async (request, response) => {
+	const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+	
+	const current_logged_user = await Users.findOne({where: {login: logged_user}});
+	
+	if(current_logged_user == null || current_logged_user.status_text != "admin"){
+		return response.status(400).send(`This page is only accessible to an admin`);
+	}
+	
+	const current_title = request.params.linkTitle;
+	
+	const current_book = await Books.findOne({where:{title: current_title}, raw:true});
+	if(current_book == null) {
+		return response.status(400).send(`A book with title "${current_title}" does not exist`);
+	}
+	
+	//Book Tags
+	const max_tag_id = await Tags.max("tag_id");
+	const max_bookTag_id = await BookTags.max("entry_id", {where:{book_id: current_book.book_id}});
+	
+	let result_string = "";
+	let result_string2 = "";
+	let i = 1;
+	let tag_count = 0;
+	
+	while(i <= max_bookTag_id) {
+		await delay(Math.random() * 10);
+		const bookTag = await BookTags.findOne({where:{book_id: current_book.book_id, entry_id: {[Op.gte]: i}}, raw:true});
+		const book_tag = await Tags.findOne({where:{tag_id: bookTag.tag_id}});
+		const book_tag_name = book_tag.tag_name;
+		
+		result_string = result_string + `<select id="tags${tag_count + 1}">`;
+		
+		result_string2 = `<option value=""></option>`;
+	
+		let j = 1;
+		while(j <= max_tag_id) {
+			await delay(Math.random() * 10);
+			const current_tag = await Tags.findOne({where:{tag_id: {[Op.gte]: j}}, raw:true});
+			const current_tag_name = current_tag.tag_name;
+			
+			if(book_tag_name == current_tag_name) {
+				result_string2 = result_string2 + `<option value="${current_tag_name}" selected>${current_tag_name}</option>`;
+			}
+			else {
+				result_string2 = result_string2 + `<option value="${current_tag_name}">${current_tag_name}</option>`;
+			}
+			j = current_tag.tag_id + 1;
+		}
+		result_string = result_string + result_string2 + `</select>`
+		i = bookTag.entry_id + 1;
+		tag_count++;
+	}
+	result_string2 = "";
+	for(i = tag_count; i < 5; i++){
+		result_string2 = result_string2 + `
+		<select id="tags${tag_count + 1}">
+			<option value=""></option>
+		`
+		for(let j = 1; j <= max_tag_id; j++){
+			await delay(Math.random() * 10);
+			const current_tag = await Tags.findOne({where:{tag_id: {[Op.gte]: j}}, raw:true});
+			const current_tag_name = current_tag.tag_name;
+			result_string2 = result_string2 + `<option value="${current_tag_name}">${current_tag_name}</option>`;
+		}
+		result_string2 = result_string2 + `</select>`;
+		tag_count++;
+	}
+	
+	result_string = result_string + result_string2;
+	
+	await hbs.registerHelper("bookTags", function(){
+		return `${result_string}`;
+	});
+	
+	//Book Genres
+	
+	const current_book_genre = await Genres.findOne({where:{genre_id: current_book.genre_id}, raw:true});
+	const book_genre_name = current_book_genre.genre_name;
+	const max_genre_id = await Genres.max("genre_id");
+	
+	let result_string3 = `<select id="bookGenre">`;
+	
+	for(let j = 1; j < max_genre_id; j++) {
+		await delay(Math.random() * 10);
+		const current_genre = await Genres.findOne({where:{genre_id: j}, raw:true});
+		const current_genre_name = current_genre.genre_name;
+		
+		if(book_genre_name == current_genre_name) {
+			result_string3 = result_string3 + `<option value="${current_genre_name}" selected>${current_genre_name}</option>`;
+		}
+		else {
+			result_string3 = result_string3 + `<option value="${current_genre_name}">${current_genre_name}</option>`;
+		}
+	}
+	
+	result_string3 = result_string3 + `</select>`;
+	
+	await hbs.registerHelper("bookGenre", function(){
+		return `${result_string3}`;
+	});
+	
+	//All other fields
+	
+	const current_book_author = await Authors.findOne({where:{author_id: current_book.author_id}, raw:true});
+	
+	const current_image = current_book.image_name;
+	const current_author = current_book_author.full_name;
+	const current_genre = current_book_genre.genre_name;
+	const current_price = current_book.price;
+	const current_date = current_book.date;
+	const current_description = current_book.description;
+
+	await hbs.registerHelper("bookTitle", function(){
+		return `
+		<input id="originalTitle" value="${current_title}" type="text" style="display:none;" />
+		<input id="bookTitle" value="${current_title}" type="text" required>
+		`;
+	});
+	
+	await hbs.registerHelper("bookAuthor", function(){
+		return `<input id="bookAuthor" value="${current_author}" type="text" required>`;
+	});
+	
+	await hbs.registerHelper("bookImage", function(){
+		return `<img id="image" src="../book_images/${current_image}" />`;
+	});
+	
+	await hbs.registerHelper("bookPrice", function(){
+		return `<input id="bookPrice" type="number" value="${current_price}" min="0.00" step="0.01" required>`;
+	});
+	
+	await hbs.registerHelper("bookDescription", function(){
+		return `
+		<textarea required id="bookDescription"
+			class="form-control user-profile-bio-field js-length-limited-input"
+			placeholder="Write down the description of the book" data-input-max-length="300">${current_description}</textarea>
+		`;
+	});
+	
+	await hbs.registerHelper("bookDate", function(){
+		return `<input value="${current_date}" id="bookDate" type="date" required>`;
+	});
+	
+	fillHeader();
+	await response.render('editBook');
+});
+
+app.post("/book/:linkTitle/deleteBook", urlencodedParser, async function (request, response) {
+	const current_title = request.params.linkTitle;
+	const current_book = await Books.findOne({where:{title: current_title}, raw:true});
+	
+	await BookTags.destroy({where: {book_id: current_book.book_id}});
+	await Books.destroy({where: {title: current_title}});
+	
+	await response.redirect(`http://localhost:3000/home`);
+});
+
+app.post("/book/:linkTitle/deleteReview", urlencodedParser, async function (request, response) {
+	const current_title = request.params.linkTitle;
+	const current_review_id = request.body.reviewId;
+	
+	await Reviews.destroy({where: {review_id: current_review_id}});
+	
+	await response.redirect(`http://localhost:3000/book/${current_title}`);
+});
 
 app.post("/book/:linkTitle", urlencodedParser, async function (request, response) { //comment leaving
     
     if(!request.body) return response.sendStatus(400);
 	
-	if(logged_user == "Not logged in"){
-		return response.status(400).send(`You're not logged in!`);
-	}
+	const current_title = request.params.linkTitle;
 	
 	const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
-	
-	const current_title = request.params.linkTitle;
 	
 	await delay(Math.random() * 10);
 	const current_user = await Users.findOne({where:{login: logged_user}, raw:true});
@@ -527,18 +742,9 @@ app.post("/book/:linkTitle", urlencodedParser, async function (request, response
 
   
 app.get('/shoppingCart', (_, response) => {
-	hbs.registerHelper("userName", function(){
-		return `${logged_user}`;
-	});
+	fillHeader();
+	
 	response.render('shoppingCart');
-});
-
-  
-app.get('/searchPage', (_, response) => {
-	hbs.registerHelper("userName", function(){
-		return `${logged_user}`;
-	});
-	response.render('searchPage');
 });
 
 app.post('/shoppingCart', urlencodedParser, async (request, response) => {
@@ -566,9 +772,6 @@ app.post('/shoppingCart', urlencodedParser, async (request, response) => {
 	
 	await Applications.create({cartCollection_id: new_cartCollection_id, user_id: current_user.user_id, status_text: "pending", date: application_date});
 	
-	hbs.registerHelper("userName", function(){
-		return `${logged_user}`;
-	});
 	await response.render('shoppingCart');
 });
    
@@ -598,7 +801,7 @@ app.get('/orders', async (_, response) => {
 		result_string = result_string + `
 		<div class="rq-card">
 			<div class="rq-left">
-				<p style="margin-bottom: 30px ; ">User: <span style="color:rgb(0, 174, 255);">${current_name}</span></p>
+				<p style="margin-bottom: 30px">User: ${current_name}</p>
 		`
 		
 		let j = 1;
@@ -613,8 +816,8 @@ app.get('/orders', async (_, response) => {
 			const current_price = current_book.price;
 			
 			result_string = result_string + `
-				<p>Book:<span style="font-weight: 900;"> ${current_title}</span></p>
-				<p style="margin-bottom: 30px ;  ">Price:<span style="color: #0cbe0f;">$${current_price}</span></p>
+				<p>Book: ${current_title}</p>
+				<p style="margin-bottom: 30px">Price: $${current_price}</p>
 			`
 			
 			j = current_collection.entry_id + 1;
@@ -622,20 +825,18 @@ app.get('/orders', async (_, response) => {
 		
 		result_string = result_string + `
 			</div>
-			<div>
 			<div class="rq-right">
 				<p>${current_date}</p>
 			</div>
 			<div class="rq-bottom-right">
-				<form  id="btn_id" action="/orders/decline" method="POST">
+				<form action="/orders/decline" method="POST">
 					<input type="text" name="cartCollectionId" style="display: none" value = "${current_application.cartCollection_id}"/>
-					<input  style="background-color: transparent;  font-size:4rem;" type="submit" value="✕" class="fas fa-times"/>
+					<input type="submit" value="✕" class="fas fa-times"/>
 				</form>
-				<form  id="btn_id" action="/orders/accept" method="POST">
+				<form action="/orders/accept" method="POST">
 					<input type="text" name="cartCollectionId" style="display: none" value = "${current_application.cartCollection_id}"/>
-					<input style="background-color: transparent;  font-size:4rem;" type="submit" value="✓" class="fas fa-check"/>
+					<input type="submit" value="✓" class="fas fa-check"/>
 				</form>
-			</div>
 			</div>
 		</div>
 		`
@@ -647,9 +848,8 @@ app.get('/orders', async (_, response) => {
 		return `${result_string}`;
 	});
 	
-	await hbs.registerHelper("userName", function(){
-		return `${logged_user}`;
-	});
+	fillHeader();
+	
 	await response.render('orders');
 });
 
@@ -722,9 +922,8 @@ app.get('/accepted_orders', async (_, response) => {
 		return `${result_string}`;
 	});
 	
-	await hbs.registerHelper("userName", function(){
-		return `${logged_user}`;
-	});
+	fillHeader();
+	
 	await response.render('accepted_orders');
 });
 
@@ -776,9 +975,8 @@ app.get('/addBook', async (_, response) => {
 			return `${result_string}`;
 		});
 		
-		await hbs.registerHelper("userName", function(){
-			return `${logged_user}`;
-		});
+		fillHeader();
+		
 		await response.render('addBook');
 	})();
 });
@@ -852,9 +1050,8 @@ app.get('/genres', async (_, response) => {
 		return `${result_string}`;
 	});
 	
-	await hbs.registerHelper("userName", function(){
-		return `${logged_user}`;
-	});
+	fillHeader();
+	
 	await response.render('genres');
 });
 
@@ -867,7 +1064,8 @@ app.get('/home', async (_, response) => {
 		
 		//Top book list
 		let i = 1;
-		while(i <= max_result) {
+		let limit = 1;
+		while(i <= max_result && limit <= 10) {
 			await delay(Math.random() * 10);
 			const current_book = await Books.findOne({where:{book_id: {[Op.gte]: i}}, raw:true});
 			const current_image = current_book.image_name;
@@ -879,6 +1077,7 @@ app.get('/home', async (_, response) => {
 			 src="book_images/${current_image}" alt="">
 			 </a>`;
 			i = current_book.book_id + 1;
+			limit++;
 			console.log(i);
 		}
 		console.log(result_string);
@@ -894,8 +1093,9 @@ app.get('/home', async (_, response) => {
 		
 		let result_string2 = "";
 		i = 1;
+		limit = 1;
 		
-		while(i <= max_result) {
+		while(i <= max_result && limit <= 12) {
 			await delay(Math.random() * 10);
 			const current_book_tag = await BookTags.findOne({where:{book_id: {[Op.gte]: i}, tag_id: featured_tag.tag_id}, raw:true});
 			const current_book = await Books.findByPk(current_book_tag.book_id);
@@ -921,6 +1121,7 @@ app.get('/home', async (_, response) => {
 			</div>	
 			`;
 			i = current_book.book_id + 1;
+			limit++;
 			console.log(i);
 		}
 		console.log(result_string2);
@@ -935,7 +1136,7 @@ app.get('/home', async (_, response) => {
             <div class="swiper-wrapper">
 		`;
 		i = 0;
-		const limit = 12;
+		limit = 12;
 		while(i < limit / 2) {
 			await delay(Math.random() * 10);
 			const current_book = await Books.findAll({order: [["date", "DESC"]], raw:true});
@@ -1037,10 +1238,29 @@ app.get('/home', async (_, response) => {
 			return `${result_string3}`;
 		});
 		
+		await fillHeader();
+		
 		await response.render('index');
 	})();
 });
 
+
+async function removeEmptyBoogTags(){
+	const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+	
+	const max_bookTag = await BookTags.max("book_id");
+	let i = 1;
+	while(i <= max_bookTag) {
+		await delay(Math.random() * 10);
+		const current_tag = await BookTags.findOne({where:{book_id: {[Op.gte]: i}}, raw:true});
+		const current_BookTag_id = current_tag.book_id;
+		const current_book = await Books.findOne({where:{book_id: current_BookTag_id}, raw:true});
+		
+		if(current_book == null) BookTags.destroy({where: {book_id: current_BookTag_id}});
+		
+		i = current_BookTag_id + 1;
+	}
+}
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -1055,8 +1275,83 @@ const upload = multer({
     storage: storage
 }).single('bookImage');
 
+app.post("/editBook", upload, async (request, response) => {
+	if(!request.body) return response.sendStatus(400);
+	
+	await removeEmptyBoogTags();
+	
+	const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+	
+	const original_title = request.body.originalTitle;
+	const book_title = request.body.bookTitle;
+	const book_genre = request.body.bookGenre;
+	const book_image = request.file.originalname;
+	const book_author = request.body.bookAuthor;
+	const book_price = request.body.bookPrice;
+	const book_date = request.body.bookDate;
+	const book_description = request.body.bookDescription;
+	const tags = [];
+	
+	if(request.body.tags1 != "") tags.push(request.body.tags1);
+	if(request.body.tags2 != "") tags.push(request.body.tags2);
+	if(request.body.tags3 != "") tags.push(request.body.tags3);
+	if(request.body.tags4 != "") tags.push(request.body.tags4);
+	if(request.body.tags5 != "") tags.push(request.body.tags5);
+	
+	upload(request, response, (err) => {
+        if (err) {
+            console.error(err);
+            response.status(500).send('Error uploading file');
+        }
+    });
+
+	const current_book = await Books.findOne({where:{title: original_title}, raw:true});
+	
+	const current_genre = await Genres.findOne({where:{genre_name: book_genre}, raw:true});
+	const current_author = await Authors.findOne({where:{full_name: book_author}, raw:true});
+	
+	if (current_author == null) {
+		await Authors.create({full_name: book_author});
+		const max_author_id = await Authors.max('author_id');
+		await Books.update({
+			genre_id: current_genre.genre_id,
+			image_name: book_image,
+			author_id: max_author_id,
+			title: book_title,
+			price: book_price,
+			date: book_date,
+			description: book_description},
+			{where: {book_id: current_book.book_id}});
+	}
+	else {
+		await Books.update({
+			genre_id: current_genre.genre_id,
+			image_name: book_image,
+			author_id: current_author.author_id,
+			title: book_title,
+			price: book_price,
+			date: book_date,
+			description: book_description},
+			{where: {book_id: current_book.book_id}});
+	}
+	
+	await BookTags.destroy({where: {book_id: current_book.book_id}});
+	
+	for(let i = 0; i < tags.length; i++) {
+		await delay(Math.random() * 10);
+		const current_tag = await Tags.findOne({where:{tag_name: tags[i]}, raw:true});
+		await BookTags.create({book_id: current_book.book_id, tag_id: current_tag.tag_id});
+	}
+	
+	await response.redirect(`http://localhost:3000/book/${book_title}`);
+});
+
 app.post("/addBook", upload, async (request, response) => {
 	if(!request.body) return response.sendStatus(400);
+	
+	await removeEmptyBoogTags();
+	
+	const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 	
 	const book_title = request.body.bookTitle;
 	const book_genre = request.body.bookGenre;
@@ -1080,45 +1375,32 @@ app.post("/addBook", upload, async (request, response) => {
         }
     });
 
-	Books.findOne({where:{title: book_title}, raw:true})
-	.then(book=>{
-		if (book != null) {
-			//Add something here so that the user knows the book already exists
+	const current_book = await Books.findOne({where:{title: book_title}, raw:true});
+	if (current_book != null) {
+		return response.status(400).send(`A book with title "${book_title}" already exists`);
+	}
+	else {
+		const current_genre = await Genres.findOne({where:{genre_name: book_genre}, raw:true});
+		const current_author = await Authors.findOne({where:{full_name: book_author}, raw:true});
+		
+		if (current_author == null) {
+			await Authors.create({full_name: book_author});
+			const max_author_id = await Authors.max('author_id');
+			await Books.create({genre_id: current_genre.genre_id, image_name: book_image, author_id: max_author_id, title: book_title, price: book_price, date: book_date, description: book_description});
 		}
 		else {
-			Genres.findOne({where:{genre_name: book_genre}, raw:true})
-			.then(genre=>{
-				
-				Authors.findOne({where:{full_name: book_author}, raw:true})
-				.then(author=>{
-					if (author != null) {
-						Books.create({genre_id: genre.genre_id, image_name: book_image, author_id: author.author_id, title: book_title, price: book_price, date: book_date});
-					}
-					else {
-						Authors.create({full_name: book_author});
-						
-						Authors.max('author_id')
-						.then(authorId=>{
-							Books.create({genre_id: genre.genre_id, image_name: book_image, author_id: authorId, title: book_title, price: book_price, date: book_date, description: book_description});
-						}).catch(err=>console.log(err));
-					}
-					
-					for(let i = 0; i < tags.length; i++) {
-						Tags.findOne({where:{tag_name: tags[i]}, raw:true})
-						.then(tag=>{
-							
-							Books.max('book_id')
-							.then(bookId=>{
-								BookTags.create({book_id: bookId, tag_id: tag.tag_id});
-							}).catch(err=>console.log(err));
-							
-						}).catch(err=>console.log(err));
-					}
-				}).catch(err=>console.log(err));
-				
-			}).catch(err=>console.log(err));
+			await Books.create({genre_id: current_genre.genre_id, image_name: book_image, author_id: current_author.author_id, title: book_title, price: book_price, date: book_date, description: book_description});
 		}
-	}).catch(err=>console.log(err)); 
+		
+		for(let i = 0; i < tags.length; i++) {
+			await delay(Math.random() * 10);
+			const current_tag = await Tags.findOne({where:{tag_name: tags[i]}, raw:true});
+			const max_book_id = await Books.max('book_id');
+			await BookTags.create({book_id: max_book_id, tag_id: current_tag.tag_id});
+		}
+	}
+	
+	await response.redirect(`http://localhost:3000/book/${book_title}`);
 });
 
 app.post("/home", urlencodedParser, function (request, response) { //login check

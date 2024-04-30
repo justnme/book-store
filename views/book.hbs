@@ -19,13 +19,12 @@
 <body>
     {{> header}}
     <div id="padding">
-      
-        <div>
-            <p>Books / Categories / Young Adult / Young Adult / Fiction / Dystopian</p>
-        </div>
-		
         {{!-- <div id="book-info"> --}}
             {{!-- unmaintainable snippet of code --}}
+			<div>
+				<!-- <p>Books - Categories - Young Adult - Young Adult - Fiction - Dystopian</p> -->
+				{{{bookTagList}}}
+			</div>
              {{{bookContainer}}}
             <div>
 				{{{bookImage}}}
@@ -72,25 +71,10 @@
             </div>
             <div id="block-padding">
                 {{{bookPrice}}}
-				<!--
-                <p>Used - Trade Paperback - 9781339016573</p>
-                <fieldset id="block-padding-border">
-
-
-                    <div>
-                        <input type="radio" id="Pick Up Today" name="Delivery" value="Pick Up Today" checked />
-                        <label for="Pick Up Today">Pick Up Today (Not In Stock at this Location)</label>
-                    </div>
-
-                    <div>
-                        <input type="radio" id="Ship to Address" name="Delivery" value="Ship to Address" checked />
-                        <label for="Ship to Address">Ship to Address</label>
-                    </div>
-                </fieldset>
-				-->
                 <div id="button-row">
                     <button class="btn" id="buyButton">Add to Cart</button>
                     <button class="btn">Add to Wishlist</button>
+					{{{adminBookButtons}}}
                 </div>
             </div>
         </div>
@@ -104,12 +88,6 @@
         <div id="block-padding">
             <h2 class="heading"> <span>Information</span> </h2>
             <ul>
-				<!--
-                <li>
-                    <span id="bold">Format:</span>
-                    <span>Trade Paperback</span>
-                </li>
-				-->
                 <li>
                     <span id="bold">Author:</span>
 					{{{bookAuthor2}}}
@@ -118,20 +96,6 @@
                     <span id="bold">Genre:</span>
 					{{{bookGenre}}}
                 </li>
-				<!--
-                <li>
-                    <span id="bold">ISBN:</span>
-                    <span>9781339016573</span>
-                </li>
-                <li>
-                    <span id="bold">Condition:</span>
-                    <span>Used</span>
-                </li>
-                <li>
-                    <span id="bold">Number Of Pages:</span>
-                    <span>528</span>
-                </li>
-				-->
                 <li>
                     <span id="bold">Publication Date:</dt>
 					{{{bookDate}}}
@@ -167,40 +131,12 @@
                     </div>
                     <span>Message</span>
                     <textarea class="textarea-message" name="review_message" rows="5" placeholder="type message" autocapitalize="off"></textarea>
-                    <input type="submit" value="add review" class="btn">
+                    <input type="submit" name="formButton" value="add review" class="btn">
                 </form>
             </div>
             <div id="block-padding-border">
 				<h2>Reviews</h2>
 				{{{reviewList}}}
-				<!--				This was very sad to remove ;(
-                <div class="review">
-                    <div class="review-user"> 
-                    <p class="username">Den</p>
-                    <p class="date">2024.04.24</p>
-                    <p class="rating">5/5</p>
-                    </div>
-                    <p class="message">Govno ebanoe!</p>
-                </div>
-
-                <div class="review">
-                    <div class="review-user"> 
-                    <p class="username">Web Ymer</p>
-                    <p class="date">1888.04.24</p>
-                    <p class="rating">0/5</p>
-                    </div>
-                    <p class="message">Веб умер, на телефон переделывайте свое говно !</p>
-                </div>
-
-                <div class="review">
-                    <div class="review-user"> 
-                    <p class="username">Deniska</p>
-                    <p class="date">1984.04.24</p>
-                    <p class="rating">2/5</p>
-                    </div>
-                    <p class="message">огузки ебанные</p>
-                </div>
-				-->
             </div>
         </div>
     </div>
