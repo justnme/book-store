@@ -1,0 +1,29 @@
+
+<header class="header">
+
+	<div class="header-1">
+
+		<a href="http://localhost:3000" class="logo"> <i class="fas fa-book"></i> Holy Book </a>
+
+		<form action="/searchPage" class="search-form" method="POST">
+			<input type="text" name="searchText" placeholder="Search here..." id="search-box">
+			<button type="submit" style="background-color: rgba(0,0,0,0)"><label for="search-box" class="fas fa-search"></label></button>
+		</form>
+
+		<div class="icons">
+			
+			<div id="search-btn" class="fas fa-search"></div>
+			<a href="#" class="fas fa-heart wish-list">
+				{{!-- <span id="wishListId">0</span> --}}
+			</a>
+			
+			<div id="login-btn" class="fas fa-user"></div>
+			<a href='http://localhost:3000/shoppingCart' class="fas fa-shopping-cart icon-cart">
+				<span id="shoppingId">0</span>
+			</a>
+			<div id="logged_user" class="User">{{{userName}}}</div>
+		</div>
+
+	</div>
+	{{> navbarindex}}
+</header>

@@ -1,0 +1,349 @@
+
+/* cart */
+.cartTab{
+    width: 400px;
+    background-color: #353432;
+    color: #eee;
+    position: fixed;
+    top: 0;
+    right: -400px;
+    bottom: 0;
+    display: grid;
+    grid-template-rows: 70px 1fr 70px;
+    transition: .5s;
+    z-index: 999;
+}
+
+body.showCart .cartTab{
+    right: 0;
+}
+
+.cartTab h1{
+    padding: 20px;
+    margin: 0;
+    font-weight: 300;
+}
+.cartTab .btn{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+.cartTab button{
+    background-color: #E8BC0E;
+    border: none;
+    font-family: Poppins;
+    font-weight: 500;
+    cursor: pointer;
+}
+.cartTab .close{
+    background-color: #eee;
+}
+.listCart .item img{
+    width: 100%;
+}
+.listCart .item{
+    display: grid;
+    grid-template-columns: 70px 150px 50px 1fr;
+    gap: 10px;
+    text-align: center;
+    align-items: center;
+}
+.listCart .quantity span{
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+    color: #555;
+    cursor: pointer;
+}
+.listCart .quantity span:nth-child(2){
+    background-color: transparent;
+    color: #eee;
+    cursor: auto;
+}
+.listCart .item:nth-child(even){
+    background-color: #eee1;
+}
+.listCart{
+    overflow: auto;
+}
+.listCart::-webkit-scrollbar{
+    width: 0;
+}
+#Centre{
+    padding: 3rem 0rem;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+#Cart{
+    width: fit-content;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem 5rem;
+}
+
+#Cart input[type = "submit"] {
+	font-size: 48px;
+}
+
+#Cart input[type = "submit"]:active{
+	background-color: rgba(0,0,0,0);
+}
+
+#Cart input[type = "submit"]:hover{
+	background-color: rgba(0,0,0,0);
+}
+
+
+
+#Cart input[type = "submit"] {
+	font-size: 48px;
+}
+
+#Cart input[type = "submit"]:active{
+	background-color: rgba(0,0,0,0);
+}
+
+ #Cart input[type = "submit"]:hover{
+	background-color: rgba(0,0,0,0);
+}
+
+h1 {
+    color: #333;
+}
+
+h5 {
+    color: #666;
+}
+
+/* Стили для корзины покупок */
+#cart-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+#cart-container h3 {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+#cart-container h3:last-child {
+    margin-right: 0;
+    margin-left: 25px;
+}
+
+/* Стили для "Saved for later" */
+#saved-for-later {
+    margin-top: 20px;
+}
+
+#saved-for-later p {
+    font-style: italic;
+}
+
+/* Стили для кнопки Apply */
+#apply-button {
+    margin-top: 20px;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#apply-button:hover {
+    background-color: #0056b3;
+}
+
+/* Стили для Order Summary */
+#order-summary {
+    margin-top: 20px;
+}
+
+/* Стили для Proceed To Checkout */
+#checkout-button {
+    display: block;
+    margin-top: 20px;
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+}
+
+#checkout-button:hover {
+    background-color: #218838;
+}
+/* Styles for cart book items */
+.cart-book {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.book-details {
+    display: flex;
+    align-items: center;
+}
+
+.book-image {
+    width: 120px; /* Adjust size as needed */
+    height: auto;
+    margin-right: 10px;
+}
+.book-container{
+    padding: 2rem;
+    margin-top: 2rem;
+    display: flex;
+    border-top: #00aeff solid 2px;
+    border-bottom: #00aeff solid 2px;
+}
+
+.book-container ~ * {
+    padding: 2rem;
+display: flex;
+    margin-bottom: 2rem;
+    border-top: none; 
+    border-bottom: #00aeff solid 2px;
+}
+.book-info {
+    flex: 1;
+}
+h2 {
+    font-size: 2rem;
+    font-weight: 700;
+}
+.book-title {
+    margin: 0;
+    color: #333;
+    font-size: 2rem;
+}
+.flexCart{
+    display: flex;
+
+}
+.book-author {
+    margin: 0;
+    color: #666;
+    font-size: 1.75rem;
+}
+#yml section{
+    padding: 0rem 0rem;
+}
+.book-price {
+
+    color: #0cbe0f;
+    font-size: 1.75rem;
+}
+.modal {
+    display: none;
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.4); 
+}
+
+.modal-content {
+    display: flex;
+    background-color: #fefefe;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 30px;
+    border: 1px solid #888;
+    width: 60%;
+    max-width: 600px;
+    font-size: 1.6rem;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    color: black;
+}
+
+.close {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 20px; 
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        #confirmForm{
+            display: inline;
+        }
+        .confirmButton {
+           margin-top: 1rem;
+    display: inline-block;
+    padding:.9rem 3rem;
+    border-radius: 1.5rem;
+    color:#0000ff;
+    background:var(--cyan);
+    font-size: 1.7rem;
+    cursor: pointer;
+    font-weight: 500;
+    font-family: var(--font-sans);
+    font-weight: var(--font-weight-6);
+    font-size: var(--font-size-5);
+    color: var(--white);
+    background: var(--cyan);
+    border: 0;
+    position: relative;
+    transition: all 0.35s;
+        }
+
+        .cancelButton {
+            margin-top: 1rem;
+    display:inline-block;
+    padding:.9rem 3rem;
+    border-radius: 1.5rem;
+    color:#0000ff;
+    background:var(--cyan);
+    font-size: 1.7rem;
+    cursor: pointer;
+    font-weight: 500;
+    font-family: var(--font-sans);
+    font-weight: var(--font-weight-6);
+    font-size: var(--font-size-5);
+    color: var(--white);
+    background: var(--cyan);
+    border: 0;
+    position: relative;
+    transition: all 0.35s;
+        }
+
+        .confirmButton:hover {
+       filter: opacity(75%);
+        }
+
+        .cancelButton:hover {
+          filter: opacity(75%);
+        }
+
+@media (max-width:991px){
+    #Cart{
+        width: 100%;
+    }
+}

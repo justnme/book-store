@@ -1,0 +1,280 @@
+@import url('https://fonts.googleapis.com/css2?family=Hahmlet:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
+.font-roboto{
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.eb-garamond {
+    font-family: "EB Garamond", serif;
+    font-style: normal;
+  }
+.font-hahmlet{
+    font-family: "Hahmlet", serif;
+    font-style: normal;
+    font-size: 1.5rem;
+}
+.font-italic {
+    font-style: italic !important;
+    font-size: 1.5rem;
+}
+
+#bold {
+    font-weight: 600;
+    min-width: 9.375rem;
+}
+
+p {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 1.5rem;
+
+}
+
+fieldset {
+    font-size: 1.25rem;
+    padding: 1rem;
+}
+
+
+
+img {
+    width: 7cm;
+    height: 10cm;
+}
+
+.book-name {
+    font-size: 2.5rem;
+    color: black;
+}
+
+.nje {
+    content: "";
+    display: block;
+    margin: 0 auto;
+    width: 40%;
+    padding-top: 20px;
+    border-bottom: 1px solid black;
+}
+
+#button-row {
+    display: flex;
+    flex-direction: column;
+    align-items:start ;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+h2 {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+#book-info {
+    display: flex;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+#book-info img {
+    max-width: 100%;
+
+}
+
+#padding {
+    padding: 5rem 4rem;
+    border-bottom: 2px solid black;
+margin-bottom: 25px;
+}
+
+#cost {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+ul,
+li {
+    list-style: none;
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+
+li {
+    padding: 2px;
+}
+
+#block-padding {
+    padding: 1rem 3rem;
+}
+.block-description{
+    width: 50%;
+    margin: 0 auto;
+    text-align: left;}
+
+@media (max-width:1600px){
+    .block-description{
+        width: 80%;
+        margin: 0 auto;
+        text-align: left;
+    }
+}
+
+.block-description p {
+    font-size: 2rem;
+    text-indent: 2em; 
+    letter-spacing: 1px;    margin-bottom: 20px; 
+    font-family: Roboto, sans-serif;
+}
+
+
+#block-padding-border {
+    padding: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border-top: #00aeff solid 2px;
+    border-bottom: #00aeff solid 2px;
+}
+
+#add_review {
+    width: 400px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#add_review span {
+    margin-bottom: 8px;
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+
+#add_review input[type="text"],
+#add_review input[type="number"],
+#add_review input[type="date"],
+#add_review textarea {
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+#add_review input[type="text"]:focus,
+#add_review input[type="number"]:focus,
+#add_review input[type="date"]:focus,
+#add_review textarea:focus {
+box-shadow: 0 0 5px #B0CFE0;
+border:1px solid #B0CFE0;
+}
+#add_review input[type="text"],
+#add_review textarea {
+    width: 100%;
+}
+
+#add_review input[type="number"] {
+    width: 50%;
+}
+  .review {
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        background-color: #f9f9f9;
+    }
+
+    .review p {
+        margin: 0;
+        font-size: 16px;
+        line-height: 1.5;
+    }
+
+
+
+    .review .message {
+        margin-top: 25px;
+    }
+          .review-user {
+        display: flex;
+        align-items: center;
+    }
+
+    .review-user p {
+        margin: 0;
+        font-size: 16px;
+        line-height: 1.5;
+    }
+
+    .review-user .username {
+        font-weight: bold;
+        margin-right: 10px;
+    }
+
+    .review-user .rating {
+        font-size: 16px;
+        color: #ffcc00;
+    }
+
+    .review-user .date {
+        font-size: 14px;
+        color: #888; 
+        margin-right: 10px;
+    }
+
+.center-content {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    flex-direction: row; 
+}
+
+.center-content > div {
+    margin: 10px;
+}
+
+
+#buyButton{
+    text-align: center;
+}
+.content-center .book-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.content-center .book-details > div {
+    margin-bottom: 10px; 
+}
+
+.side-bar{
+    display: block;
+}
+
+        .textarea-message {
+            width: 60%;
+max-width: 100%;
+min-height: 200px;
+min-width: 60%;
+max-height: 1000px; 
+margin-top: 7px;
+margin-bottom: 5px;
+}
+@media (max-width:768px){
+#book-info{
+    flex-direction: column;
+}
+}
+@media (max-width:540px){
+    #add_review{
+        width: 350px;
+    }
+}
