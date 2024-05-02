@@ -1252,6 +1252,11 @@ app.post("/home", urlencodedParser, function (request, response) { //login check
 	response.redirect(request.get('referer')); //reload page
 });
 
+app.get('/wishlist', (_, response) => {
+	fillHeader();
+	response.render('wishList');
+});
+
 app.listen(port, () => {
     console.log(`Server is listening on localhost:${port}`);
 });
