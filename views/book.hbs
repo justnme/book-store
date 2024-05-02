@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/css/style.css" type="text/css">
     <link rel="stylesheet" href="/css/book.css" type="text/css">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+<link href="https://cdn.jsdelivr.net/npm/quill@2.0.1/dist/quill.snow.css" rel="stylesheet" />
 
 </head>
 
@@ -134,14 +135,15 @@
 
                 <form id="add_review" method="POST" action="">
                     <span>Rate</span>
-                    <div>
+                    <div class="review-rating-block">
                         <input type="number" id="rating" name="review_rating" value="1" min="1" max="5" />
                         <span> / 5</span>
                     </div>
                     <span>Message</span>
-                    <textarea class="textarea-message" name="review_message" rows="5" placeholder="type message"
-                        autocapitalize="off"></textarea>
-                    <input type="submit" name="formButton" value="add review" class="btn">
+                    <div id="reviewMessage" name="review_message">
+                    </div>
+
+                    <input type="submit" name="formButton" value="add review" class="btn" style="margin: 1rem auto;">
                 </form>
             </div>
             <div id="reviews-padding">
@@ -152,39 +154,20 @@
     </div>
     {{> footer}}
 </body>
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.1/dist/quill.js"></script>
 
+ 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="/javascript.js"></script>
-<script>
-    var swiper = new Swiper(".featured-slider", {
-        spaceBetween: 10,
-        loop: true,
-        centeredSlides: true,
-        autoplay: {
-            delay: 9500,
-            disableOnInteraction: false,
-        },
 
-
-        breakpoints: {
-            0: {
-                slidesPerView: 1,
-            },
-            450: {
-                slidesPerView: 2,
-            },
-            768: {
-                slidesPerView: 3,
-            },
-            1024: {
-                slidesPerView: 4,
-            },
-        },
-    });
-</script>
 {{!-- shopping cart --}}
 <script src="/scripts/change-shopping-cart.js"></script>
 <script src="/scripts/buy-book.js"></script>
 <script src="/scripts/shopping-cart.js"></script>
-
+<script>
+const quill = new Quill('#reviewMessage', {
+    placeholder: 'Write your review here',
+    theme: 'snow',
+  });
+</script>
 </html>

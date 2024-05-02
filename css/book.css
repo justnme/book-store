@@ -25,13 +25,13 @@
     font-weight: 600;
 }
 
-p {
+/* p {
     font-family: "Roboto", sans-serif;
     font-weight: 500;
     font-style: normal;
     font-size: 1.5rem;
 
-}
+} */
 
 fieldset {
     font-size: 1.25rem;
@@ -64,7 +64,7 @@ img {
     flex-direction: column;
     align-items:start ;
 }
-
+/* 
 h1 {
     font-size: 2rem;
 }
@@ -72,7 +72,7 @@ h1 {
 h2 {
     font-size: 2rem;
     font-weight: 700;
-}
+} */
 
 #book-info {
     display: flex;
@@ -94,7 +94,7 @@ margin-bottom: 25px;
     font-size: 2.5rem;
     font-weight: 700;
 }
-
+/* 
 ul,
 li {
     
@@ -105,7 +105,7 @@ li {
 
 li {
     padding: 2px;
-}
+} */
 
 #block-padding {
     padding: 1rem 3rem;
@@ -177,6 +177,7 @@ li {
     border-radius: 8px;
     background-color: #ffffff;
 }
+
 #add_review {
     width: 500px;
     padding: 20px;
@@ -186,7 +187,6 @@ li {
     font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
 }
 
 #add_review span {
@@ -214,13 +214,18 @@ li {
 box-shadow: 0 0 5px #B0CFE0;
 border:1px solid #B0CFE0;
 }
-#add_review input[type="text"],
+/* #add_review input[type="text"],
 #add_review textarea {
     width: 100%;
-}
+} */
 
+/* .review-rating-block{
+    margin: 0 auto;
+    text-align: center;
+} */
 #add_review input[type="number"] {
     width: 50%;
+
 }
   .review {
         border: 1px solid #ccc;
@@ -296,15 +301,7 @@ border:1px solid #B0CFE0;
     display: block;
 }
 
-        .textarea-message {
-            width: 60%;
-max-width: 100%;
-min-height: 200px;
-min-width: 60%;
-max-height: 1000px; 
-margin-top: 7px;
-margin-bottom: 5px;
-}
+
 @media (max-width:768px){
 #book-info{
     flex-direction: column;
