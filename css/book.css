@@ -87,7 +87,6 @@ h2 {
 
 #padding {
     padding: 5rem 4rem;
-    border-bottom: 2px solid black;
 margin-bottom: 25px;
 }
 
@@ -111,11 +110,37 @@ li {
 #block-padding {
     padding: 1rem 3rem;
 }
+#reviews-padding {
+    padding: 5rem 1rem;
+}
+.description p{
+    font-size: 1.85rem;
+    letter-spacing: 1px;    margin-bottom: 10px; 
+    font-family: Roboto, sans-serif;
+}
 .block-description{
     width: 50%;
     margin: 0 auto;
     text-align: left;}
 
+    #shovavca{
+        display: none;
+    }
+    #shovavca2{
+        display: block;
+        }
+        #pramoi{
+            display: flex;
+        }
+        #tag p{
+            font-size: 2rem;
+        }
+        .stoi_rovno{
+            display: flex;
+           align-items: center;
+            flex-direction: column;
+        }
+      
 @media (max-width:1600px){
     .block-description{
         width: 80%;
@@ -125,7 +150,7 @@ li {
 }
 
 .block-description p {
-    font-size: 2rem;
+    font-size: 1.85rem;
     text-indent: 2em; 
     letter-spacing: 1px;    margin-bottom: 20px; 
     font-family: Roboto, sans-serif;
@@ -139,9 +164,21 @@ li {
     border-top: #00aeff solid 2px;
     border-bottom: #00aeff solid 2px;
 }
-
+#block-padding-border2 {
+    padding: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border-top: #00aeff solid 2px;
+}
+#background_cool{
+    width: fit-content;
+    padding: 20px;
+    border: 1px solid #e2e2e2;
+    border-radius: 8px;
+    background-color: #ffffff;
+}
 #add_review {
-    width: 400px;
+    width: 500px;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 8px;
@@ -234,8 +271,8 @@ border:1px solid #B0CFE0;
 .center-content {
     display: flex;
     justify-content: center;
-    align-items: center; 
-    flex-direction: row; 
+    align-items: center;
+    flex-direction: column;
 }
 
 .center-content > div {
@@ -279,11 +316,19 @@ margin-bottom: 5px;
     }
 }
 @media (max-width:550px){
-    .center-content {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
+  
+    #shovavca{
+    display: block;
     }
-
+    #shovavca2{
+        display: none;
+        }
+        #pramoi{
+          flex-direction: column;
+        }
+        #button-row {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 }

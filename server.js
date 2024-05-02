@@ -296,7 +296,7 @@ app.get('/book/:linkTitle', async (request, response) => {
 		const comment_date = comment.date;
 		
 		result_string2 = result_string2 + `
-		<div class="review">
+		<div class="review" id="background_cool">
 			<div class="review-user"> 
 				<p class="username">${comment_user_name}</p>
 				<p class="date">${comment_date}</p>
