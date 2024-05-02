@@ -13,11 +13,13 @@
 	<link rel="stylesheet" href="css/style.css" type="text/css">
 	<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 
+<link href="https://cdn.jsdelivr.net/npm/quill@2.0.1/dist/quill.snow.css" rel="stylesheet" />
 
 </head>
 
 <body>
-	{{> header}}
+	{{> header}}	
+	
 	<div id="padding">
 		<h1 class="heading"> <span>Add book</span> </h1>
 		<div id="centre">
@@ -80,46 +82,38 @@
 					</div>
 					<label>Book description</label>
 					<div id="stretch">
-						<textarea required id="bookDescription"
-							class="form-control user-profile-bio-field js-length-limited-input"
-							placeholder="Write down the description of the book" data-input-max-length="300"></textarea>
-						<button type="submit" class="btn">Add book</button>
+						<div id="bookDescription"></div>
+						<button style="btn" onclick="check()">press</button>
+						<button type="submit" class="btn">Add book</button> 
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
-	<!--
-        <form id="edit-book-form" style="display: none;">
-            <label for="edit-title">Нова назва книги:</label>
-            <input type="text" id="edit-title" required>
-        
-            <label for="edit-author">Новий автор:</label>
-            <input type="text" id="edit-author" required>
-        
-            <label for="edit-year">Новий рік видання:</label>
-            <input type="number" id="edit-year" required>
-        
-            <label for="edit-genre">Новий жанр:</label>
-            <select id="edit-genre">
-                <option value="Драма">Драма</option>
-                <option value="Історія">Історія</option>
-                <option value="Фантастика">Фантастика</option>
-                <option value="Пригоди">Пригоди</option>
-                <option value="Роман">Роман</option>
-            </select>
-        
-            <button type="submit">Зберегти зміни</button>
-        </form>
-		-->
+
 	{{> footer}}
 
 </body>
+
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.1/dist/quill.js"></script>
+<script>
+
+  const quill = new Quill('#bookDescription', {
+    placeholder: 'Book description text',
+    theme: 'snow',
+  });
+
+  function check(){
+	  const book_description = document.getElementById('bookDescription'); 
+ 	 console.log('Book description received:', book_description);
+  }
+</script>
+
+
     <script src="/scripts/change-shopping-cart.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="../scripts/addBook.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>   
-<script src="javascript.js"></script>
-<script src="js/script.js"></script>
+
 
 </html>
