@@ -83,7 +83,7 @@
 					<label>Book description</label>
 					<div id="stretch">
 						<div id="bookDescription"></div>
-						<button style="btn" onclick="check()">press</button>
+						{{!-- <button style="btn" onclick="check()">press</button> --}}
 						<button type="submit" class="btn">Add book</button> 
 					</div>
 				</form>
@@ -96,18 +96,6 @@
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/quill@2.0.1/dist/quill.js"></script>
-<script>
-
-  const quill = new Quill('#bookDescription', {
-    placeholder: 'Book description text',
-    theme: 'snow',
-  });
-
-  function check(){
-	  const book_description = document.getElementById('bookDescription'); 
- 	 console.log('Book description received:', book_description);
-  }
-</script>
 
 
     <script src="/scripts/change-shopping-cart.js"></script>
