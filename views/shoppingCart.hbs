@@ -166,6 +166,12 @@
 
     function buyShoppingCart() {
       
+		const currentUser = document.getElementById("logged_user");
+		if(currentUser.value = "Not logged in"){
+			alert("You must log in first!");
+			return;
+		}
+		
 		const book_array = cookiesBooksToJs();
 		if(book_array.length == 0){
 			alert("You must fill your cart first!");

@@ -12,7 +12,7 @@ const { Op } = require("sequelize"); //needed for sequelize operators
 const hbs = require("hbs");
 const app = express();
 
-// o((>ω< ))o
+// o((>ω< ))o                                    ( ͡° ͜ʖ ͡°)
 app.use(express.static('public'));
 
 const port = 3000;
@@ -38,7 +38,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 // ---------DATABASE------------->>>
-// ┳━┳ ノ( ゜-゜ノ)
+// ┳━┳ ノ( ゜-゜ノ)                             ( ͡° ͜ʖ ͡°)
 const {
 	sequelize, 
 	Users,
@@ -237,22 +237,23 @@ app.get('/book/:linkTitle', async (request, response) => {
 	}
 	
 	
-	//Featured list
+	//Similar genre list
 	await delay(Math.random() * 10);
 	
-	const featured_tag = await Tags.findOne({where:{tag_name: "featured"}, raw:true});
-	const max_featured_id = await BookTags.max("book_id", {where:{tag_id: featured_tag.tag_id, [Op.not]: {book_id: current_book.book_id}}});
+	const book_genre_id = current_book_genre.genre_id;
+	const max_genre_id = await Books.max("book_id", {where:{genre_id: book_genre_id, [Op.not]: {book_id: current_book.book_id}}});
 	
 	let result_string = "";
 	i = 1;
 	
-	while(i <= max_featured_id) {
+	limit = 1;
+		
+	while(i <= max_genre_id && limit <= 10) {
 		await delay(Math.random() * 10);
-		const featured_book_tag = await BookTags.findOne({where:{book_id: {[Op.gte]: i}, [Op.not]: {book_id: current_book.book_id}, tag_id: featured_tag.tag_id}, raw:true});
-		const featured_book = await Books.findByPk(featured_book_tag.book_id);
-		const featured_image = featured_book.image_name;
-		const featured_title = featured_book.title;
-		const featured_price = featured_book.price;
+		const genre_book = await Books.findOne({where:{book_id: {[Op.gte]: i}, [Op.not]: {book_id: current_book.book_id}, genre_id: book_genre_id}, raw:true});
+		const genre_image = genre_book.image_name;
+		const genre_title = genre_book.title;
+		const genre_price = genre_book.price;
 		
 		result_string = result_string + `
 		<div class="swiper-slide box">
@@ -262,16 +263,17 @@ app.get('/book/:linkTitle', async (request, response) => {
 				<a href="#" class="fas fa-eye"></a>
 			</div>
 			<div class="image">
-				<a href="/book/${featured_title}"><img style="max-width: 165.5px" src="/book_images/${featured_image}"></a>
+				<a href="/book/${genre_title}"><img style="max-width: 165.5px" src="/book_images/${genre_image}"></a>
 			</div>
 			<div class="content">
-				<h3>${featured_title}</h3>
-				<div class="price">$${featured_price}</div>
+				<h3>${genre_title}</h3>
+				<div class="price">$${genre_price}</div>
 				<a href="#" class="btn">add to cart</a>
 			</div>
 		</div>	
 		`;
-		i = featured_book.book_id + 1;
+		i = genre_book.book_id + 1;
+		limit++;
 		console.log(i);
 	}
 	console.log(result_string);
@@ -537,6 +539,65 @@ app.post("/book/:linkTitle", urlencodedParser, async function (request, response
 	response.redirect(request.get('referer')); //reload page
 });
 
+app.post('/searchPage', urlencodedParser, async (request, response) => {
+	const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+	
+	const search_text = request.body.searchText;
+	const max_book_id = await Books.max("book_id", {where: {title: {[Op.like]: '%' + search_text + '%'}}, raw:true});
+	
+	let result_string = "";
+	let i = 1;
+	
+	console.log(max_book_id);
+	
+	while(i <= max_book_id){
+		await delay(Math.random() * 10);
+		const current_book = await Books.findOne({where:{book_id: {[Op.gte]: i}, title: {[Op.like]: '%' + search_text + '%'}}, raw:true});
+		const current_author = await Authors.findOne({where:{author_id: current_book.author_id}, raw:true});
+		
+		const current_image = current_book.image_name;
+		const current_author_name = current_author.full_name;
+		const current_title = current_book.title;
+		const current_price = current_book.price;
+		
+		result_string = result_string +
+		`
+		<div class="search-container">
+			<div>
+				<h2 class="book-title">${current_title}</h2>
+				<p class="book-author">by ${current_author_name}</p>
+				<div>
+					<a href="/book/${current_title}"><img class="book-image" src="book_images/${current_image}" alt="Wish you were here"></a>
+					<p class="book-price">$${current_price}</p>
+				</div>
+			</div>
+        </div>
+		`
+		i = current_book.book_id + 1;
+	}
+	
+	if(result_string != ""){
+		result_string = `
+		<div id="Centre_search">
+			<div id="Search">
+		` + result_string + `
+			</div>
+		</div>
+		`;
+	}
+	
+	await hbs.registerHelper("searchValue", function(){
+		return `${search_text}`;
+	});
+	
+	await hbs.registerHelper("searchList", function(){
+		return `${result_string}`;
+	});
+	
+	fillHeader();
+	
+	await response.render('searchPage');
+});
   
 app.get('/shoppingCart', (_, response) => {
 	fillHeader();
@@ -1023,7 +1084,7 @@ app.get('/home', async (_, response) => {
 					j++;
 				}
 				average_rating /= rating_count;
-				average_rating = average_rating + " / 5"
+				average_rating = average_rating.toFixed(1) + " / 5"
 			}
 			else average_rating = "No reviews yet";
 			
