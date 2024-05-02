@@ -109,7 +109,7 @@ button#prevButton,
 }
 
 .btn:hover{
-    filter: opacity(75%);
+    background:var(--black);
    }
 
 #btn_id{
@@ -133,7 +133,7 @@ button#prevButton,
 }
 
 #btn_id:hover{
-    filter: opacity(75%);
+    background:var(--black);
    }
 
 
@@ -545,6 +545,16 @@ button#prevButton,
     background-position: center;
     background-attachment: fixed;
 
+}
+.newsletter input[type="email"] {
+    box-shadow: 0 0 5px transparent; 
+    border: 1px solid transparent; 
+    transition: box-shadow 0.3s, border 0.3s; 
+}
+
+.newsletter input[type="email"]:focus {
+    box-shadow: 0 0 5px #B0CFE0;
+    border: 1px solid #B0CFE0;
 }
 
 .newsletter form{
