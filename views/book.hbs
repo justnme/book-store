@@ -17,64 +17,95 @@
 
 <body>
     {{> header}}
-    <div id="padding">
+    
+        <div id="padding">
 
-			
-        
-             {{{bookContainer}}}
+<div id="pramoi">
+            <div>
+                {{{bookContainer}}}
 
-            <div>
-             <div>
-				{{{bookTagList}}}
-			</div>
-				{{{bookImage}}}
-            </div>
-     <div class="side-bar">
-            <div>
                 <div>
-                    <div class="row">
-                        <div id="block-padding">
-                            {{{bookTitle}}}
-							{{{bookAuthor}}}
+                    <div id="tag">
+                        {{{bookTagList}}}
+                    </div>
+                    {{{bookImage}}}
+                </div>
+                <div class="side-bar">
+                    <div>
+                        <div>
+                            <div class="row">
+                                <div id="block-padding">
+                                    {{{bookTitle}}}
+                                    {{{bookAuthor}}}
 
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div id="block-padding">
+                        {{{bookPrice}}}
+                        <div id="button-row">
+                            <button class="btn" id="buyButton">Add to Cart</button>
+                            <button class="btn">Add to Wishlist</button>
+                            {{{adminBookButtons}}}
                         </div>
                     </div>
                 </div>
-              
             </div>
+        </div>
+        <div  id="shovavca2">
             <div id="block-padding">
-                {{{bookPrice}}}
-                <div id="button-row">
-                    <button class="btn" id="buyButton">Add to Cart</button>
-                    <button class="btn">Add to Wishlist</button>
-					{{{adminBookButtons}}}
+                <h2>Description:</h2>
+                <div class="description" id="background_cool">
+                    {{{bookDescription}}}
+                </div>
+            </div>
+            <div id="block-padding" >
+                <h2>Information:</h2>
+                <div id="background_cool">
+                    <ul>
+                        <li>
+                            <span id="bold">Author:</span>
+                            {{{bookAuthor2}}}
+                        </li>
+                        <li>
+                            <span id="bold">Genre:</span>
+                            {{{bookGenre}}}
+                        </li>
+                        <li>
+                            <span id="bold">Publication Date:</dt>
+                                {{{bookDate}}}
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
-</div>
+    </div>
+    <div id="shovavca">
         <div id="block-padding">
             <h2 class="heading"> <span>Description</span> </h2>
-          <div  class="block-description">
-            {{{bookDescription}}}
-           </div>
+            <div class="block-description" id="background_cool">
+                {{{bookDescription}}}
+            </div>
         </div>
         <div id="block-padding">
             <h2 class="heading"> <span>Information</span> </h2>
-            <div  class="block-description">
-            <ul>
-                <li>
-                    <span id="bold">Author:</span>
-					{{{bookAuthor2}}}
-                </li>
-				<li>
-                    <span id="bold">Genre:</span>
-					{{{bookGenre}}}
-                </li>
-                <li>
-                    <span id="bold">Publication Date:</dt>
-					{{{bookDate}}}
-                </li>
-            </ul>
+            <div class="block-description" id="background_cool">
+                <ul>
+                    <li>
+                        <span id="bold">Author:</span>
+                        {{{bookAuthor2}}}
+                    </li>
+                    <li>
+                        <span id="bold">Genre:</span>
+                        {{{bookGenre}}}
+                    </li>
+                    <li>
+                        <span id="bold">Publication Date:</dt>
+                            {{{bookDate}}}
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
@@ -89,7 +120,7 @@
                     {{> featured}}
 
                 </div>
-                
+
             </div>
 
         </section>
@@ -97,8 +128,10 @@
     <div id="block-padding">
         <h1 class="heading"> <span>Customer Reviews</span> </h1>
         <div id="padding">
-            <div id="block-padding-border">
+            <div id="block-padding" class="stoi_rovno">
+
                 <h2>Add Review</h2>
+
                 <form id="add_review" method="POST" action="">
                     <span>Rate</span>
                     <div>
@@ -106,13 +139,14 @@
                         <span> / 5</span>
                     </div>
                     <span>Message</span>
-                    <textarea class="textarea-message" name="review_message" rows="5" placeholder="type message" autocapitalize="off"></textarea>
+                    <textarea class="textarea-message" name="review_message" rows="5" placeholder="type message"
+                        autocapitalize="off"></textarea>
                     <input type="submit" name="formButton" value="add review" class="btn">
                 </form>
             </div>
-            <div id="block-padding-border">
-				<h2>Reviews</h2>
-				{{{reviewList}}}
+            <div id="reviews-padding">
+                <h2>Reviews</h2>
+                {{{reviewList}}}
             </div>
         </div>
     </div>
