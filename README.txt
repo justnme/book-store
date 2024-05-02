@@ -6,3 +6,11 @@ Head over to your browser and follow the link "localhost:3000" or "127.0.0.1:300
 
 The repository that helped us and inpired us to create this team project
 https://github.com/Marietaaaa/Online-Book-Site-HTML-project
+
+Admin account on site:
+login: admin
+password: admin
+
+Pre-made user account on site:
+login: user
+passwrod: user

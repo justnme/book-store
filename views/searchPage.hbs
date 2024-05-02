@@ -20,43 +20,28 @@
 
 <body>
     {{>header}}
- <h1>Search result "Wish"</h1>
+	<h1>Search result "{{{searchValue}}}"</h1>
 
-<div id="Centre_search">
-        <div id="Search">
-            <div id="bookListContainer"></div>
-        <div class="search-container">
-                <div>
-                    <h2 class="book-title">Wish you were here</h2>
-                    <p class="book-author">by Lana Doyle</p>
-                    <div>
-                    <img class="book-image" src="book_images/wish_you_were_here.jpg" alt="Wish you were here">
-                    <p class="book-price">$24.99</p>
-                    </div>
-                </div>
-        </div>
-    </div>
- <div id="block-padding">
-        <h1 class="heading"> <span>You May Also Like</span> </h1>
+	{{{searchList}}}
+	<div id="block-padding">
+		<h1 class="heading"> <span>You May Also Like</span> </h1>
+	</div>
+	<div id="yml">
+		<section class="featured" id="featured">
 
-<div id="yml">
-    <section class="featured" id="featured">
+			<div class="swiper featured-slider">
 
+				<div class="swiper-wrapper">
 
+					{{> featured}}
 
-        <div class="swiper featured-slider">
+				</div>
 
-            <div class="swiper-wrapper">
+				<div class="swiper-button-next"></div>
+				<div class="swiper-button-prev"></div>
 
-                {{> featured}}
-
-            </div>
-
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-
-        </div>
-</div>
+			</div>
+	</div>
     {{>footer}}
 </body>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>

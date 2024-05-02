@@ -5,9 +5,9 @@
 
 		<a href="http://localhost:3000" class="logo"> <i class="fas fa-book"></i> Holy Book </a>
 
-		<form action="" class="search-form">
-			<input type="search" name="" placeholder="Search here..." id="search-box">
-			<label for="search-box" class="fas fa-search"></label>
+		<form action="/searchPage" class="search-form" method="POST">
+			<input type="text" name="searchText" placeholder="Search here..." id="search-box">
+			<button type="submit" style="background-color: rgba(0,0,0,0)"><label for="search-box" class="fas fa-search"></label></button>
 		</form>
 
 		<div class="icons">
