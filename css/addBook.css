@@ -233,3 +233,7 @@ input[type = "file"] {
 	margin-left: -250px;
 	opacity: 0;
 }
+
+.btn{
+    margin: 1rem auto;
+}
