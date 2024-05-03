@@ -19,8 +19,8 @@ const port = 3000;
 // #4 hbs conf
 const path = require('path');
 
-// let logged_user = "Not logged in";
-let logged_user = "admin";
+let logged_user = "Not logged in";
+// let logged_user = "admin";
 
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));

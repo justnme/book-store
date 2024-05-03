@@ -112,12 +112,25 @@ li {
 }
 #reviews-padding {
     padding: 5rem 1rem;
+    display: flex;
+    flex-wrap: wrap;
 }
-.description p{
-    font-size: 1.85rem;
-    letter-spacing: 1px;    margin-bottom: 10px; 
+
+#reviews-padding #background_cool form{
+    margin-left: auto;
+}
+
+.description{
+    /* font-size: 1.85rem; */
+    letter-spacing: 1px;  
+      margin-bottom: 10px; 
     font-family: Roboto, sans-serif;
 }
+.description h1{
+    text-align: center;
+}
+
+
 .block-description{
     width: 50%;
     margin: 0 auto;
@@ -171,11 +184,15 @@ li {
     border-top: #00aeff solid 2px;
 }
 #background_cool{
-    width: fit-content;
+    /* width: fit-content; */
     padding: 20px;
     border: 1px solid #e2e2e2;
     border-radius: 8px;
     background-color: #ffffff;
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: column;
+ 
 }
 
 #add_review {
@@ -228,11 +245,14 @@ border:1px solid #B0CFE0;
 
 }
   .review {
+        width: 60%;
         border: 1px solid #ccc;
         border-radius: 8px;
         padding: 20px;
-        margin-bottom: 20px;
+        /* margin-bottom: 20px; */
         background-color: #f9f9f9;
+        margin: 10px auto;
+        
     }
 
     .review p {
@@ -301,10 +321,12 @@ border:1px solid #B0CFE0;
     display: block;
 }
 
-
 @media (max-width:768px){
 #book-info{
     flex-direction: column;
+}
+.review{
+    width: 100%;
 }
 }
 @media (max-width:540px){

@@ -237,3 +237,6 @@ input[type = "file"] {
 .btn{
     margin: 1rem auto;
 }
+.ql-editor h1{
+    text-align: center;
+}

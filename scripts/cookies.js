@@ -1,7 +1,7 @@
-let listbookHTML = document.querySelector('.listbook');
-let listCartHTML = document.querySelector('.listCart');
-let iconCart = document.querySelector('.icon-cart');
-let iconCartSpan = document.getElementById('shoppingId');
+// let listbookHTML = document.querySelector('.listbook');
+// let listCartHTML = document.querySelector('.listCart');
+// let iconCart = document.querySelector('.icon-cart');
+// // let iconCartSpan = document.getElementById('shoppingId');
 let body = document.querySelector('body');
 
 function setCookie(name, value, days, sameSite) {
@@ -55,7 +55,23 @@ function cookiesBooksToJs() {
     
     return cartItems;
 }
+// if necessary
+function cookiesWishListToJs() {
+    let cookies = document.cookie.split(';');
+    let cartItems = [];
 
+    for (let i = 0; i < cookies.length; i++) {
+        let cookie = cookies[i].trim();
+        if (cookie.startsWith('wish_')) {
+            let bookName = cookie.substring(5, cookie.indexOf('='));
+            cartItems.push(bookName);
+        }
+    }
+
+    console.log(cartItems)
+    
+    return cartItems;
+}
 
 function deleteCookie(name) {
     document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;SameSite=Strict;';

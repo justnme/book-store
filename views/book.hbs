@@ -48,7 +48,7 @@
                         {{{bookPrice}}}
                         <div id="button-row">
                             <button class="btn" id="buyButton">Add to Cart</button>
-                            <button class="btn">Add to Wishlist</button>
+                            <button class="btn" id="wishButton">Add to Wishlist</button>
                             {{{adminBookButtons}}}
                         </div>
                     </div>
@@ -127,7 +127,7 @@
         </section>
     </div>
     <div id="block-padding">
-        <h1 class="heading"> <span>Customer Reviews</span> </h1>
+        <h1 class="heading"> <span>Leave your review! </span> </h1>
         <div id="padding">
             <div id="block-padding" class="stoi_rovno">
 
@@ -146,8 +146,9 @@
                     <input type="submit" name="formButton" value="add review" class="btn" style="margin: 1rem auto;">
                 </form>
             </div>
+            <h1 class="heading" style="margin-top: 20px;"> <span>Reviews</span> </h1>
             <div id="reviews-padding">
-                <h2>Reviews</h2>
+               
                 {{{reviewList}}}
             </div>
         </div>
@@ -161,8 +162,8 @@
 <script src="/javascript.js"></script>
 
 {{!-- shopping cart --}}
-<script src="/scripts/change-shopping-cart.js"></script>
+<script src="/scripts/change-cookies.js"></script>
 <script src="/scripts/buy-book.js"></script>
-<script src="/scripts/shopping-cart.js"></script>
+<script src="/scripts/cookies.js"></script>
 
 </html>

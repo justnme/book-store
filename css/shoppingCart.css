@@ -256,6 +256,7 @@ h2 {
     height: 100%;
     overflow: auto; 
     background-color: rgba(0,0,0,0.4); 
+    z-index: 1000;
 }
 
 .modal-content {
@@ -271,7 +272,7 @@ h2 {
     max-width: 600px;
     font-size: 1.6rem;
     text-align: center;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     color: black;
 }
