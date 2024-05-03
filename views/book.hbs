@@ -140,9 +140,9 @@
                         <span> / 5</span>
                     </div>
                     <span>Message</span>
-                    <div id="reviewMessage" name="review_message">
+                    <div id="reviewMessage" >
                     </div>
-
+                    <input type="hidden" id="review_message" name="review_message"> 
                     <input type="submit" name="formButton" value="add review" class="btn" style="margin: 1rem auto;">
                 </form>
             </div>
@@ -156,7 +156,7 @@
 </body>
 <script src="https://cdn.jsdelivr.net/npm/quill@2.0.1/dist/quill.js"></script>
 
- 
+<script src="/scripts/reviews.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="/javascript.js"></script>
 
@@ -164,10 +164,5 @@
 <script src="/scripts/change-shopping-cart.js"></script>
 <script src="/scripts/buy-book.js"></script>
 <script src="/scripts/shopping-cart.js"></script>
-<script>
-const quill = new Quill('#reviewMessage', {
-    placeholder: 'Write your review here',
-    theme: 'snow',
-  });
-</script>
+
 </html>
