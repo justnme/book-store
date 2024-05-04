@@ -221,9 +221,7 @@ exports.getEditBook = async function (request, response) {
 	
 	await hbs.registerHelper("bookDescription", function(){
 		return `
-		<textarea required id="bookDescription"
-			class="form-control user-profile-bio-field js-length-limited-input"
-			placeholder="Write down the description of the book" data-input-max-length="300">${current_description}</textarea>
+		<div required id="bookDescription">${current_description}</div>
 		`;
 	});
 	

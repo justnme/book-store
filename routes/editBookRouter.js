@@ -7,10 +7,10 @@ var bodyParser = require('body-parser');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'book_images/') // Destination folder
+        cb(null, 'book_images/');
     },
     filename: function (req, file, cb) {
-        cb(null, file.originalname); // File name
+        cb(null, file.originalname);
     }
 });
 
