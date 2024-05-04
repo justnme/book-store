@@ -1,5 +1,4 @@
 
-
 const Sequelize = require("sequelize");
 const sequelize = new Sequelize({
 	dialect: "sqlite",
@@ -75,6 +74,10 @@ const Books = sequelize.define("Books", {
 		allowNull: false,
 	},
 	date: {
+		type: Sequelize.STRING,
+		allowNull: false,
+	},
+	publish_date: {
 		type: Sequelize.STRING,
 		allowNull: false,
 	},
