@@ -32,7 +32,7 @@
 
         <div id="close-login-btn" class="fas fa-times"></div>
 
-        <form method="POST" action="">
+        <form method="POST" action="/login">
             <h3>sign in</h3>
             <span>username</span>
             <input type="text" name="login_name" class="box" placeholder="enter your login" id="">
@@ -45,7 +45,7 @@
             <input type="submit" value="sign in" class="btn">
             <p>forget password ? <a href="#">click here</a></p>
             <p>don't have an account ? <a href='registration'>create one</a></p>
-            <p style="color: red">{{login_result}}</p>
+            {{!-- <p style="color: red">{{login_result}}</p> --}}
         </form>
 
     </div>

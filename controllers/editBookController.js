@@ -21,7 +21,6 @@ const {
 } = require('./../database.js');
 
 var serverModule = require('./../server.js');
-let logged_user = serverModule.logged_user;
 
 exports.postEditBook = async function (request, response) {
 	if(!request.body) return response.sendStatus(400);
@@ -90,6 +89,7 @@ exports.postEditBook = async function (request, response) {
 exports.getEditBook = async function (request, response) {
 	const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 	
+	const logged_user = serverModule.getLogged_user();
 	const current_logged_user = await Users.findOne({where: {login: logged_user}});
 	
 	if(current_logged_user == null || current_logged_user.status_text != "admin"){

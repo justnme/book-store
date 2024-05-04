@@ -1,9 +1,9 @@
 const express = require("express");
 const urlencodedParser = express.urlencoded({extended: false}); //needed for POST forms
-const homeController = require("../controllers/homeController.js");
-const homeRouter = express.Router();
+const registrationController = require("../controllers/registrationController.js");
+const registrationRouter = express.Router();
 
-homeRouter.get('/home', homeController.getHome);
-homeRouter.post('/home', urlencodedParser, homeController.postHome);
+registrationRouter.get('/registration', registrationController.getRegistration);
+registrationRouter.post('/registration', urlencodedParser, registrationController.postRegistration);
 
-module.exports = homeRouter;
+module.exports = registrationRouter;

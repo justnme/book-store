@@ -23,9 +23,11 @@ const {
 var serverModule = require('./../server.js');
 
 exports.postBook = async function (request, response) { //comment leaving
-    
     if(!request.body) return response.sendStatus(400);
-	if(serverModule.logged_user == "Not logged in"){
+	
+	const logged_user = serverModule.getLogged_user();
+	
+	if(logged_user == "Not logged in"){
 		return response.status(400).send(`You must be logged in to leave a review`);
 	}
 	const current_title = request.params.linkTitle;
@@ -33,7 +35,7 @@ exports.postBook = async function (request, response) { //comment leaving
 	const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 	
 	await delay(Math.random() * 10);
-	const current_user = await Users.findOne({where:{login: serverModule.logged_user}, raw:true});
+	const current_user = await Users.findOne({where:{login: logged_user}, raw:true});
 	
 	await delay(Math.random() * 10);
 	const current_book = await Books.findOne({where:{title: current_title}, raw:true});
@@ -81,6 +83,7 @@ exports.postDeleteReview = async function (request, response) {
 exports.getBook = async function (request, response) {
 	const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 	
+	const logged_user = serverModule.getLogged_user();
 	const current_title = request.params.linkTitle;
 	
 	const current_book = await Books.findOne({where:{title: current_title}, raw:true});
@@ -89,7 +92,7 @@ exports.getBook = async function (request, response) {
 		return response.status(400).send(`A book with title "${current_title}" does not exist`);
 	}
 	
-	const current_logged_user = await Users.findOne({where: {login: serverModule.logged_user}});
+	const current_logged_user = await Users.findOne({where: {login: logged_user}});
 	
 	const current_book_author = await Authors.findOne({where:{author_id: current_book.author_id}, raw:true});
 	
@@ -160,7 +163,7 @@ exports.getBook = async function (request, response) {
 		return `<span>${current_date}</span>`;
 	});
 	
-	if(serverModule.logged_user != "Not logged in" && current_logged_user.status_text == "admin"){
+	if(logged_user != "Not logged in" && current_logged_user.status_text == "admin"){
 		await hbs.registerHelper("adminBookButtons", function(){
 			return `
 			<a href="http://localhost:3000/editBook/${current_title}" class="btn">Edit</a>
@@ -240,7 +243,7 @@ exports.getBook = async function (request, response) {
 			<p class="message">${comment_message}</p>
 		`;
 		
-		if(serverModule.logged_user != "Not logged in" && (comment_user_name == serverModule.logged_user || current_logged_user.status_text == "admin")){
+		if(logged_user != "Not logged in" && (comment_user_name == logged_user || current_logged_user.status_text == "admin")){
 			result_string2 = result_string2 + `
 				<form action="http://localhost:3000/book/${current_title}/deleteReview" method="POST">
 					<input type="text" style="display:none" name="reviewId" value="${comment.review_id}">

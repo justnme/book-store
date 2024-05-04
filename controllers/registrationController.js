@@ -22,7 +22,6 @@ const {
 } = require('./../database.js');
 
 var serverModule = require('./../server.js');
-let logged_user = serverModule.logged_user;
 
 exports.getRegistration = function (_, response) {
 	serverModule.fillHeader();
@@ -34,6 +33,7 @@ exports.postRegistration = async function (request, response) { //login check
 	
 	const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 	
+	const logged_user = serverModule.getLogged_user();
 	const reg_login = request.body.reg_login;
     const reg_email = request.body.reg_email;
     const reg_password = request.body.reg_password;
@@ -41,21 +41,17 @@ exports.postRegistration = async function (request, response) { //login check
 	const reg_status = "user";
 	
 	if(reg_password != confirm_reg_password) {
-		await delay(Math.random() * 10);
 		await hbs.registerHelper("reg_result", function(){
 			return `The second password is not indentical`;
 		});
 	}
-	else if(reg_login == logged_user){
-		await delay(Math.random() * 10);
+	else if(logged_user != "Not logged in"){
 		await hbs.registerHelper("reg_result", function(){
 			return `You're already logged in!`;
 		});
 	}
 	else {
-		await delay(Math.random() * 10);
 		let user = await Users.findOne({where: {[Op.or]: [{email: reg_email}, {login: reg_login}]}, raw:true});
-		await delay(Math.random() * 10);
 		if (user != null && user.email == reg_email) {
 			if (user.email == reg_email) {
 				await hbs.registerHelper("reg_result", function(){
@@ -70,8 +66,8 @@ exports.postRegistration = async function (request, response) { //login check
 		}
 		else {
 			await Users.create({password_text: reg_password, email: reg_email, login: reg_login, status_text: "user"});
-			logged_user = reg_login;
+			serverModule.setLogged_user(reg_login);
 		}
 	}
-	await response.redirect(request.get('referer')); //reload page
+	await response.redirect(request.get('referer'));
 };

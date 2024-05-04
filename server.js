@@ -19,9 +19,11 @@ const port = 3000;
 // #4 hbs conf
 const path = require('path');
 
-//var logged_user = "Not logged in";
-var logged_user = "AdminGuy";
-module.exports.logged_user = logged_user;
+var logged_user = "Not logged in";
+//var logged_user = "AdminGuy";
+module.exports.getLogged_user = function () {
+	return logged_user;
+};
 
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
@@ -98,10 +100,10 @@ app.use('/', accepted_ordersRouter);
 const wishListRouter = require('./routes/wishListRouter.js');
 app.use('/', wishListRouter);
 
+const loginRouter = require('./routes/loginRouter.js');
+app.use('/', loginRouter);
+
 // <<<-------CONTROLLERS-----------
-
-
-
 
 app.get('/', (_, response) => {
 	response.redirect('home');
@@ -140,6 +142,7 @@ exports.fillHeader = async function() {
 			return ``;
 		});
 	}
+	console.log(logged_user);
 }
 
 exports.removeEmptyBookTags = async function (){

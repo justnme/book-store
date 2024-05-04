@@ -21,11 +21,11 @@ const {
 } = require('./../database.js');
 
 var serverModule = require('./../server.js');
-let logged_user = serverModule.logged_user;
 
 exports.getAccepted_orders = async function (_, response) {
 	const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 	
+	const logged_user = serverModule.getLogged_user();
 	const current_logged_user = await Users.findOne({where: {login: logged_user}});
 	
 	if(current_logged_user == null || current_logged_user.status_text != "admin"){

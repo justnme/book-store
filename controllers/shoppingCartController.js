@@ -21,7 +21,6 @@ const {
 } = require('./../database.js');
 
 var serverModule = require('./../server.js');
-let logged_user = serverModule.logged_user;
 
 exports.getShoppingCart = function (_, response) {
 	serverModule.fillHeader();
@@ -33,6 +32,7 @@ exports.postShoppingCart = async function (request, response) {
 	
 	const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 	
+	const logged_user = serverModule.getLogged_user();
 	const application_titles = request.body.applicationTitles;
 	const application_date = request.body.applicationDate;
 	

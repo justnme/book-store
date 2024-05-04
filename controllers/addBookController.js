@@ -21,11 +21,11 @@ const {
 } = require('./../database.js');
 
 var serverModule = require('./../server.js');
-let logged_user = serverModule.logged_user;
 
 exports.getAddBook = async function (_, response) {
+	const logged_user = serverModule.getLogged_user();
 	const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
-	
+	console.log(logged_user);
 	const current_logged_user = await Users.findOne({where: {login: logged_user}});
 	
 	if(current_logged_user == null || current_logged_user.status_text != "admin"){
@@ -78,6 +78,18 @@ exports.postAddBook = async function (request, response) {
 	if(request.body.tags3 != "") tags.push(request.body.tags3);
 	if(request.body.tags4 != "") tags.push(request.body.tags4);
 	if(request.body.tags5 != "") tags.push(request.body.tags5);
+	
+	const date = new Date();
+
+	let day = date.getDate();
+	if (day < 10) day = '0' + day;
+	
+	let month = date.getMonth() + 1;
+	if (month < 10) month = '0' + month;
+	
+	let year = date.getFullYear();
+	
+	const book_publish_date = `${year}-${month}-${day}`;
 
 	const current_book = await Books.findOne({where:{title: book_title}, raw:true});
 	if (current_book != null) {
@@ -90,10 +102,10 @@ exports.postAddBook = async function (request, response) {
 		if (current_author == null) {
 			await Authors.create({full_name: book_author});
 			const max_author_id = await Authors.max('author_id');
-			await Books.create({genre_id: current_genre.genre_id, image_name: book_image, author_id: max_author_id, title: book_title, price: book_price, date: book_date, description: book_description});
+			await Books.create({genre_id: current_genre.genre_id, image_name: book_image, author_id: max_author_id, title: book_title, price: book_price, date: book_date, publish_date: book_publish_date, description: book_description});
 		}
 		else {
-			await Books.create({genre_id: current_genre.genre_id, image_name: book_image, author_id: current_author.author_id, title: book_title, price: book_price, date: book_date, description: book_description});
+			await Books.create({genre_id: current_genre.genre_id, image_name: book_image, author_id: current_author.author_id, title: book_title, price: book_price, date: book_date, publish_date: book_publish_date, description: book_description});
 		}
 		
 		for(let i = 0; i < tags.length; i++) {

@@ -21,7 +21,6 @@ const {
 } = require('./../database.js');
 
 var serverModule = require('./../server.js');
-let logged_user = serverModule.logged_user;
 
 exports.getSearchPage = function (_, response) {
 	serverModule.fillHeader();

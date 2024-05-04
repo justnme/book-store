@@ -21,7 +21,6 @@ const {
 } = require('./../database.js');
 
 var serverModule = require('./../server.js');
-let logged_user = serverModule.logged_user;
 
 exports.getHome = async function (_, response) {
 	const delay = ms => new Promise(resolve => setTimeout(resolve, ms)); //This is all for book on the home screen
@@ -106,7 +105,7 @@ exports.getHome = async function (_, response) {
 	limit = 12;
 	while(i < limit / 2) {
 		await delay(Math.random() * 10);
-		const current_book = await Books.findAll({order: [["date", "DESC"]], raw:true});
+		const current_book = await Books.findAll({order: [["publish_date", "DESC"]], raw:true});
 		
 		console.log(current_book[i]);
 		
@@ -155,7 +154,7 @@ exports.getHome = async function (_, response) {
 	
 	while(i < limit) {
 		await delay(Math.random() * 10);
-		const current_book = await Books.findAll({order: [["date", "DESC"]], raw:true});
+		const current_book = await Books.findAll({order: [["publish_date", "DESC"]], raw:true});
 		
 		const current_image = current_book[i].image_name;
 		const current_title = current_book[i].title;
@@ -205,37 +204,7 @@ exports.getHome = async function (_, response) {
 		return `${result_string3}`;
 	});
 	
-	await serverModule.fillHeader();
+	serverModule.fillHeader();
 	
 	await response.render('index');
-};
-
-exports.postHome = function (request, response) { //login check
-    
-    if(!request.body) return response.sendStatus(400);
-    const login_name = request.body.login_name;
-    const login_password = request.body.login_password;
-	
-	if(login_name == logged_user){
-		hbs.registerHelper("login_result", function(){
-			return `You're already logged in!`;
-		});
-	}
-	else {
-		Users.findOne({where:{login: login_name, password_text: login_password}, raw:true})
-		.then(users=>{
-			if (users == null) {
-				hbs.registerHelper("login_result", function(){
-					return `The email or password is wrong`;
-				});
-			}
-			else {
-				serverModule.setLogged_user(login_name);
-				hbs.registerHelper("login_result", function(){
-					return ``;
-				});
-			}
-		}).catch(err=>console.log(err));
-	}
-	response.redirect(request.get('referer')); //reload page
 };
