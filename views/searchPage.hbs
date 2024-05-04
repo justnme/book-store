@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holy Book</title>
+        <link rel="icon" type="image/x-icon" href="/image/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+       <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+
+ <link rel="stylesheet" href="css/searchPage.css" type="text/css">
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/shoppingCart.css" type="text/css">
+</head>
+
+<body>
+    {{>header}}
+	<h1>Search result "{{{searchValue}}}"</h1>
+
+	{{{searchList}}}
+	<div id="block-padding">
+		<h1 class="heading"> <span>You May Also Like</span> </h1>
+	</div>
+	<div id="yml">
+		<section class="featured" id="featured">
+
+			<div class="swiper featured-slider">
+
+				<div class="swiper-wrapper">
+
+					{{> featured}}
+
+				</div>
+
+				<div class="swiper-button-next"></div>
+				<div class="swiper-button-prev"></div>
+
+			</div>
+	</div>
+    {{>footer}}
+</body>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="/javascript.js"></script>
+
+   <script src="/scripts/change-cookies.js"></script>
+
+   <script>changeQuantityCart();</script>
+    {{!-- <script>changeQuantityCart();</script> --}}
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>   
+ <!-- custom js file link  -->
+
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- custom js file link  -->
+
+    <script src="javascript.js"></script>
+    {{!-- shopping cart logic --}}
+    <script src="scripts/coockies-to-js.js"></script>
+    <script src="/scripts/change-cookies.js"></script>
+    <script src="scripts/shopping-cart-content.js"></script>
+    <script src="scripts/cookies.js"></script>
+</html>

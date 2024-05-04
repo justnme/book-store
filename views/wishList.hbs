@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holy Book</title>
+    <link rel="icon" type="image/x-icon" href="/image/favicon.ico">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/shoppingCart.css" type="text/css">
+</head>
+
+<body>
+    {{>header}}
+    {{!-- <div id="myModal" class="modal">
+
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Are you sure that you want to confirm the purchase worth <span id="totalPriceConfirmation"
+                    class="book-price">0$</span>?</p>
+            <form id="confirmForm" method="POST" onsubmit="clearWishList();closeModal()">
+				<button type = "submit" id="confirmButton" class="confirmButton">Confirm</button>
+			</form>
+			<button id="cancelButton" class="cancelButton">Cancel</button>
+        </div>
+
+    </div> --}}
+
+    <div id="Centre">
+        <div id="Cart">
+            <h1>Your Wishing List</h1>
+             {{!-- <button class="btn" id="clearAllButton" onclick="clearShoppingCart()">Clear all cart</button> --}}
+            <div id="bookWishContainer"></div>
+
+            <h2>Total price is: <span id="totalPrice" class="book-price">0$</span></h2>
+            <button class="btn" id="buyAllButton" onclick="buyShoppingCart()">Buy</button>
+        </div>
+    </div>
+     <div id="block-padding">
+        <h1 class="heading"> <span>You May Also Like</span> </h1>
+
+        <section class="featured" id="featured">
+            <div class="swiper featured-slider">
+
+                <div class="swiper-wrapper">
+
+                    {{> featured}}
+
+                </div>
+                
+            </div>
+
+        </section>
+    </div>
+    {{>footer}}
+</body>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="/javascript.js"></script>
+<script src="/scripts/change-cookies.js"></script>
+<script src="/scripts/cookies.js"></script>
+
+<script src="/scripts/wish-list.js"></script>
+
+</html>

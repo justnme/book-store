@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/addBook.css" type="text/css">
+	<title>Add book</title>
+	<link rel="icon" type="image/x-icon" href="/image/favicon.ico">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+	<!-- custom css file link  -->
+	<link rel="stylesheet" href="../css/style.css" type="text/css">
+	<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+<link href="https://cdn.jsdelivr.net/npm/quill@2.0.1/dist/quill.snow.css" rel="stylesheet" />
+
+</head>
+
+<body>
+	{{> header}}
+	<div id="padding">
+		<h1 class="heading"> <span>Edit book</span> </h1>
+		<div id="centre">
+			<div class="container" id="padding">
+
+				<form id="saveForm">
+					<div class="book-flex">
+						<div class="book-picture" id="add-padding">
+							<label for="image">Book image</label>
+		
+							{{{bookImage}}}
+							<input id="bookImage" name="fieldname" required type="file" onchange="load_Image(this)" />
+						</div>
+						<div class="book-fields" id="add-padding">
+							<div id="stretch">
+								<label for="title">Book title</label>
+								
+								{{{bookTitle}}}
+							</div>
+							<div id="stretch">
+								<label for="author">Author</label>
+								
+								{{{bookAuthor}}}
+							</div>
+							<div id="stretch">
+								<label for="price">Price ($)</label>
+								
+								{{{bookPrice}}}
+							</div>
+							<div id="stretch">
+								<label for="date">Date</label>
+								
+								{{{bookDate}}}
+							</div>
+							<div id="stretch">
+								<label for="genre">Genre</label>
+								{{{bookGenre}}}
+							</div>
+						</div>
+					</div>
+					<label for="tags">Tags</label>
+					<div class="flex-container">
+						{{{bookTags}}}
+					</div>
+					<label>Book description</label>
+					
+					<div id="stretch">
+						{{{bookDescription}}}
+						<button type="submit" class="btn">Edit book</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	{{> footer}}
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.1/dist/quill.js"></script>
+
+    <script src="/../scripts/change-cookies.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="../../scripts/editBook.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>   
+<script src="../javascript.js"></script>
+<script src="../js/script.js"></script>
+
+</html>
