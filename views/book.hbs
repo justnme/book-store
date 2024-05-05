@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book</title>
+    <link rel="icon" type="image/x-icon" href="/image/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/book.css" type="text/css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+<link href="https://cdn.jsdelivr.net/npm/quill@2.0.1/dist/quill.snow.css" rel="stylesheet" />
+
+</head>
+
+
+<body>
+    {{> header}}
+    
+        <div id="padding">
+
+<div id="pramoi">
+            <div>
+                {{{bookContainer}}}
+
+                <div>
+                    <div id="tag">
+                        {{{bookTagList}}}
+                    </div>
+                    {{{bookImage}}}
+                </div>
+                <div class="side-bar">
+                    <div>
+                        <div>
+                            <div class="row">
+                                <div id="block-padding">
+                                    {{{bookTitle}}}
+                                    {{{bookAuthor}}}
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div id="block-padding">
+                        {{{bookPrice}}}
+                        <div id="button-row">
+                            <button class="btn" id="buyButton">Add to Cart</button>
+                            <button class="btn" id="wishButton">Add to Wishlist</button>
+                            {{{adminBookButtons}}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div  id="shovavca2">
+            <div id="block-padding">
+                <h2>Description:</h2>
+                <div class="description" id="background_cool">
+                    {{{bookDescription}}}
+                </div>
+            </div>
+            <div id="block-padding" >
+                <h2>Information:</h2>
+                <div id="background_cool">
+                    <ul>
+                        <li>
+                            <span id="bold">Author:</span>
+                            {{{bookAuthor2}}}
+                        </li>
+                        <li>
+                            <span id="bold">Genre:</span>
+                            {{{bookGenre}}}
+                        </li>
+                        <li>
+                            <span id="bold">Publication Date:</dt>
+                                {{{bookDate}}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="shovavca">
+        <div id="block-padding">
+            <h2 class="heading"> <span>Description</span> </h2>
+            <div class="block-description" id="background_cool">
+                {{{bookDescription}}}
+            </div>
+        </div>
+        <div id="block-padding">
+            <h2 class="heading"> <span>Information</span> </h2>
+            <div class="block-description" id="background_cool">
+                <ul>
+                    <li>
+                        <span id="bold">Author:</span>
+                        {{{bookAuthor2}}}
+                    </li>
+                    <li>
+                        <span id="bold">Genre:</span>
+                        {{{bookGenre}}}
+                    </li>
+                    <li>
+                        <span id="bold">Publication Date:</dt>
+                            {{{bookDate}}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="block-padding">
+        <h1 class="heading"> <span>You May Also Like</span> </h1>
+
+        <section class="featured" id="featured">
+            <div class="swiper featured-slider">
+
+                <div class="swiper-wrapper">
+
+                    {{> featured}}
+
+                </div>
+
+            </div>
+
+        </section>
+    </div>
+    <div id="block-padding">
+        <h1 class="heading"> <span>Leave your review! </span> </h1>
+        <div id="padding">
+            <div id="block-padding" class="stoi_rovno">
+
+                <h2>Add Review</h2>
+
+                <form id="add_review" method="POST" action="">
+                    <span>Rate</span>
+                    <div class="review-rating-block">
+                        <input type="number" id="rating" name="review_rating" value="1" min="1" max="5" />
+                        <span> / 5</span>
+                    </div>
+                    <span>Message</span>
+                    <div id="reviewMessage" >
+                    </div>
+                    <input type="hidden" id="review_message" name="review_message"> 
+                    <input type="submit" name="formButton" value="add review" class="btn" style="margin: 1rem auto;">
+                </form>
+            </div>
+            <h1 class="heading" style="margin-top: 20px;"> <span>Reviews</span> </h1>
+            <div id="reviews-padding">
+               
+                {{{reviewList}}}
+            </div>
+        </div>
+    </div>
+    {{> footer}}
+</body>
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.1/dist/quill.js"></script>
+
+<script src="/scripts/reviews.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="/javascript.js"></script>
+
+{{!-- shopping cart --}}
+<script src="/scripts/change-cookies.js"></script>
+<script src="/scripts/buy-book.js"></script>
+<script src="/scripts/cookies.js"></script>
+
+</html>
