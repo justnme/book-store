@@ -32,7 +32,12 @@ exports.postEditBook = async function (request, response) {
 	const original_title = request.body.originalTitle;
 	const book_title = request.body.bookTitle;
 	const book_genre = request.body.bookGenre;
-	const book_image = request.file.originalname;
+	
+	let book_image;
+	if(request.file === undefined)
+		book_image = request.body.originalImage;
+	else book_image = request.file.originalname;
+	
 	const book_author = request.body.bookAuthor;
 	const book_price = request.body.bookPrice;
 	const book_date = request.body.bookDate;
@@ -212,7 +217,10 @@ exports.getEditBook = async function (request, response) {
 	});
 	
 	await hbs.registerHelper("bookImage", function(){
-		return `<img id="image" src="../book_images/${current_image}" />`;
+		return `
+		<input type="text" style="display: none;" id="originalImage" value="${current_image}" />
+		<img id="image" src="../book_images/${current_image}" />
+		`;
 	});
 	
 	await hbs.registerHelper("bookPrice", function(){

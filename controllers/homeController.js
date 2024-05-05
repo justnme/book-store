@@ -26,14 +26,25 @@ exports.getHome = async function (_, response) {
 	const delay = ms => new Promise(resolve => setTimeout(resolve, ms)); //This is all for book on the home screen
 	
 	let result_string = "";
-	let max_result = await Books.max("book_id");
 		
 	//Top book list
+	
+	await delay(Math.random() * 10);
+	const book_list = await Books.findAll();
+	let used_book_ids = [];
+	
 	let i = 1;
-	let limit = 1;
-	while(i <= max_result && limit <= 10) {
+	while(i <= 10 && i <= book_list.length) {
 		await delay(Math.random() * 10);
-		const current_book = await Books.findOne({where:{book_id: {[Op.gte]: i}}, raw:true});
+		
+		let current_book_id = 0;
+		do {
+			current_book_id = Math.floor(Math.random() * book_list.length);
+		} while(used_book_ids.indexOf(current_book_id) != -1);
+		used_book_ids.push(current_book_id);
+		console.log("---------------" + current_book_id + "------------------");
+		
+		const current_book = book_list[current_book_id];
 		const current_image = current_book.image_name;
 		const current_title = current_book.title;
 		result_string = result_string +
@@ -42,8 +53,7 @@ exports.getHome = async function (_, response) {
 		 <img style="max-width: 165.5px" 
 		 src="/book_images/${current_image}" alt="">
 		 </a>`;
-		i = current_book.book_id + 1;
-		limit++;
+		i++;
 		console.log(i);
 	}
 	console.log(result_string);
@@ -53,13 +63,15 @@ exports.getHome = async function (_, response) {
 	});
 	
 	//Featured list
+	let max_result = await Books.max("book_id");
+	
 	await delay(Math.random() * 10);
 	const featured_tag = await Tags.findOne({where:{tag_name: "featured"}, raw:true});
 	max_result = await BookTags.max("book_id", {where:{tag_id: featured_tag.tag_id}});
 	
 	let result_string2 = "";
 	i = 1;
-	limit = 1;
+	let limit = 1;
 	
 	while(i <= max_result && limit <= 12) {
 		await delay(Math.random() * 10);
