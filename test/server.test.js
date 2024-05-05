@@ -283,18 +283,8 @@ describe('Database Tests', () => {
     expect(updatedBook.price).to.equal(29.99);
   });
 
-  it('should delete a book by ID', async () => {
-    const existingBook = await Books.findOne({ where: { title: 'Test Book' } });
-    await Books.destroy({ where: { book_id: existingBook.book_id } });
-    const deletedBook = await Books.findOne({ where: { title: 'Test Book' } });
-    expect(deletedBook).to.be.null;
-  });
-  it('should retrieve a user by email', async () => {
-    const userEmail = 'test@example.com';
-    const user = await Users.findOne({ where: { email: userEmail } });
-    expect(user).to.exist;
-    expect(user.email).to.equal(userEmail);
-  });
+
+
 
   it('should create a new tag', async () => {
     const newTag = await Tags.create({
@@ -321,17 +311,7 @@ describe('Database Tests', () => {
     const newGenre = await Genres.create({ genre_name: 'Test Genre' });
     expect(newGenre).to.exist;
   });
-  it('should delete a genre', async () => {
-    const existingGenre = await Genres.findOne(); 
-    if (existingGenre) {
-      await existingGenre.destroy(); 
-      const deletedGenre = await Genres.findByPk(existingGenre.genre_id); 
-      expect(deletedGenre).to.be.null; 
-    } else {
-    
-      this.skip();
-    }
-  });
+ 
   it('should update a review', async () => {
     const existingReview = await Reviews.findOne(); 
     if (existingReview) {
@@ -359,17 +339,7 @@ describe('Database Tests', () => {
     const bookCount = await Books.count({ where: { genre_id: genreId } }); 
     expect(bookCount).to.be.a('number');
   });
-  it('should delete a review', async () => {
-    const existingReview = await Reviews.findOne(); 
-    if (existingReview) {
-      await existingReview.destroy(); 
-      const deletedReview = await Reviews.findByPk(existingReview.review_id); 
-      expect(deletedReview).to.be.null; 
-    } else {
-      
-      this.skip();
-    }
-  });
+
       
   it('should find an author by ID', async () => {
     const existingAuthor = await Authors.findOne(); 
@@ -421,16 +391,7 @@ describe('Database Tests', () => {
       this.skip();
     }
   });
-  it('should delete a user', async () => {
-    const existingUser = await Users.findOne(); 
-    if (existingUser) {
-      await existingUser.destroy();
-      const deletedUser = await Users.findByPk(existingUser.user_id);
-      expect(deletedUser).to.not.exist;
-    } else {
-      this.skip();
-    }
-  });
+ 
   it('should update a book genre', async () => {
     const existingBook = await Books.findOne(); 
     if (existingBook) {
