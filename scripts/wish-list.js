@@ -6,6 +6,8 @@
 
 function load() {
     let bookInfoArray = document.cookie.split(';');
+    let wishCookies = document.cookie.split(';').filter(cookie => cookie.trim().startsWith('wish_'));
+
     let bookList = document.getElementById('bookWishContainer');
     if (bookInfoArray.length === 0 ||
         (bookInfoArray.length === 1 &&
@@ -18,7 +20,7 @@ function load() {
     console.log(bookInfoArray + "start");
 
 
-    for (const bookInfoString of bookInfoArray) {
+    for (const bookInfoString of wishCookies) {
         let bookInfoTrimmed = bookInfoString.trim();
         let bookInfo = JSON.parse(bookInfoTrimmed.substring(bookInfoTrimmed.indexOf('=') + 1));
         let imagePath = bookInfo.imageSrc;

@@ -5,47 +5,45 @@ function buyShoppingCart() {
 
 
 function load() {
-    let bookInfoArray = document.cookie.split(';');
     let bookList = document.getElementById('bookListContainer');
-    if (bookInfoArray.length === 0 ||
-        (bookInfoArray.length === 1 &&
-            bookInfoArray[0] === "")) {
-        console.log("No saved coockies was found.");
+    let cartCookies = document.cookie.split(';').filter(cookie => cookie.trim().startsWith('cart_'));
+
+    if (cartCookies.length === 0) {
+        console.log("No saved cookies were found.");
         bookList.innerHTML = ``;
         return;
     }
 
-    console.log(bookInfoArray + "start");
+    console.log(cartCookies + "start");
 
-
-    for (const bookInfoString of bookInfoArray) {
-        let bookInfoTrimmed = bookInfoString.trim();
-        let bookInfo = JSON.parse(bookInfoTrimmed.substring(bookInfoTrimmed.indexOf('=') + 1));
+    for (const cookie of cartCookies) {
+        let cookieValue = cookie.split('=')[1];
+        let bookInfo = JSON.parse(cookieValue);
         let imagePath = bookInfo.imageSrc;
         let imageName = imagePath.substring(imagePath.lastIndexOf('/') + 1);
 
         bookList.innerHTML += `
-                <div class="book-container">
-                    <div>
+            <div class="book-container">
+                <div>
                     <img class="book-image" src="book_images/${imageName}" alt="${bookInfo.name}">           
-                    </div>
-                    <div style="width:100%;">
+                </div>
+                <div style="width:100%;">
                     <h2 class="book-title">${bookInfo.name}</h2>
                     <p class="book-author">${bookInfo.author}</p>
-                    </div>
-                    <div style="display: flex;
-                    flex-direction: column;
-                    align-items: flex-end;
-                    justify-content: flex-end;">
-                    <p   class="book-price">${bookInfo.price}</p>
-                    <button style="margin-top:120px;"  class="btn" id="book-button-${bookInfo.name}"  onclick="removeBook('${bookInfo.name}')">Delete</button>
-                    </div>
-
                 </div>
-            `;
+                <div style="display: flex;
+                            flex-direction: column;
+                            align-items: flex-end;
+                            justify-content: flex-end;">
+                    <p class="book-price">${bookInfo.price}</p>
+                    <button style="margin-top:120px;" class="btn" id="book-button-${bookInfo.name}" onclick="removeBook('${bookInfo.name}')">Delete</button>
+                </div>
+            </div>
+        `;
     }
     updateTotalPrice();
 }
+
 
 function clearShoppingCart() {
     let cookies = document.cookie.split(';');

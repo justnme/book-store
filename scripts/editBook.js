@@ -11,9 +11,10 @@ const saveForm =  document.getElementById("saveForm")
 saveForm.addEventListener("submit", submitForm);
 
 function submitForm(e){
-	e.preventDefault(); //This blocks redirects
+	e.preventDefault();
 	const originalTitle = document.getElementById("originalTitle");
 	const bookTitle = document.getElementById("bookTitle");
+	const originalImage = document.getElementById("originalImage");
 	const bookImage = document.getElementById("bookImage");
 	const bookAuthor = document.getElementById("bookAuthor");
 	const bookPrice = document.getElementById("bookPrice");
@@ -29,6 +30,7 @@ function submitForm(e){
 	const formData = new FormData();
 	formData.append("originalTitle", originalTitle.value);
 	formData.append("bookTitle", bookTitle.value);
+	formData.append("originalImage", originalImage.value);
 	formData.append("bookAuthor", bookAuthor.value);
 	formData.append("bookPrice", bookPrice.value);
 	formData.append("bookDate", bookDate.value);
@@ -39,7 +41,15 @@ function submitForm(e){
 	formData.append("tags4", tags4.value);
 	formData.append("tags5", tags5.value);
     formData.append("bookDescription", bookDescription);
-    formData.append("bookImage", bookImage.files[0]);
+
+	if (bookImage.files.length === 0) {
+		let imageElement = document.getElementById('image');
+		let imageUrl = imageElement.getAttribute('src');	
+		formData.append("bookImage", imageUrl);
+		console.log(imageUrl);
+	} else {
+		formData.append("bookImage", bookImage.files[0]);
+	}
 	
 	fetch('http://localhost:3000/editBook', {
 		method: 'POST',
