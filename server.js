@@ -161,3 +161,4 @@ exports.removeEmptyBookTags = async function (){
 		i = current_BookTag_id + 1;
 	}
 }
+module.exports = app;
