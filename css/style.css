@@ -844,7 +844,18 @@ button#prevButton,
 
 
 /* media queries  */
+@media (max-width:1366px){
+    .header .header-1 {
+        padding: 1.5rem 2% !important;
 
+      }
+}
+@media (max-width:1024px){
+
+.header .header-1 .search-form {
+width: 33rem;
+}
+}
 @media (max-width:991px){
 
     html{

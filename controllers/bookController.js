@@ -196,9 +196,9 @@ exports.getBook = async function (request, response) {
 		result_string = result_string + `
 		<div class="swiper-slide box">
 			<div class="icons">
-				<a href="#" class="fas fa-search"></a>
-				<a href="#" class="fas fa-heart"></a>
-				<a href="#" class="fas fa-eye"></a>
+				<a href="/book/${genre_title}" class="fas fa-search"></a>
+				<a href="/book/${genre_title}" class="fas fa-heart"></a>
+				<a href="/book/${genre_title}" class="fas fa-eye"></a>
 			</div>
 			<div class="image">
 				<a href="/book/${genre_title}"><img style="max-width: 165.5px" src="/book_images/${genre_image}"></a>
@@ -206,7 +206,7 @@ exports.getBook = async function (request, response) {
 			<div class="content">
 				<h3>${genre_title}</h3>
 				<div class="price">$${genre_price}</div>
-				<a href="#" class="btn">add to cart</a>
+				<a href="/book/${genre_title}" class="btn">add to cart</a>
 			</div>
 		</div>	
 		`;

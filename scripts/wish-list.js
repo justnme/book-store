@@ -13,23 +13,22 @@ function load() {
         (bookInfoArray.length === 1 &&
             bookInfoArray[0] === "")) {
         console.log("No saved cookies was found.");
-        bookList.innerHTML = ``;
         return;
     }
-
-    console.log(bookInfoArray + "start");
-
-
+    bookList.innerHTML = ``;
+    let userName = document.getElementById("logged_user").innerHTML;
     for (const bookInfoString of wishCookies) {
-        let bookInfoTrimmed = bookInfoString.trim();
-        let bookInfo = JSON.parse(bookInfoTrimmed.substring(bookInfoTrimmed.indexOf('=') + 1));
-        let imagePath = bookInfo.imageSrc;
-        let imageName = imagePath.substring(imagePath.lastIndexOf('/') + 1);
+        let userCookie = getUserName(bookInfoString);
+        if (userCookie == userName || userCookie == "Not logged in") {
+            let bookInfoTrimmed = bookInfoString.trim();
+            let bookInfo = JSON.parse(bookInfoTrimmed.substring(bookInfoTrimmed.indexOf('=') + 1));
+            let imagePath = bookInfo.imageSrc;
+            let imageName = imagePath.substring(imagePath.lastIndexOf('/') + 1);
 
-        bookList.innerHTML += `
+            bookList.innerHTML += `
                 <div class="book-container">
                     <div>
-                    <img class="book-image" src="book_images/${imageName}" alt="${bookInfo.name}">           
+                    <a href="/book/${bookInfo.name}"><img class="book-image" src="book_images/${imageName}" alt="${bookInfo.name}"> </a>      
                     </div>
                     <div style="width:100%;">
                     <h2 class="book-title">${bookInfo.name}</h2>
@@ -40,36 +39,46 @@ function load() {
                     align-items: flex-end;
                     justify-content: flex-end;">
                     <p   class="book-price">${bookInfo.price}</p>
-                    <button style="margin-top:120px;"  class="btn" id="book-button-${bookInfo.name}"  onclick="removeBook('${bookInfo.name}')">Delete</button>
+                    <button style="margin-top:40px;"  class="btn" id="book-button-${bookInfo.name}"  onclick="removeBook('${bookInfo.name}', '${userName}')">Delete</button>
+                    <button class="btn" class="btn" onclick="moveWishBook('${bookInfo.name}','${userName}')">Buy book</button>
                     </div>
 
                 </div>
             `;
+        }
+        updateTotalPrice();
     }
-    updateTotalPrice();
 }
-
 function clearWishList() {
     let cookies = document.cookie.split(';');
+    let userName = document.getElementById("logged_user").innerHTML;
     for (let i = 0; i < cookies.length; i++) {
         let cookie = cookies[i].trim();
-        if (cookie.startsWith('wish_')) {
+        let userCookie = getUserName(bookInfoString);
+        if (cookie.startsWith('wish_') && (
+            userCookie == userName || 
+            userCookie == "Not logged in")) {
             let cookieName = cookie.split('=')[0];
             deleteCookie(cookieName);
         }
     }
     let totalPriceElement = document.getElementById('totalPrice');
     totalPriceElement.innerHTML = `0$`;
-    load();
+    load(); updateTotalPrice();
+    changeWishList();
 }
 
 function updateTotalPrice() {
     let cookies = document.cookie.split(';');
     let totalPrice = 0;
+    let userName = document.getElementById("logged_user").innerHTML;
 
     for (let i = 0; i < cookies.length; i++) {
         let cookie = cookies[i].trim();
-        if (cookie.startsWith('wish_')) {
+        let userCookie = getUserName(cookie);
+        if (cookie.startsWith('wish_') && (
+            userCookie == userName || 
+            userCookie == "Not logged in"))  {
             let cookieValue = cookie.split('=')[1];
             let bookInfo = JSON.parse(cookieValue);
             let price = parseFloat(bookInfo.price.replace('$', ''));
@@ -84,16 +93,31 @@ function updateTotalPrice() {
 }
 
 
-function removeBook(bookName) {
+function removeBook(bookName, userName) {
     let bookElement = document.getElementById(`book-button-${bookName}`).parentNode.parentNode;
 
     bookElement.remove();
-    let cookieName = 'wish_' + bookName;
+    let cookieName = 'wish_' + bookName + '_' + userName;
     deleteCookie(cookieName);
     updateTotalPrice();
     changeWishList();
 }
 
+
+function moveWishBook(cookieName, userName) {
+    let name = 'wish_' + cookieName + '_' + userName;
+    let cookieValue = getCookie(name);
+    let newName = 'cart_' + cookieName;
+
+    setCookie(newName,cookieValue,30,"Strict" ,userName)
+
+    deleteCookie(name);
+
+    updateTotalPrice();
+    changeWishList();
+    changeQuantityCart();
+    load();
+}
 
 load();
 changeWishList();
