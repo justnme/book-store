@@ -1,0 +1,246 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+/* стилизация контейнера главной формы */
+.container {
+width: fit-content;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+
+
+}
+
+.form-control.user-profile-bio-field {
+    min-height: 300px;
+    min-width: 60%;
+    max-height: 1000px;
+    margin-top: 7px;
+    margin-bottom: 5px;
+}
+
+#padding {
+    padding: 5rem 4rem;
+}
+h1 {
+    font-size: 2rem;
+}
+#block-padding {
+    padding: 1rem 3rem;
+}
+#add-padding{
+    padding: 1rem;
+}
+#saveForm > label {
+    text-align: center;
+	margin-top: 25px;
+	margin-bottom: 5px;
+    display: block;
+    font-weight: bold;
+    font-size: 1.75rem;
+}
+.book-picture label {
+    text-align: center;
+    display: block;
+    font-weight: bold;
+    font-size: 1.75rem;
+}
+#centre{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+#stretch{
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+}
+
+.book-fields  label{
+    text-align: center;
+    display: block;
+    font-weight: bold;
+    font-size:  1.75rem;
+}
+.book-flex{
+    display: flex;
+    justify-content: center;
+    }
+    
+
+.flex-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+}
+.book-fields input[type="text"],
+.book-fields input[type="number"],
+.book-fields input[type="date"],
+ .book-fields select {
+width: 300px;
+}
+.book-fields input[type="text"],
+.book-fields input[type="number"],
+.book-fields input[type="date"],
+textarea, select {
+    padding-right: 8px;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+textarea:focus , select:focus {
+box-shadow: 0 0 5px #B0CFE0;
+border:1px solid #B0CFE0;
+}
+
+#tags1,#tags2,#tags3,#tags4,#tags5{
+    margin: 2px;
+}
+/* Стили для кнопок сортировок */
+#sort-title,
+#sort-author,
+#sort-year,
+#sort-genre {
+    background-color:#0b1cb8;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-right: 10px;
+    width: 100%;
+
+}
+
+#sort-title:hover,
+#sort-author:hover,
+#sort-year:hover,
+#sort-genre:hover {
+    background-color: #0075f2;
+}
+
+#book-list {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.book {
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Стили для кнопок с фильтрами */
+#filter-button {
+    background-color: #0b1cb8;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+}
+
+#filter-button:hover {
+    background-color: #0075f2;
+}
+
+/* Стили для фильтров */
+#filter-genre,
+#filter-author,
+#filter-title,
+#filter-year {
+    width: 100%;
+    padding: 10px 0 10px 0;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+/* Стили для кнопок редагировки и удаления */
+/*Снести нахуй и использовать из оновного css btn*/
+.book .edit,
+.book .delete {
+    background-color: #007bff;
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.book .edit:hover,
+.book .delete:hover {
+    background-color: #0056b3;
+}
+
+
+.book .edit {
+    margin-right: 5px;
+}
+
+.book .delete {
+    margin-left: 5px;
+}
+
+
+
+
+/* форма редагування книги */
+/* выдвинул вправо для упрощения */
+#edit-book-form {
+    width: 300px;
+    position: fixed;
+    top: 50%;
+    left: 75%;
+    transform: translate(-50%, -50%);
+}
+
+#image {
+	background-color: white;
+	box-shadow: 0px 0px 3px black;
+	border: 2px solid black;
+	width: 250px;
+	height: 400px;
+	z-index: 1000;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
+
+input[type = "file"] {
+	width: 250px;
+	height: 400px;
+	z-index: 1000;
+	position: absolute;
+	margin-left: -250px;
+	opacity: 0;
+}
+
+.btn{
+    margin: 1rem auto;
+}
+.ql-editor h1{
+    text-align: center;
+}
+
+#bookDescription{
+    width: 750px;
+}
