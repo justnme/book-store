@@ -113,8 +113,14 @@ function moveWishBook(cookieName, userName) {
 
     setCookie(newName,cookieValue,30,"Strict" ,userName)
 
-    deleteCookie(name);
-
+    let noname =  'wish_' + cookieName + '_' + "Not logged in";
+    if (checkCookieExists(noname, "Not logged in") === true){
+        deleteCookie(noname)
+    }
+    else {
+        deleteCookie(name);
+    }
+ 
     updateTotalPrice();
     changeWishList();
     changeQuantityCart();

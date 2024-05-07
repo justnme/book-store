@@ -1,7 +1,4 @@
-// let listbookHTML = document.querySelector('.listbook');
-// let listCartHTML = document.querySelector('.listCart');
-// let iconCart = document.querySelector('.icon-cart');
-// // let iconCartSpan = document.getElementById('shoppingId');
+
 let body = document.querySelector('body');
 
 function setCookie(name, value, days, sameSite, userName) {
