@@ -82,9 +82,9 @@ h1 {
  .book-fields select {
 width: 300px;
 }
-input[type="text"],
-input[type="number"],
-input[type="date"],
+.book-fields input[type="text"],
+.book-fields input[type="number"],
+.book-fields input[type="date"],
 textarea, select {
     padding-right: 8px;
     padding: 8px;

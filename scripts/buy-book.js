@@ -3,26 +3,28 @@ let addToCartBtn = document.getElementById("buyButton");
 addToCartBtn.addEventListener("click", function() {
     console.log("button pressed buy");
 
-    var bookName = document.getElementById("BookName").innerText;
-    var author = document.getElementById("bookAuthor").innerText;
-    var imageUrl = document.getElementById("bookImage").src;
-    var imageSrc = imageUrl.substring(imageUrl.lastIndexOf('/') + 1);
-    var price = document.getElementById("cost").innerText;
+    let bookName = document.getElementById("BookName").innerText;
+    let author = document.getElementById("bookAuthor").innerText;
+    let imageUrl = document.getElementById("bookImage").src;
+    let imageSrc = imageUrl.substring(imageUrl.lastIndexOf('/') + 1);
+    let price = document.getElementById("cost").innerText;
+    let userName = document.getElementById("logged_user").innerHTML;
 
-    var bookData = {
+    let bookData = {
         name: bookName,
         author: author,
         imageSrc: imageSrc,
-        price: price
+        price: price,
+        userName: userName
     };
 
-    var bookDataString = JSON.stringify(bookData);
-    var cookieName = 'cart_' + bookName;
+    let bookDataString = JSON.stringify(bookData);
+    let cookieName = 'cart_'  + bookName;
 
-    if (getCookie(cookieName)) {
+    if (getCookie(cookieName + '_' + userName)) {
         alert(`${bookName} is already in your shopping cart!`);
     } else {
-        setCookie(cookieName, bookDataString, 30, "Strict");
+        setCookie(cookieName, bookDataString, 30, "Strict",userName);
         alert(`${bookName} was added to your shopping cart!`);
         changeQuantityCart();
     }
@@ -33,27 +35,31 @@ let addToWishBtn = document.getElementById("wishButton");
 addToWishBtn.addEventListener("click", function() {
     console.log("button pressed wish");
 
-    var bookName = document.getElementById("BookName").innerText;
-    var author = document.getElementById("bookAuthor").innerText;
-    var imageUrl = document.getElementById("bookImage").src;
-    var imageSrc = imageUrl.substring(imageUrl.lastIndexOf('/') + 1);
-    var price = document.getElementById("cost").innerText;
+    let bookName = document.getElementById("BookName").innerText;
+    let author = document.getElementById("bookAuthor").innerText;
+    let imageUrl = document.getElementById("bookImage").src;
+    let imageSrc = imageUrl.substring(imageUrl.lastIndexOf('/') + 1);
+    let price = document.getElementById("cost").innerText;
+    let userName = document.getElementById("logged_user").innerHTML;
 
-    var bookData = {
+    let bookData = {
         name: bookName,
         author: author,
         imageSrc: imageSrc,
-        price: price
+        price: price,
+        userName: userName
     };
 
-    var bookDataString = JSON.stringify(bookData);
-    var cookieName = 'wish_' + bookName;
+    let bookDataString = JSON.stringify(bookData);
+    let cookieName = 'wish_' + bookName;
 
-    if (getCookie(cookieName)) {
+
+    if (getCookie(cookieName + '_' + userName)) {
         alert(`${bookName} is already in your wish list!`);
     } else {
-        setCookie(cookieName, bookDataString, 30, "Strict");
+        setCookie(cookieName, bookDataString, 30, "Strict",userName);
         alert(`${bookName} was added to your wish list!`);
         changeWishList();
     }
 });
+

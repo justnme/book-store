@@ -47,7 +47,7 @@ exports.postSearchPage = async function (request, response) {
 		const current_author_name = current_author.full_name;
 		const current_title = current_book.title;
 		const current_price = current_book.price;
-		
+
 		result_string = result_string +
 		`
 		<div class="search-container">
@@ -58,7 +58,9 @@ exports.postSearchPage = async function (request, response) {
 					<a href="/book/${current_title}"><img class="book-image" src="book_images/${current_image}" alt="Wish you were here"></a>
 					<p class="book-price">$${current_price}</p>
 				</div>
+
 			</div>
+
         </div>
 		`
 		i = current_book.book_id + 1;

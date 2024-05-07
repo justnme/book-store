@@ -84,9 +84,9 @@ exports.getHome = async function (_, response) {
 		result_string2 = result_string2 + `
 		<div class="swiper-slide box">
 			<div class="icons">
-				<a href="#" class="fas fa-search"></a>
-				<a href="#" class="fas fa-heart"></a>
-				<a href="#" class="fas fa-eye"></a>
+				<a href="/book/${current_title}" class="fas fa-search"></a>
+				<a href="/book/${current_title}" class="fas fa-heart"></a>
+				<a href="/book/${current_title}" class="fas fa-eye"></a>
 			</div>
 			<div class="image">
 				<a href="/book/${current_title}"><img style="max-width: 165.5px" src="/book_images/${current_image}"></a>
@@ -94,7 +94,7 @@ exports.getHome = async function (_, response) {
 			<div class="content">
 				<h3>${current_title}</h3>
 				<div class="price">$${current_price}</div>
-				<a href="#" class="btn">add to cart</a>
+				<a href="/book/${current_title}" class="btn">add to cart</a>
 			</div>
 		</div>	
 		`;
@@ -215,6 +215,12 @@ exports.getHome = async function (_, response) {
 	await hbs.registerHelper("new_arrivalsList", function(){
 		return `${result_string3}`;
 	});
+	// idk
+	// await delay(Math.random() * 10);
+	// await hbs.registerHelper("email_box", function(){
+	// 	return ` <input type="email" name="Gmail" placeholder="enter your email" id="gmail" class="box"
+	// 	value="${current_tag_name}">`;
+	// });
 	
 	serverModule.fillHeader();
 	
