@@ -161,4 +161,38 @@ exports.removeEmptyBookTags = async function (){
 		i = current_BookTag_id + 1;
 	}
 }
+const nodemailer = require('nodemailer');
+
+const transporter = nodemailer.createTransport({
+	service: 'gmail',
+	host: 'smtp.gmail.com',
+	port: 465,
+	secure: true,
+	auth: {
+	 user: 'urmail@gmail.com',
+	 pass: '',
+	},
+   });
+ 
+app.post('/sendEmail', (req, res) => {
+	var email = req.body.email;
+
+    var mailOptions = {
+		from: 'urmail@gmail.com',
+		to: email,
+		subject: 'Subscription approved!',
+		text: 'You have successfully subscribed to our site!'
+    };
+
+    transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+            console.log(error);
+            res.send('Error occurred, email not sent.');
+        } else {
+            console.log('Email sent: ' + info.response);
+            res.send(`Email sent successfully! to ${email}` );
+        }
+    }); 
+});
+
 module.exports = app;

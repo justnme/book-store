@@ -50,7 +50,7 @@
                 <h3 style="color:white;">Up to 50% discount</h3>
                 <a href="#" class="btn">Buy now</a>
                 <p style="color:white; font-size:20px;"> Buy used or new books, online or in store, only at Holy Book
-                     in the beautiful city of Odesa!</p>
+                    in the beautiful city of Odesa!</p>
             </div>
             <div class="swiper books-slider">
 
@@ -135,15 +135,15 @@
     <!-- featured section ends -->
 
     <!-- newsletter section starts -->
-	
+
     <section class="newsletter">
 
-        <form action="" style="padding: 2rem; background-color:rgba(0, 0, 0, 0.25)">
-            <h3>subscribe for latest updates</h3>
-            {{!-- {{{email_box}}} --}}
-            <input type="email" name="Gmail" placeholder="enter your email" id="gmail" class="box">
-            <input type="submit" value="subscribe" class="btn">
+        <form action="" style="padding: 2rem; background-color:rgba(0, 0, 0, 0.25)" onsubmit="sendEmail(event)">
+            <h3>Subscribe for latest updates</h3>
+            <input type="email" name="Gmail" placeholder="Enter your email" id="gmail" class="box">
+            <input type="submit" value="Subscribe" class="btn">
         </form>
+
 
     </section>
 
@@ -189,12 +189,41 @@
 
 
 
-    <script src="/scripts/change-cookies.js"></script>
-   <script>changeQuantityCart();</script>
-    {{!-- <script>changeQuantityCart();</script> --}}
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>   
- <!-- custom js file link  -->
-    <script src="/javascript.js"></script>
+  
 </body>
+  <script src="/scripts/change-cookies.js"></script>
+    <script>changeQuantityCart();</script>
+    {{!--
+    <script>changeQuantityCart();</script> --}}
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- custom js file link  -->
+    <script src="/javascript.js"></script>
+    <script src="/node_modules/nodemailer/dist/nodemailer.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    function sendEmail(event) {
+        event.preventDefault(); 
 
+        var email = document.getElementById("gmail").value;
+
+        var mailOptions = {
+            from: 'urmail@gmail.com',
+            to: email,
+            subject: 'Subscription approved!',
+            text: 'You have successfully subscribed to our site!'
+        };
+
+        axios.post('/sendEmail', mailOptions)
+            .then(function (response) {
+                console.log('Email sent successfully!');
+                alert(`Email sent successfully! to ${email}`);
+            })
+            .catch(function (error) {
+                console.error('Error sending email:', error);
+            });
+    }
+</script>
+
+
+    </script>  
 </html>

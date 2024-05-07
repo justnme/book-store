@@ -481,6 +481,23 @@ describe('Login Form', () => {
 
 
     after(async () => {
+	  const last_book_id = await Books.max("book_id");
+      await Books.destroy({where: {book_id: last_book_id}});
+	  
+	  for(let i = 1; i <= 3; i++){
+	    const last_genre_id = await Genres.max("genre_id");
+        await Genres.destroy({where: {genre_id: last_genre_id}});
+	  }
+	  
+	  const last_author_id = await Authors.max("author_id");
+      await Authors.destroy({where: {author_id: last_author_id}});
+	  
+	  const last_tag_id = await Tags.max("tag_id");
+      await Tags.destroy({where: {tag_id: last_tag_id}});
+	  
+	  const last_review_id = await Reviews.max("review_id");
+      await Reviews.destroy({where: {review_id: last_review_id}});
+	  
       await sequelize.close();
     });
   });
