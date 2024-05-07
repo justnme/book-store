@@ -169,7 +169,7 @@ const transporter = nodemailer.createTransport({
 	port: 465,
 	secure: true,
 	auth: {
-	 user: 'urmail@gmail.com',
+	 user: '',
 	 pass: '',
 	},
    });
@@ -178,7 +178,7 @@ app.post('/sendEmail', (req, res) => {
 	var email = req.body.email;
 
     var mailOptions = {
-		from: 'urmail@gmail.com',
+		from: '',
 		to: email,
 		subject: 'Subscription approved!',
 		text: 'You have successfully subscribed to our site!'

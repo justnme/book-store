@@ -54,7 +54,7 @@ function clearWishList() {
     let userName = document.getElementById("logged_user").innerHTML;
     for (let i = 0; i < cookies.length; i++) {
         let cookie = cookies[i].trim();
-        let userCookie = getUserName(bookInfoString);
+        let userCookie = getUserName(cookies[i]);
         if (cookie.startsWith('wish_') && (
             userCookie == userName || 
             userCookie == "Not logged in")) {
@@ -64,7 +64,9 @@ function clearWishList() {
     }
     let totalPriceElement = document.getElementById('totalPrice');
     totalPriceElement.innerHTML = `0$`;
-    load(); updateTotalPrice();
+    let bookList = document.getElementById('bookWishContainer');
+    bookList.innerHTML = ``;
+    updateTotalPrice();
     changeWishList();
 }
 
