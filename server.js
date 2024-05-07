@@ -175,7 +175,7 @@ const transporter = nodemailer.createTransport({
    });
  
 app.post('/sendEmail', (req, res) => {
-	var email = req.body.email;
+	var email = req.body.Gmail;
 
     var mailOptions = {
 		from: 'urmail@gmail.com',
