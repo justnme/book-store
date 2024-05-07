@@ -24,6 +24,7 @@ var serverModule = require('./../server.js');
 
 exports.getHome = async function (_, response) {
 	const delay = ms => new Promise(resolve => setTimeout(resolve, ms)); //This is all for book on the home screen
+	const logged_user = serverModule.getLogged_user();
 	
 	let result_string = "";
 		
@@ -211,16 +212,27 @@ exports.getHome = async function (_, response) {
 	</div>
 	`;
 	
-	await delay(Math.random() * 10);
 	await hbs.registerHelper("new_arrivalsList", function(){
 		return `${result_string3}`;
 	});
-	// idk
-	// await delay(Math.random() * 10);
-	// await hbs.registerHelper("email_box", function(){
-	// 	return ` <input type="email" name="Gmail" placeholder="enter your email" id="gmail" class="box"
-	// 	value="${current_tag_name}">`;
-	// });
+	
+	if(logged_user == "Not logged in")
+		await hbs.registerHelper("gmailForm", function(){
+			return `
+			<input type="email" name="Gmail" value="You can't subscribe without an account!" id="gmail" class="box" disabled>
+			<input type="submit" value="Subscribe" class="btn" style="pointer-events: none; background-color: rgba(58, 175, 240, 0.5)" disabled>
+			`;
+		});
+	else {
+		const current_user = await Users.findOne({where: {login: logged_user}});
+		const current_gmail = current_user.email;
+		await hbs.registerHelper("gmailForm", function(){
+			return `
+			<input type="email" name="Gmail" value="${current_gmail}" id="gmail" class="box" disabled>
+			<input type="submit" value="Subscribe" class="btn">
+			`;
+		});
+	}
 	
 	serverModule.fillHeader();
 	
