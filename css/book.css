@@ -121,7 +121,7 @@ li {
 }
 
 .description{
-    /* font-size: 1.85rem; */
+    
     letter-spacing: 1px;  
       margin-bottom: 10px; 
     font-family: Roboto, sans-serif;
@@ -184,7 +184,7 @@ li {
     border-top: #00aeff solid 2px;
 }
 #background_cool{
-    /* width: fit-content; */
+    
     padding: 20px;
     border: 1px solid #e2e2e2;
     border-radius: 8px;
@@ -249,7 +249,7 @@ border:1px solid #B0CFE0;
         border: 1px solid #ccc;
         border-radius: 8px;
         padding: 20px;
-        /* margin-bottom: 20px; */
+        
         background-color: #f9f9f9;
         margin: 10px auto;
         
